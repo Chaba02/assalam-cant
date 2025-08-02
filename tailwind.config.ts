@@ -52,6 +52,20 @@ export default {
 					DEFAULT: 'hsl(var(--card))',
 					foreground: 'hsl(var(--card-foreground))'
 				},
+				// Islamic design system colors
+				gold: {
+					DEFAULT: 'hsl(var(--gold))',
+					foreground: 'hsl(var(--gold-foreground))'
+				},
+				beige: {
+					DEFAULT: 'hsl(var(--beige))',
+					foreground: 'hsl(var(--beige-foreground))'
+				},
+				'night-blue': {
+					DEFAULT: 'hsl(var(--night-blue))',
+					foreground: 'hsl(var(--night-blue-foreground))'
+				},
+				'warm-white': 'hsl(var(--warm-white))',
 				sidebar: {
 					DEFAULT: 'hsl(var(--sidebar-background))',
 					foreground: 'hsl(var(--sidebar-foreground))',
