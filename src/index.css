@@ -1,3 +1,4 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -20,86 +21,76 @@ All colors MUST be HSL.
     --primary: 220 80% 25%;
     --primary-foreground: 35 40% 95%;
 
-    --secondary: 35 30% 90%;
+    --secondary: 35 30% 88%;
     --secondary-foreground: 220 30% 15%;
 
-    --muted: 35 20% 92%;
+    --muted: 35 20% 90%;
     --muted-foreground: 220 15% 45%;
 
-    --accent: 45 100% 65%;
-    --accent-foreground: 220 30% 15%;
+    --accent: 220 30% 20%;
+    --accent-foreground: 35 40% 95%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 35 20% 85%;
+    --border: 35 20% 82%;
     --input: 35 20% 88%;
-    --ring: 45 100% 65%;
+    --ring: 45 90% 55%;
 
-    /* Islamic-inspired color palette */
-    --gold: 45 100% 65%;
+    /* Islamic-inspired color palette with better contrast */
+    --gold: 45 90% 55%;
     --gold-foreground: 220 30% 15%;
-    --beige: 35 30% 90%;
+    --beige: 35 30% 88%;
     --beige-foreground: 220 30% 15%;
     --night-blue: 220 80% 25%;
     --night-blue-foreground: 35 40% 95%;
     --warm-white: 35 25% 96%;
     --soft-shadow: 220 30% 15%;
 
+    /* Improved contrast colors */
+    --gold-dark: 45 70% 45%;
+    --beige-dark: 35 25% 75%;
+    --accent-gold: 40 85% 50%;
+
     /* Gradients */
     --gradient-sunset: linear-gradient(135deg, hsl(45, 80%, 70%), hsl(35, 70%, 60%), hsl(220, 60%, 40%));
     --gradient-peaceful: linear-gradient(180deg, hsl(35, 25%, 96%), hsl(35, 30%, 92%));
-    --gradient-gold: linear-gradient(135deg, hsl(45, 100%, 75%), hsl(45, 90%, 65%));
+    --gradient-gold: linear-gradient(135deg, hsl(45, 90%, 65%), hsl(45, 70%, 45%));
 
     /* Shadows */
-    --shadow-gentle: 0 4px 20px hsl(220, 30%, 15%, 0.08);
-    --shadow-elevated: 0 8px 30px hsl(220, 30%, 15%, 0.12);
-    --shadow-gold: 0 4px 20px hsl(45, 100%, 65%, 0.2);
+    --shadow-gentle: 0 4px 20px hsla(220, 30%, 15%, 0.08);
+    --shadow-elevated: 0 8px 30px hsla(220, 30%, 15%, 0.12);
+    --shadow-gold: 0 4px 20px hsla(45, 90%, 55%, 0.2);
 
     --radius: 0.5rem;
 
     --sidebar-background: 0 0% 98%;
-
     --sidebar-foreground: 240 5.3% 26.1%;
-
     --sidebar-primary: 240 5.9% 10%;
-
     --sidebar-primary-foreground: 0 0% 98%;
-
     --sidebar-accent: 240 4.8% 95.9%;
-
     --sidebar-accent-foreground: 240 5.9% 10%;
-
     --sidebar-border: 220 13% 91%;
-
     --sidebar-ring: 217.2 91.2% 59.8%;
   }
 
   .dark {
     --background: 222.2 84% 4.9%;
     --foreground: 210 40% 98%;
-
     --card: 222.2 84% 4.9%;
     --card-foreground: 210 40% 98%;
-
     --popover: 222.2 84% 4.9%;
     --popover-foreground: 210 40% 98%;
-
     --primary: 210 40% 98%;
     --primary-foreground: 222.2 47.4% 11.2%;
-
     --secondary: 217.2 32.6% 17.5%;
     --secondary-foreground: 210 40% 98%;
-
     --muted: 217.2 32.6% 17.5%;
     --muted-foreground: 215 20.2% 65.1%;
-
     --accent: 217.2 32.6% 17.5%;
     --accent-foreground: 210 40% 98%;
-
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 210 40% 98%;
-
     --border: 217.2 32.6% 17.5%;
     --input: 217.2 32.6% 17.5%;
     --ring: 212.7 26.8% 83.9%;
@@ -121,6 +112,7 @@ All colors MUST be HSL.
 
   body {
     @apply bg-background text-foreground;
+    scroll-behavior: smooth;
   }
 
   /* Custom fonts for Islamic feel */
@@ -132,9 +124,26 @@ All colors MUST be HSL.
     font-family: 'Playfair Display', serif;
   }
 
-  /* Custom animations */
+  /* Enhanced animations */
   .fade-in {
     animation: fadeIn 0.8s ease-in-out;
+  }
+
+  .slide-up {
+    animation: slideUp 0.6s ease-out;
+  }
+
+  .scale-in {
+    animation: scaleIn 0.4s ease-out;
+  }
+
+  .hover-lift {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .hover-lift:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-elevated);
   }
 
   @keyframes fadeIn {
@@ -142,10 +151,102 @@ All colors MUST be HSL.
     to { opacity: 1; transform: translateY(0); }
   }
 
+  @keyframes slideUp {
+    from { opacity: 0; transform: translateY(40px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes scaleIn {
+    from { opacity: 0; transform: scale(0.9); }
+    to { opacity: 1; transform: scale(1); }
+  }
+
   .gradient-text {
     background: var(--gradient-gold);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
+  }
+
+  /* Improved button styles */
+  .btn-gold {
+    background: hsl(var(--gold));
+    color: hsl(var(--gold-foreground));
+    border: 1px solid hsl(var(--gold));
+    transition: all 0.3s ease;
+  }
+
+  .btn-gold:hover {
+    background: hsl(var(--gold-dark));
+    border-color: hsl(var(--gold-dark));
+    transform: translateY(-1px);
+  }
+
+  /* Smooth scrolling between sections */
+  .scroll-smooth {
+    scroll-behavior: smooth;
+  }
+}
+
+/* Animation utility classes */
+@layer utilities {
+  .animate-fade-in-up {
+    animation: fadeInUp 0.6s ease-out forwards;
+    opacity: 0;
+  }
+
+  .animate-slide-in-left {
+    animation: slideInLeft 0.6s ease-out forwards;
+    opacity: 0;
+  }
+
+  .animate-slide-in-right {
+    animation: slideInRight 0.6s ease-out forwards;
+    opacity: 0;
+  }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes slideInLeft {
+    from {
+      opacity: 0;
+      transform: translateX(-30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes slideInRight {
+    from {
+      opacity: 0;
+      transform: translateX(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  .animation-delay-200 {
+    animation-delay: 200ms;
+  }
+
+  .animation-delay-400 {
+    animation-delay: 400ms;
+  }
+
+  .animation-delay-600 {
+    animation-delay: 600ms;
   }
 }
