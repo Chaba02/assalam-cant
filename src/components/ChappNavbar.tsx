@@ -1,7 +1,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { Menu, X, ChevronDown, Globe } from 'lucide-react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useLanguage, Language } from '../contexts/LanguageContext';
 
 const ChappNavbar = () => {
@@ -9,7 +9,6 @@ const ChappNavbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isLanguageOpen, setIsLanguageOpen] = useState(false);
   const { language, setLanguage, t, isLoading } = useLanguage();
-  const navigate = useNavigate();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -19,35 +18,6 @@ const ChappNavbar = () => {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
-
-  const handleNavClick = (href: string) => {
-    setIsOpen(false);
-    
-    if (href.includes('#')) {
-      const [path, hash] = href.split('#');
-      
-      if (path === '/' || path === '') {
-        // Siamo già sulla homepage, scorri alla sezione
-        if (window.location.pathname === '/') {
-          const element = document.getElementById(hash);
-          if (element) {
-            element.scrollIntoView({ behavior: 'smooth' });
-          }
-        } else {
-          // Naviga alla homepage e poi scorri
-          navigate('/');
-          setTimeout(() => {
-            const element = document.getElementById(hash);
-            if (element) {
-              element.scrollIntoView({ behavior: 'smooth' });
-            }
-          }, 100);
-        }
-      }
-    } else {
-      navigate(href);
-    }
-  };
 
   const navLinks = [
     { name: t('nav.about'), href: '/#about', isExternal: false },
@@ -76,38 +46,41 @@ const ChappNavbar = () => {
     >
       <div className="container-chapp mt-3">
         <div className="flex items-center justify-between h-14 sm:h-16">
-          {/* Logo con click per tornare all'hero */}
+          {/* Logo */}
           <div className="flex items-center">
-            <button
-              onClick={() => {
-                navigate('/');
-                setTimeout(() => {
-                  window.scrollTo({ top: 0, behavior: 'smooth' });
-                }, 100);
-              }}
-              className="text-heading-lg text-chapp-white font-display hover:text-white/90 transition-colors duration-300"
-            >
+            <div className="text-heading-lg text-chapp-white font-display">
               Novaresin s.p.a
-            </button>
+            </div>
           </div>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-6">
             {navLinks.map((link) => (
-              <button
-                key={link.name}
-                onClick={() => handleNavClick(link.href)}
-                className="text-body-md font-medium text-chapp-gray-300 hover:text-chapp-white transition-all duration-300 relative group link-hover-dark"
-              >
-                {link.name}
-                <span className="absolute -bottom-1 left-0 right-0 h-0.5 bg-chapp-accent-blue scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></span>
-              </button>
+              link.href.startsWith('/') && !link.href.includes('#') ? (
+                <Link
+                  key={link.name}
+                  to={link.href}
+                  className="text-body-md font-medium text-chapp-gray-300 hover:text-chapp-white transition-all duration-300 relative group link-hover-dark"
+                >
+                  {link.name}
+                  <span className="absolute -bottom-1 left-0 right-0 h-0.5 bg-chapp-accent-blue scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></span>
+                </Link>
+              ) : (
+                <a
+                  key={link.name}
+                  href={link.href}
+                  className="text-body-md font-medium text-chapp-gray-300 hover:text-chapp-white transition-all duration-300 relative group link-hover-dark"
+                >
+                  {link.name}
+                  <span className="absolute -bottom-1 left-0 right-0 h-0.5 bg-chapp-accent-blue scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></span>
+                </a>
+              )
             ))}
           </div>
 
           {/* Language Dropdown & CTA */}
           <div className="hidden md:flex items-center space-x-3">
-            {/* Language Dropdown */}
+            {/* Language Dropdown - Dimensioni ridotte */}
             <div className="relative">
               <button
                 onClick={() => setIsLanguageOpen(!isLanguageOpen)}
@@ -147,7 +120,7 @@ const ChappNavbar = () => {
               )}
             </div>
 
-            {/* CTA Button */}
+            {/* CTA Button - Dimensioni ridotte */}
             <button className={`px-5 py-2 bg-chapp-accent-blue text-chapp-white font-medium rounded-xl text-body-md hover:bg-chapp-accent-blue-dark transition-all duration-300 hover:scale-[1.02] hover:shadow-glow-blue ${isLoading ? 'opacity-50 cursor-not-allowed' : ''}`}>
               {t('nav.cta')}
             </button>
@@ -183,13 +156,25 @@ const ChappNavbar = () => {
         >
           <div className="flex flex-col space-y-3 pt-3 border-t border-chapp-white/20">
             {navLinks.map((link) => (
-              <button
-                key={link.name}
-                onClick={() => handleNavClick(link.href)}
-                className="text-body-md font-medium text-chapp-gray-300 hover:text-chapp-white transition-colors duration-300 px-3 py-2 hover:bg-chapp-white/10 rounded-lg text-left"
-              >
-                {link.name}
-              </button>
+              link.href.startsWith('/') && !link.href.includes('#') ? (
+                <Link
+                  key={link.name}
+                  to={link.href}
+                  className="text-body-md font-medium text-chapp-gray-300 hover:text-chapp-white transition-colors duration-300 px-3 py-2 hover:bg-chapp-white/10 rounded-lg"
+                  onClick={() => setIsOpen(false)}
+                >
+                  {link.name}
+                </Link>
+              ) : (
+                <a
+                  key={link.name}
+                  href={link.href}
+                  className="text-body-md font-medium text-chapp-gray-300 hover:text-chapp-white transition-colors duration-300 px-3 py-2 hover:bg-chapp-white/10 rounded-lg"
+                  onClick={() => setIsOpen(false)}
+                >
+                  {link.name}
+                </a>
+              )
             ))}
             
             {/* Mobile Language Options */}
