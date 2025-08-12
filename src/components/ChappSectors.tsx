@@ -22,28 +22,43 @@ const ChappSectors = () => {
     const scrollContainer = scrollRef.current;
     if (!scrollContainer) return;
 
-    const scrollWidth = scrollContainer.scrollWidth;
-    const clientWidth = scrollContainer.clientWidth;
-    const sectorWidth = scrollWidth / 3; // Since we have 3 copies
-
+    const sectorWidth = scrollContainer.scrollWidth / 3; // Since we have 3 copies
     let scrollPosition = sectorWidth; // Start from the middle copy
     scrollContainer.scrollLeft = scrollPosition;
+    let isUserScrolling = false;
+
+    const handleUserScroll = () => {
+      isUserScrolling = true;
+      clearTimeout(scrollTimeout);
+      scrollTimeout = setTimeout(() => {
+        isUserScrolling = false;
+      }, 2000);
+    };
+
+    let scrollTimeout: NodeJS.Timeout;
 
     const scroll = () => {
-      scrollPosition += 0.5; // Reduced speed for smoother effect
+      if (isUserScrolling) return;
       
-      // Reset position seamlessly when reaching the end of second copy
+      scrollPosition += 0.3; // Reduced speed for smoother effect
+      
+      // Seamless reset when reaching the end of second copy
       if (scrollPosition >= sectorWidth * 2) {
-        scrollPosition = sectorWidth;
-        scrollContainer.scrollLeft = scrollPosition;
+        scrollContainer.scrollLeft = sectorWidth;
+        scrollPosition = sectorWidth + 0.3;
       } else {
         scrollContainer.scrollLeft = scrollPosition;
       }
     };
 
+    scrollContainer.addEventListener('scroll', handleUserScroll);
     const intervalId = setInterval(scroll, 16); // ~60fps for smoother animation
 
-    return () => clearInterval(intervalId);
+    return () => {
+      clearInterval(intervalId);
+      clearTimeout(scrollTimeout);
+      scrollContainer.removeEventListener('scroll', handleUserScroll);
+    };
   }, []);
 
   return (
@@ -74,7 +89,6 @@ const ChappSectors = () => {
             style={{ 
               scrollbarWidth: 'none',
               msOverflowStyle: 'none',
-              WebkitScrollbar: { display: 'none' }
             }}
           >
             {duplicatedSectors.map((sector, index) => (

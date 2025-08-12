@@ -28,18 +28,6 @@ const ChappMap: React.FC<ChappMapProps> = ({ className = '' }) => {
     const nibionnoCoords: [number, number] = [45.7587, 9.3205];
 
     // Initialize map
-    mapboxgl.accessToken = '<mapbox-public-token>';
-    
-    map.current = new mapboxgl.Map({
-      container: mapContainer.current,
-      style: 'mapbox://styles/mapbox/light-v11',
-      projection: 'globe',
-      zoom: 14,
-      center: nibionnoCoords,
-      pitch: 0,
-    });
-
-    // Initialize map
     const map = L.map(mapRef.current, {
       center: nibionnoCoords,
       zoom: 14,
