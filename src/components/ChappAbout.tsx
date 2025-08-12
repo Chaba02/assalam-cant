@@ -1,31 +1,31 @@
-
 import React from 'react';
-import { Users, Target, Award, TrendingUp, Sparkles, Monitor, Database } from 'lucide-react';
+import { Users, Award, Sparkles, Factory, Layers } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
 
 const ChappAbout = () => {
   const { t } = useLanguage();
-  
+
+  // Qui potremmo mantenere i valori oppure adattarli ai valori tessili dell'azienda
   const values = [
     {
-      icon: Monitor,
-      title: t('about.value1.title'),
-      description: t('about.value1.desc')
+      icon: Layers,
+      title: "Tecnologie Avanzate",
+      description: "Utilizziamo le più moderne tecnologie di finissaggio, accoppiatura e nobilitazione per tessuti di alta qualità."
     },
     {
-      icon: Database,
-      title: t('about.value2.title'),
-      description: t('about.value2.desc')
+      icon: Factory,
+      title: "Esperienza Industriale",
+      description: "Dal 1970, esperienza consolidata nel settore tessile, con un know-how unico e riconosciuto."
     },
     {
       icon: Award,
-      title: t('about.value3.title'),
-      description: t('about.value3.desc')
+      title: "Qualità e Affidabilità",
+      description: "Garantiamo prodotti con standard elevati, in grado di soddisfare clienti nazionali e internazionali."
     },
     {
-      icon: TrendingUp,
-      title: t('about.value4.title'),
-      description: t('about.value4.desc')
+      icon: Users,
+      title: "Team Specializzato",
+      description: "Un team di professionisti dedicati alla ricerca e allo sviluppo di soluzioni innovative."
     }
   ];
 
@@ -33,32 +33,34 @@ const ChappAbout = () => {
     <section id="about" className="section-chapp bg-chapp-dark-bg px-6 sm:px-8 lg:px-20">
       <div className="container-chapp">
         <div className="grid grid-cols-1 xl:grid-cols-2 gap-16 lg:gap-20 items-center">
-          {/* Text Content */}
+          {/* Testo Storia e Valori */}
           <div className="animate-on-scroll">
             <div className="inline-flex items-center gap-2 bg-chapp-white/10 backdrop-blur-sm px-4 py-2 rounded-full text-body-md font-medium text-chapp-gray-300 mb-8 shadow-chapp border border-chapp-white/20">
               <Sparkles size={16} className="text-chapp-accent-blue" />
-              {t('about.badge')}
+              La Nostra Storia
             </div>
-            
+
             <h2 className="text-display-lg text-chapp-title mb-8 leading-tight">
-              {t('about.title1')}{' '}
+              Novaresin: <br />
               <span className="bg-gradient-blue-elegant bg-clip-text text-transparent">
-                {t('about.title2')}
+                Innovazione Tessile
               </span>{' '}
-              {t('about.title3')}
+              dal 1970
             </h2>
-            
-            <div className="space-y-6 mb-12">
-              <p className="text-body-xl text-chapp-body leading-relaxed">
-                {t('about.description1')}
+
+            <div className="space-y-6 mb-12 text-body-lg text-chapp-body leading-relaxed">
+              <p>
+                La nostra storia inizia nel 1970 come Retex Srl, evolvendosi fino a diventare Novaresin S.p.A., leader nel finissaggio, accoppiatura e nobilitazione tessuti.
               </p>
-              
-              <p className="text-body-lg text-chapp-body leading-relaxed">
-                {t('about.description2')}
+              <p>
+                Grazie a investimenti continui e a un team specializzato, offriamo soluzioni innovative e tecnologie all’avanguardia per il settore tessile tecnico e arredamento.
+              </p>
+              <p>
+                Oggi siamo un punto di riferimento per aziende che cercano qualità, affidabilità e ricerca applicata nel mondo dei tessuti.
               </p>
             </div>
 
-            {/* Values Grid */}
+            {/* Valori */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
               {values.map((value, index) => (
                 <div
@@ -87,47 +89,47 @@ const ChappAbout = () => {
           {/* Visual Content */}
           <div className="animate-on-scroll relative">
             <div className="relative">
-              {/* Main Visual */}
+              {/* Visual principale */}
               <div className="card-premium-dark p-12 text-center relative overflow-hidden min-h-96 flex flex-col items-center justify-center">
-                {/* Background Pattern */}
+                {/* Pattern Sfondo */}
                 <div className="absolute inset-0 bg-gradient-to-br from-chapp-accent-blue/5 via-transparent to-chapp-accent-blue-light/5"></div>
-                
-                {/* Content */}
+
+                {/* Contenuto */}
                 <div className="relative z-10 space-y-6">
                   <div className="w-20 h-20 bg-gradient-blue-elegant rounded-3xl flex items-center justify-center shadow-chapp-lg mx-auto">
-                    <Users className="text-chapp-white" size={32} />
+                    <Factory className="text-chapp-white" size={32} />
                   </div>
                   <div>
                     <h3 className="text-heading-xl text-chapp-title font-semibold mb-3">
-                      {t('about.team.title')}
+                      Il Nostro Team
                     </h3>
                     <p className="text-body-lg text-chapp-body mb-6">
-                      {t('about.team.subtitle')}
+                      Professionisti con esperienza consolidata nel settore tessile, dedicati alla ricerca e sviluppo di tecnologie innovative.
                     </p>
                     <div className="inline-flex items-center gap-2 bg-chapp-white/10 px-4 py-2 rounded-full text-body-sm font-medium text-chapp-gray-300 border border-chapp-white/20">
                       <Award size={14} />
-                      {t('about.team.badge')}
+                      Eccellenza Certificata
                     </div>
                   </div>
                 </div>
 
-                {/* Floating Elements */}
+                {/* Elementi flottanti */}
                 <div className="absolute top-6 right-6 w-16 h-16 bg-chapp-accent-blue/10 rounded-full blur-xl animate-float"></div>
                 <div className="absolute bottom-6 left-6 w-12 h-12 bg-chapp-accent-blue-light/10 rounded-full blur-lg animate-float" style={{ animationDelay: '1s' }}></div>
               </div>
 
-              {/* Stats Cards */}
+              {/* Statistiche */}
               <div className="absolute -bottom-6 -left-6 card-glass-dark p-6 shadow-chapp-lg">
                 <div className="text-center">
-                  <div className="text-display-md text-chapp-title font-semibold mb-1">12+</div>
-                  <div className="text-body-sm text-chapp-body">{t('about.stat1')}</div>
+                  <div className="text-display-md text-chapp-title font-semibold mb-1">50+</div>
+                  <div className="text-body-sm text-chapp-body">Anni di esperienza</div>
                 </div>
               </div>
 
               <div className="absolute -top-6 -right-6 card-glass-dark p-6 shadow-chapp-lg">
                 <div className="text-center">
-                  <div className="text-display-md text-chapp-title font-semibold mb-1">150+</div>
-                  <div className="text-body-sm text-chapp-body">{t('about.stat2')}</div>
+                  <div className="text-display-md text-chapp-title font-semibold mb-1">200+</div>
+                  <div className="text-body-sm text-chapp-body">Clienti soddisfatti</div>
                 </div>
               </div>
             </div>

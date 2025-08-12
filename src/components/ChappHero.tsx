@@ -27,15 +27,15 @@ const ChappHero = () => {
         viewBox="0 0 1200 800"
       >
         <defs>
-          <linearGradient id="premiumGold" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stopColor="#d4af37" />
-            <stop offset="50%" stopColor="#f4e4bc" />
-            <stop offset="100%" stopColor="#c9b037" />
+          <linearGradient id="glowBlue" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stopColor="#3b82f6" stopOpacity="0.8" />
+            <stop offset="50%" stopColor="#60a5fa" stopOpacity="1" />
+            <stop offset="100%" stopColor="#3b82f6" stopOpacity="0.8" />
           </linearGradient>
-          <linearGradient id="premiumSilver" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="#c0c0c0" />
-            <stop offset="50%" stopColor="#e8e8e8" />
-            <stop offset="100%" stopColor="#a8a8a8" />
+          <linearGradient id="glowRed" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor="#ef4444" stopOpacity="0.8" />
+            <stop offset="50%" stopColor="#f87171" stopOpacity="1" />
+            <stop offset="100%" stopColor="#ef4444" stopOpacity="0.8" />
           </linearGradient>
           <linearGradient id="premiumPlatinum" x1="100%" y1="0%" x2="0%" y2="100%">
             <stop offset="0%" stopColor="#e5e4e2" />
@@ -47,10 +47,10 @@ const ChappHero = () => {
         {/* Linee animate */}
         <path
           d="M0,250 Q300,150 600,250 T1200,250"
-          stroke="url(#premiumGold)"
+          stroke="url(#glowBlue)"
           strokeWidth="1.5"
           fill="none"
-          opacity="0.8"
+          opacity="0.9"
           strokeDasharray="2000"
           strokeDashoffset="2000"
         >
@@ -76,10 +76,10 @@ const ChappHero = () => {
 
         <path
           d="M0,450 Q300,550 600,450 T1200,450"
-          stroke="url(#premiumSilver)"
+          stroke="url(#glowRed)"
           strokeWidth="1.2"
           fill="none"
-          opacity="0.6"
+          opacity="0.8"
           strokeDasharray="2200"
           strokeDashoffset="2200"
         >
@@ -136,7 +136,7 @@ const ChappHero = () => {
 
         <path
           d="M0,600 Q300,500 600,600 Q900,700 1200,600"
-          stroke="url(#premiumSilver)"
+          stroke="url(#glowRed)"
           strokeWidth="0.6"
           fill="none"
           opacity="0.4"
@@ -196,13 +196,26 @@ const ChappHero = () => {
               className="ml-2 group-hover:translate-x-1 transition-transform duration-300"
             />
           </button>
-          <button className="inline-flex items-center justify-center px-8 py-4 bg-transparent text-white border-2 border-blue-500 font-medium rounded-2xl text-body-lg hover:bg-blue-500 hover:text-white hover:border-blue-500 active:bg-blue-600 transition-all duration-300 hover:scale-[1.02] hover:shadow-[0_0_20px_rgba(59,130,246,0.3)] focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-chapp-dark-bg shadow-md group">
+          <button
+            className="inline-flex items-center justify-center px-8 py-4
+    bg-white/10 backdrop-blur-md border border-white/30 text-white
+    font-medium rounded-2xl text-body-lg
+    hover:bg-white/20 hover:border-white/50
+    active:bg-white/25
+    transition-all duration-300
+    hover:scale-[1.02]
+    hover:shadow-[0_0_20px_rgba(255,255,255,0.3)]
+    focus:ring-2 focus:ring-white/40 focus:ring-offset-2 focus:ring-offset-chapp-dark-bg
+    shadow-md
+    group"
+          >
             <Play
               size={18}
               className="mr-2 group-hover:scale-110 transition-transform duration-300"
             />
             Guarda il video
           </button>
+
         </div>
       </div>
 
