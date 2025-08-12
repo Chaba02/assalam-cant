@@ -1,7 +1,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { Menu, X, ChevronDown, Globe } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useLanguage, Language } from '../contexts/LanguageContext';
 
 const ChappNavbar = () => {
@@ -9,6 +9,8 @@ const ChappNavbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isLanguageOpen, setIsLanguageOpen] = useState(false);
   const { language, setLanguage, t, isLoading } = useLanguage();
+  const location = useLocation();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -19,10 +21,50 @@ const ChappNavbar = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  const handleNavClick = (href: string) => {
+    setIsOpen(false);
+    
+    if (href.startsWith('/#')) {
+      const targetId = href.substring(2);
+      if (location.pathname !== '/') {
+        navigate('/');
+        setTimeout(() => {
+          const element = document.getElementById(targetId);
+          if (element) {
+            element.scrollIntoView({ behavior: 'smooth' });
+          }
+        }, 100);
+      } else {
+        const element = document.getElementById(targetId);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
+      }
+    }
+  };
+
+  const handleContactClick = () => {
+    setIsOpen(false);
+    if (location.pathname !== '/') {
+      navigate('/');
+      setTimeout(() => {
+        const element = document.getElementById('contact');
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 100);
+    } else {
+      const element = document.getElementById('contact');
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  };
+
   const navLinks = [
-    { name: t('nav.about'), href: '/#about', isExternal: false },
-    { name: t('nav.services'), href: '/services', isExternal: false },
-    { name: t('nav.contact'), href: '/#contact', isExternal: false },
+    { name: t('nav.about'), href: '/#about', action: () => handleNavClick('/#about') },
+    { name: t('nav.services'), href: '/services', isRoute: true },
+    { name: t('nav.contact'), href: '/#contact', action: () => handleNavClick('/#contact') },
   ];
 
   const languages = [
@@ -46,15 +88,18 @@ const ChappNavbar = () => {
         <div className="flex items-center justify-between h-14 sm:h-16">
           {/* Logo */}
           <div className="flex items-center">
-            <div className="text-heading-lg text-chapp-white font-display">
+            <Link 
+              to="/" 
+              className="text-heading-lg text-chapp-white font-display hover:text-chapp-accent-blue transition-colors duration-300"
+            >
               Novaresin s.p.a
-            </div>
+            </Link>
           </div>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-6">
             {navLinks.map((link) => (
-              link.href.startsWith('/') && !link.href.includes('#') ? (
+              link.isRoute ? (
                 <Link
                   key={link.name}
                   to={link.href}
@@ -64,21 +109,21 @@ const ChappNavbar = () => {
                   <span className="absolute -bottom-1 left-0 right-0 h-0.5 bg-chapp-accent-blue scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></span>
                 </Link>
               ) : (
-                <a
+                <button
                   key={link.name}
-                  href={link.href}
+                  onClick={link.action}
                   className="text-body-md font-medium text-chapp-gray-300 hover:text-chapp-white transition-all duration-300 relative group link-hover-dark"
                 >
                   {link.name}
                   <span className="absolute -bottom-1 left-0 right-0 h-0.5 bg-chapp-accent-blue scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></span>
-                </a>
+                </button>
               )
             ))}
           </div>
 
           {/* Language Dropdown & CTA */}
           <div className="hidden md:flex items-center space-x-3">
-            {/* Language Dropdown - Dimensioni ridotte */}
+            {/* Language Dropdown */}
             <div className="relative">
               <button
                 onClick={() => setIsLanguageOpen(!isLanguageOpen)}
@@ -117,8 +162,11 @@ const ChappNavbar = () => {
               )}
             </div>
 
-            {/* CTA Button - Dimensioni ridotte */}
-            <button className={`px-5 py-2 bg-chapp-accent-blue text-chapp-white font-medium rounded-xl text-body-md hover:bg-chapp-accent-blue-dark transition-all duration-300 hover:scale-[1.02] hover:shadow-glow-blue ${isLoading ? 'opacity-50 cursor-not-allowed' : ''}`}>
+            {/* CTA Button */}
+            <button 
+              onClick={handleContactClick}
+              className={`px-5 py-2 bg-chapp-accent-blue text-chapp-white font-medium rounded-xl text-body-md hover:bg-chapp-accent-blue-dark transition-all duration-300 hover:scale-[1.02] hover:shadow-glow-blue ${isLoading ? 'opacity-50 cursor-not-allowed' : ''}`}
+            >
               {t('nav.cta')}
             </button>
           </div>
@@ -152,7 +200,7 @@ const ChappNavbar = () => {
         >
           <div className="flex flex-col space-y-3 pt-3 border-t border-chapp-white/20">
             {navLinks.map((link) => (
-              link.href.startsWith('/') && !link.href.includes('#') ? (
+              link.isRoute ? (
                 <Link
                   key={link.name}
                   to={link.href}
@@ -162,14 +210,13 @@ const ChappNavbar = () => {
                   {link.name}
                 </Link>
               ) : (
-                <a
+                <button
                   key={link.name}
-                  href={link.href}
-                  className="text-body-md font-medium text-chapp-gray-300 hover:text-chapp-white transition-colors duration-300 px-3 py-2 hover:bg-chapp-white/10 rounded-lg"
-                  onClick={() => setIsOpen(false)}
+                  onClick={link.action}
+                  className="text-body-md font-medium text-chapp-gray-300 hover:text-chapp-white transition-colors duration-300 px-3 py-2 hover:bg-chapp-white/10 rounded-lg text-left"
                 >
                   {link.name}
-                </a>
+                </button>
               )
             ))}
 
@@ -193,7 +240,10 @@ const ChappNavbar = () => {
             )}
 
             <div className="px-3 pt-1">
-              <button className={`w-full px-4 py-2 bg-chapp-accent-blue text-chapp-white font-medium rounded-lg text-body-md hover:bg-chapp-accent-blue-dark transition-all duration-300 ${isLoading ? 'opacity-50 cursor-not-allowed' : ''}`}>
+              <button 
+                onClick={handleContactClick}
+                className={`w-full px-4 py-2 bg-chapp-accent-blue text-chapp-white font-medium rounded-lg text-body-md hover:bg-chapp-accent-blue-dark transition-all duration-300 ${isLoading ? 'opacity-50 cursor-not-allowed' : ''}`}
+              >
                 {t('nav.cta')}
               </button>
             </div>

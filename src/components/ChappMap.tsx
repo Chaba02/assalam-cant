@@ -1,3 +1,4 @@
+
 import React, { useEffect, useRef } from 'react';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
@@ -25,6 +26,18 @@ const ChappMap: React.FC<ChappMapProps> = ({ className = '' }) => {
 
     // Coordinate approssimate Novaresin S.p.A., Nibionno (LC)
     const nibionnoCoords: [number, number] = [45.7587, 9.3205];
+
+    // Initialize map
+    mapboxgl.accessToken = '<mapbox-public-token>';
+    
+    map.current = new mapboxgl.Map({
+      container: mapContainer.current,
+      style: 'mapbox://styles/mapbox/light-v11',
+      projection: 'globe',
+      zoom: 14,
+      center: nibionnoCoords,
+      pitch: 0,
+    });
 
     // Initialize map
     const map = L.map(mapRef.current, {
@@ -86,14 +99,14 @@ const ChappMap: React.FC<ChappMapProps> = ({ className = '' }) => {
   }, []);
 
   return (
-    <div className={`relative ${className}`}>
+    <div className={`relative overflow-hidden ${className}`}>
       <div
         ref={mapRef}
-        className="w-full h-full rounded-2xl overflow-hidden border border-chapp-dark-border/30 bg-chapp-dark-card"
+        className="w-full h-full rounded-2xl overflow-hidden border border-chapp-dark-border/30 bg-chapp-dark-card relative z-0"
         style={{ minHeight: '400px' }}
       />
       {/* Overlay for subtle gradient effect */}
-      <div className="absolute inset-0 pointer-events-none rounded-2xl bg-gradient-to-t from-chapp-dark-bg/20 to-transparent"></div>
+      <div className="absolute inset-0 pointer-events-none rounded-2xl bg-gradient-to-t from-chapp-dark-bg/20 to-transparent z-10"></div>
     </div>
   );
 };

@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { Send, CheckCircle, AlertCircle, User, Mail, Building, MessageSquare } from 'lucide-react';
 import ChappMap from './ChappMap';
@@ -69,7 +70,7 @@ const ChappContactForm = () => {
   };
 
   return (
-    <section id="contact" className="section-chapp bg-chapp-dark-bg">
+    <section id="contact" className="section-chapp bg-chapp-dark-bg relative z-10">
       <div className="container-chapp">
         {/* Header */}
         <div className="text-center mb-16">
@@ -79,18 +80,18 @@ const ChappContactForm = () => {
           <h2 className="text-display-lg text-chapp-title mb-6">
             Inizia il Tuo{' '}
             <span className="bg-gradient-blue-elegant bg-clip-text text-transparent">
-              Progetto Digitale
+              Progetto Tessile
             </span>
           </h2>
           <p className="text-body-xl text-chapp-body max-w-2xl mx-auto">
-            Contattaci per una consulenza gratuita e personalizzata. Il nostro team di esperti è pronto ad analizzare le tue esigenze tecnologiche.
+            Contattaci per una consulenza gratuita e personalizzata. Il nostro team di esperti è pronto ad analizzare le tue esigenze tessili.
           </p>
         </div>
 
-        {/* Contact Form & Map Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+        {/* Contact Form & Map Grid - Fixed Heights */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch">
           {/* Contact Form */}
-          <div className="card-premium-dark p-8 lg:p-12">
+          <div className="card-premium-dark p-8 lg:p-12 flex flex-col h-full">
             <h3 className="text-heading-xl text-chapp-title mb-8">
               Richiedi una Consulenza Gratuita
             </h3>
@@ -104,7 +105,7 @@ const ChappContactForm = () => {
               </div>
             )}
 
-            <form onSubmit={handleSubmit} className="space-y-6" noValidate>
+            <form onSubmit={handleSubmit} className="space-y-6 flex-1 flex flex-col" noValidate>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {/* Nome */}
                 <div>
@@ -120,11 +121,9 @@ const ChappContactForm = () => {
                     onChange={handleChange}
                     className={`form-chapp ${errors.name ? 'border-red-500 focus:ring-red-500 focus:border-red-500' : ''}`}
                     placeholder="Il tuo nome"
-                    aria-invalid={errors.name ? 'true' : 'false'}
-                    aria-describedby={errors.name ? 'name-error' : undefined}
                   />
                   {errors.name && (
-                    <p id="name-error" className="mt-2 text-body-sm text-red-400 flex items-center gap-1" role="alert">
+                    <p className="mt-2 text-body-sm text-red-400 flex items-center gap-1">
                       <AlertCircle size={14} />
                       {errors.name}
                     </p>
@@ -145,11 +144,9 @@ const ChappContactForm = () => {
                     onChange={handleChange}
                     className={`form-chapp ${errors.email ? 'border-red-500 focus:ring-red-500 focus:border-red-500' : ''}`}
                     placeholder="la.tua@email.com"
-                    aria-invalid={errors.email ? 'true' : 'false'}
-                    aria-describedby={errors.email ? 'email-error' : undefined}
                   />
                   {errors.email && (
-                    <p id="email-error" className="mt-2 text-body-sm text-red-400 flex items-center gap-1" role="alert">
+                    <p className="mt-2 text-body-sm text-red-400 flex items-center gap-1">
                       <AlertCircle size={14} />
                       {errors.email}
                     </p>
@@ -171,12 +168,11 @@ const ChappContactForm = () => {
                   onChange={handleChange}
                   className="form-chapp"
                   placeholder="Nome dell'azienda (opzionale)"
-                  aria-describedby="company-desc"
                 />
               </div>
 
               {/* Messaggio */}
-              <div>
+              <div className="flex-1 flex flex-col">
                 <label htmlFor="message" className="flex items-center gap-2 text-body-sm font-semibold text-chapp-white mb-3">
                   <MessageSquare size={16} className="text-chapp-accent-blue" />
                   Messaggio <span className="text-red-400">*</span>
@@ -184,16 +180,14 @@ const ChappContactForm = () => {
                 <textarea
                   id="message"
                   name="message"
-                  rows={6}
+                  rows={4}
                   value={formData.message}
                   onChange={handleChange}
-                  className={`form-textarea-chapp ${errors.message ? 'border-red-500 focus:ring-red-500 focus:border-red-500' : ''}`}
-                  placeholder="Descrivi il tuo progetto web o le tue esigenze di Business Intelligence..."
-                  aria-invalid={errors.message ? 'true' : 'false'}
-                  aria-describedby={errors.message ? 'message-error' : undefined}
+                  className={`form-textarea-chapp flex-1 ${errors.message ? 'border-red-500 focus:ring-red-500 focus:border-red-500' : ''}`}
+                  placeholder="Descrivi il tuo progetto tessile o le tue esigenze..."
                 />
                 {errors.message && (
-                  <p id="message-error" className="mt-2 text-body-sm text-red-400 flex items-center gap-1" role="alert">
+                  <p className="mt-2 text-body-sm text-red-400 flex items-center gap-1">
                     <AlertCircle size={14} />
                     {errors.message}
                   </p>
@@ -201,51 +195,52 @@ const ChappContactForm = () => {
               </div>
 
               {/* Submit Button */}
-              <button
-                type="submit"
-                disabled={status === 'loading'}
-                className={`btn-chapp-accent w-full justify-center flex items-center hover-glow-blue ${status === 'loading' ? 'opacity-75 cursor-not-allowed' : ''
-                  }`}
-              >
-                {status === 'loading' ? (
-                  <>
-                    <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin mr-2" />
-                    Invio in corso...
-                  </>
-                ) : (
-                  <>
-                    Richiedi Consulenza
-                    <Send size={18} className="ml-2" />
-                  </>
-                )}
-              </button>
+              <div className="pt-4">
+                <button
+                  type="submit"
+                  disabled={status === 'loading'}
+                  className={`btn-chapp-accent w-full justify-center flex items-center hover-glow-blue ${status === 'loading' ? 'opacity-75 cursor-not-allowed' : ''}`}
+                >
+                  {status === 'loading' ? (
+                    <>
+                      <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin mr-2" />
+                      Invio in corso...
+                    </>
+                  ) : (
+                    <>
+                      Richiedi Consulenza
+                      <Send size={18} className="ml-2" />
+                    </>
+                  )}
+                </button>
+              </div>
 
-              <p className="text-body-sm text-chapp-gray-400 text-center mt-6">
-                Rispettiamo la tua privacy. Le informazioni fornite verranno utilizzate esclusivamente per contattarti in merito alla tua richiesta.
+              <p className="text-body-sm text-chapp-gray-400 text-center">
+                Rispettiamo la tua privacy. Le informazioni fornite verranno utilizzate esclusivamente per contattarti.
               </p>
             </form>
           </div>
 
           {/* Map & Contact Info */}
-          <div className="space-y-8">
-            {/* Map */}
-            <div className="h-80 rounded-2xl overflow-hidden border border-chapp-dark-border/30">
+          <div className="flex flex-col h-full space-y-6">
+            {/* Map - Fixed height to match form */}
+            <div className="flex-1 rounded-2xl overflow-hidden border border-chapp-dark-border/30 bg-chapp-dark-card relative">
               <ChappMap className="h-full w-full" />
             </div>
 
             {/* Contact Info Card */}
-            <div className="card-premium-dark p-8 rounded-2xl">
+            <div className="card-premium-dark p-6">
               <h3 className="text-heading-lg text-chapp-title mb-6">
                 Informazioni di Contatto
               </h3>
 
-              <div className="space-y-6">
+              <div className="space-y-4">
                 <div className="flex items-start gap-4">
                   <div className="w-10 h-10 bg-chapp-accent-blue/10 border border-chapp-accent-blue/30 rounded-xl flex items-center justify-center flex-shrink-0">
                     <Mail className="text-chapp-accent-blue" size={18} />
                   </div>
                   <div>
-                    <h4 className="text-body-lg font-medium text-chapp-white mb-2">Email</h4>
+                    <h4 className="text-body-lg font-medium text-chapp-white mb-1">Email</h4>
                     <p className="text-chapp-gray-300 text-body-md">info@novaresin.it</p>
                   </div>
                 </div>
@@ -255,8 +250,8 @@ const ChappContactForm = () => {
                     <Building className="text-chapp-accent-blue" size={18} />
                   </div>
                   <div>
-                    <h4 className="text-body-lg font-medium text-chapp-white mb-2">Sede</h4>
-                    <address className="not-italic text-chapp-gray-300 text-body-md">
+                    <h4 className="text-body-lg font-medium text-chapp-white mb-1">Sede</h4>
+                    <address className="not-italic text-chapp-gray-300 text-body-sm">
                       Via Montegrappa, 28<br />
                       23895 Nibionno (LC)<br />
                       Italia

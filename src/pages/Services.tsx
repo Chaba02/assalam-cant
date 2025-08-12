@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { 
   Droplets, 
@@ -92,7 +93,6 @@ const Services = () => {
       
       {/* Hero Section */}
       <section className="section-chapp pt-32 bg-chapp-dark-bg relative overflow-hidden">
-        
         <div className="container-chapp relative z-10">
           {/* Back Button */}
           <Link 
@@ -104,14 +104,14 @@ const Services = () => {
           </Link>
 
           <div className="text-center">
-            <div className="inline-flex items-center gap-2 glass-dark px-8 py-4 rounded-full text-body-md font-medium mb-8 apple-glow">
-              <Shield size={20} className="text-chapp-accent-blue" />
+            <div className="inline-flex items-center gap-2 bg-chapp-accent-blue/20 text-chapp-accent-blue px-4 py-2 rounded-full text-body-sm font-semibold mb-6">
+              <Shield size={16} />
               {t('services.badge')}
             </div>
             
-            <h1 className="text-hero text-chapp-hero mb-8 leading-none">
+            <h1 className="text-display-xl text-chapp-title mb-6 leading-tight">
               {t('services.title.part1')}{' '}
-              <span className="bg-gradient-to-r from-chapp-accent-blue via-chapp-white to-chapp-accent-blue-light bg-clip-text text-transparent font-bold">
+              <span className="bg-gradient-blue-elegant bg-clip-text text-transparent">
                 {t('services.title.part2')}
               </span>
             </h1>
@@ -136,38 +136,40 @@ const Services = () => {
         </div>
       </section>
 
-      {/* Services Section - Ferrari Elegant Style */}
+      {/* Services Section */}
       <section className="section-chapp bg-chapp-dark-bg">
         <div className="container-chapp">
-          <div className="space-y-32">
+          <div className="space-y-24">
             {services.map((service, index) => (
-              <div 
-                key={service.id} 
-                className="relative group"
-              >
+              <div key={service.id} className="relative group">
+                {/* Elegant Separator */}
+                {index > 0 && (
+                  <div className="absolute -top-12 left-1/2 transform -translate-x-1/2 w-px h-24 bg-gradient-to-b from-transparent via-chapp-accent-blue/30 to-transparent"></div>
+                )}
+                
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
                   {/* Content */}
-                  <div className={`${index % 2 === 1 ? 'lg:order-2' : ''} space-y-10`}>
+                  <div className={`${index % 2 === 1 ? 'lg:order-2' : ''} space-y-8`}>
                     <div className="space-y-6">
-                      <div className="w-20 h-20 rounded-3xl bg-chapp-white/5 border border-chapp-white/10 flex items-center justify-center backdrop-blur-sm">
-                        <service.icon className="text-chapp-accent-blue" size={36} />
+                      <div className="w-16 h-16 rounded-2xl glass-dark border border-chapp-accent-blue/20 flex items-center justify-center">
+                        <service.icon className="text-chapp-accent-blue" size={32} />
                       </div>
-                      <h2 className="text-display-lg text-chapp-white font-light tracking-tight">
+                      <h2 className="text-display-lg text-chapp-title font-light tracking-tight">
                         {service.title}
                       </h2>
                     </div>
                     
-                    <p className="text-body-xl text-chapp-gray-300 leading-relaxed font-light">
+                    <p className="text-body-xl text-chapp-body leading-relaxed">
                       {service.longDescription}
                     </p>
 
-                    {/* Features in clean list */}
+                    {/* Features */}
                     <div className="space-y-6">
-                      <h3 className="text-heading-lg text-chapp-white font-light">{t('services.featuresTitle')}</h3>
-                      <div className="space-y-4">
+                      <h3 className="text-heading-lg text-chapp-white">{t('services.featuresTitle')}</h3>
+                      <div className="space-y-3">
                         {service.features.map((feature, featureIndex) => (
-                          <div key={featureIndex} className="flex items-start gap-4 group/item">
-                            <div className="w-1.5 h-1.5 bg-chapp-accent-blue rounded-full mt-3 flex-shrink-0 group-hover/item:bg-chapp-accent-blue-light transition-colors duration-300"></div>
+                          <div key={featureIndex} className="flex items-start gap-3 group/item">
+                            <div className="w-1.5 h-1.5 bg-chapp-accent-blue rounded-full mt-2.5 flex-shrink-0 group-hover/item:scale-150 transition-transform duration-300"></div>
                             <span className="text-chapp-gray-300 text-body-lg leading-relaxed group-hover/item:text-chapp-white transition-colors duration-300">{feature}</span>
                           </div>
                         ))}
@@ -176,11 +178,11 @@ const Services = () => {
 
                     {/* Benefits */}
                     <div className="space-y-6">
-                      <h3 className="text-heading-lg text-chapp-white font-light">{t('services.benefitsTitle')}</h3>
-                      <div className="space-y-4">
+                      <h3 className="text-heading-lg text-chapp-white">{t('services.benefitsTitle')}</h3>
+                      <div className="space-y-3">
                         {service.benefits.map((benefit, benefitIndex) => (
-                          <div key={benefitIndex} className="flex items-start gap-4 group/benefit">
-                            <CheckCircle size={20} className="text-chapp-accent-blue/60 flex-shrink-0 mt-1 group-hover/benefit:text-chapp-accent-blue transition-colors duration-300" />
+                          <div key={benefitIndex} className="flex items-start gap-3 group/benefit">
+                            <CheckCircle size={18} className="text-chapp-accent-blue/60 flex-shrink-0 mt-0.5 group-hover/benefit:text-chapp-accent-blue group-hover/benefit:scale-110 transition-all duration-300" />
                             <span className="text-chapp-gray-300 text-body-lg leading-relaxed group-hover/benefit:text-chapp-white transition-colors duration-300">{benefit}</span>
                           </div>
                         ))}
@@ -188,24 +190,30 @@ const Services = () => {
                     </div>
 
                     <div className="pt-4">
-                      <button className="px-8 py-4 bg-chapp-white/5 border border-chapp-white/10 text-chapp-white rounded-2xl hover:bg-chapp-white/10 hover:border-chapp-accent-blue/50 transition-all duration-300 backdrop-blur-sm font-medium">
+                      <a 
+                        href="/#contact" 
+                        className="btn-chapp-primary inline-flex items-center gap-2"
+                      >
                         {t('services.requestQuote')}
-                      </button>
+                        <ArrowLeft size={16} className="rotate-180" />
+                      </a>
                     </div>
                   </div>
 
-                  {/* Visual Element - Minimal and Elegant */}
+                  {/* Enhanced Visual Element */}
                   <div className={`${index % 2 === 1 ? 'lg:order-1' : ''} flex items-center justify-center`}>
-                    <div className="relative group">
-                      <div className="w-96 h-96 rounded-full border border-chapp-white/5 bg-chapp-white/[0.02] flex items-center justify-center backdrop-blur-sm group-hover:border-chapp-white/10 transition-all duration-500">
-                        <div className="w-64 h-64 rounded-full border border-chapp-white/10 bg-chapp-white/[0.03] flex items-center justify-center group-hover:border-chapp-accent-blue/30 transition-all duration-500">
-                          <div className="w-32 h-32 rounded-full bg-chapp-accent-blue/10 flex items-center justify-center group-hover:bg-chapp-accent-blue/20 transition-all duration-500">
-                            <service.icon className="text-chapp-accent-blue group-hover:scale-110 transition-transform duration-500" size={64} />
+                    <div className="relative group/visual">
+                      <div className="w-80 h-80 rounded-full border border-chapp-white/5 bg-chapp-white/[0.02] flex items-center justify-center backdrop-blur-sm group-hover/visual:border-chapp-white/10 transition-all duration-700 animate-pulse">
+                        <div className="w-56 h-56 rounded-full border border-chapp-white/10 bg-chapp-white/[0.03] flex items-center justify-center group-hover/visual:border-chapp-accent-blue/30 group-hover/visual:rotate-45 transition-all duration-700">
+                          <div className="w-28 h-28 rounded-full bg-chapp-accent-blue/10 flex items-center justify-center group-hover/visual:bg-chapp-accent-blue/20 group-hover/visual:scale-110 transition-all duration-500">
+                            <service.icon className="text-chapp-accent-blue group-hover/visual:scale-125 group-hover/visual:rotate-12 transition-all duration-500" size={56} />
                           </div>
                         </div>
                       </div>
-                      <div className="absolute top-1/4 right-1/4 w-2 h-2 bg-chapp-accent-blue rounded-full animate-pulse"></div>
-                      <div className="absolute bottom-1/3 left-1/4 w-1.5 h-1.5 bg-chapp-accent-blue-light rounded-full animate-pulse" style={{ animationDelay: '1s' }}></div>
+                      {/* Floating particles */}
+                      <div className="absolute top-1/4 right-1/4 w-2 h-2 bg-chapp-accent-blue rounded-full animate-bounce" style={{ animationDelay: '0s' }}></div>
+                      <div className="absolute bottom-1/3 left-1/4 w-1.5 h-1.5 bg-chapp-accent-blue-light rounded-full animate-bounce" style={{ animationDelay: '1s' }}></div>
+                      <div className="absolute top-2/3 right-1/3 w-1 h-1 bg-chapp-accent-blue rounded-full animate-bounce" style={{ animationDelay: '2s' }}></div>
                     </div>
                   </div>
                 </div>
@@ -226,12 +234,12 @@ const Services = () => {
               {t('services.cta.description')}
             </p>
             <div className="flex flex-col sm:flex-row gap-6 justify-center">
-              <button className="btn-chapp-primary">
+              <a href="/#contact" className="btn-chapp-primary">
                 {t('services.cta.primary')}
-              </button>
-              <button className="btn-chapp-secondary">
+              </a>
+              <a href="/#contact" className="btn-chapp-secondary">
                 {t('services.cta.secondary')}
-              </button>
+              </a>
             </div>
           </div>
         </div>
