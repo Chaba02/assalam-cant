@@ -1,6 +1,7 @@
 
 import React, { useState } from 'react';
 import { Send, CheckCircle, AlertCircle, User, Mail, Building, MessageSquare } from 'lucide-react';
+import ChappMap from './ChappMap';
 
 const ChappContactForm = () => {
   const [formData, setFormData] = useState({
@@ -68,14 +69,14 @@ const ChappContactForm = () => {
   };
 
   return (
-    <section id="contact" className="section-chapp bg-chapp-dark-bg px-6 sm:px-8 lg:px-20">
-      <div className="container-chapp-narrow">
+    <section id="contact" className="section-chapp bg-chapp-dark-bg">
+      <div className="container-chapp">
         {/* Header */}
         <div className="text-center mb-16">
           <div className="inline-flex items-center gap-2 bg-chapp-accent-blue/20 text-chapp-accent-blue px-4 py-2 rounded-full text-body-sm font-semibold mb-6">
             Contattaci
           </div>
-          <h2 className="text-display-md text-chapp-title mb-6">
+          <h2 className="text-display-lg text-chapp-title mb-6">
             Inizia il Tuo{' '}
             <span className="bg-gradient-blue-elegant bg-clip-text text-transparent">
               Progetto Digitale
@@ -87,136 +88,179 @@ const ChappContactForm = () => {
           </p>
         </div>
 
-        {/* Contact Form */}
-        <div className="card-premium-dark p-8 lg:p-12 max-w-3xl mx-auto">
-          <h3 className="text-heading-xl text-chapp-title mb-8 text-center">
-            Richiedi una Consulenza Gratuita
-          </h3>
+        {/* Contact Form & Map Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+          {/* Contact Form */}
+          <div className="card-premium-dark p-8 lg:p-12">
+            <h3 className="text-heading-xl text-chapp-title mb-8">
+              Richiedi una Consulenza Gratuita
+            </h3>
 
-          {status === 'success' && (
-            <div className="mb-8 p-4 bg-green-900/20 border border-green-500/30 rounded-2xl flex items-center gap-3">
-              <CheckCircle className="text-green-400" size={20} />
-              <p className="text-green-400">
-                Messaggio inviato con successo! Ti contatteremo presto.
-              </p>
-            </div>
-          )}
+            {status === 'success' && (
+              <div className="mb-8 p-4 bg-green-900/20 border border-green-500/30 rounded-2xl flex items-center gap-3">
+                <CheckCircle className="text-green-400" size={20} />
+                <p className="text-green-400">
+                  Messaggio inviato con successo! Ti contatteremo presto.
+                </p>
+              </div>
+            )}
 
-          <form onSubmit={handleSubmit} className="space-y-6">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {/* Nome */}
+            <form onSubmit={handleSubmit} className="space-y-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {/* Nome */}
+                <div>
+                  <label htmlFor="name" className="flex items-center gap-2 text-body-sm font-semibold text-chapp-white mb-3">
+                    <User size={16} className="text-chapp-accent-blue" />
+                    Nome *
+                  </label>
+                  <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    value={formData.name}
+                    onChange={handleChange}
+                    className={`form-chapp ${errors.name ? 'border-red-500 focus:ring-red-500 focus:border-red-500' : ''}`}
+                    placeholder="Il tuo nome"
+                  />
+                  {errors.name && (
+                    <p className="mt-2 text-body-sm text-red-400 flex items-center gap-1">
+                      <AlertCircle size={14} />
+                      {errors.name}
+                    </p>
+                  )}
+                </div>
+
+                {/* Email */}
+                <div>
+                  <label htmlFor="email" className="flex items-center gap-2 text-body-sm font-semibold text-chapp-white mb-3">
+                    <Mail size={16} className="text-chapp-accent-blue" />
+                    Email *
+                  </label>
+                  <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    className={`form-chapp ${errors.email ? 'border-red-500 focus:ring-red-500 focus:border-red-500' : ''}`}
+                    placeholder="la.tua@email.com"
+                  />
+                  {errors.email && (
+                    <p className="mt-2 text-body-sm text-red-400 flex items-center gap-1">
+                      <AlertCircle size={14} />
+                      {errors.email}
+                    </p>
+                  )}
+                </div>
+              </div>
+
+              {/* Azienda */}
               <div>
-                <label htmlFor="name" className="flex items-center gap-2 text-body-sm font-semibold text-chapp-white mb-3">
-                  <User size={16} className="text-chapp-accent-blue" />
-                  Nome *
+                <label htmlFor="company" className="flex items-center gap-2 text-body-sm font-semibold text-chapp-white mb-3">
+                  <Building size={16} className="text-chapp-accent-blue" />
+                  Azienda
                 </label>
                 <input
                   type="text"
-                  id="name"
-                  name="name"
-                  value={formData.name}
+                  id="company"
+                  name="company"
+                  value={formData.company}
                   onChange={handleChange}
-                  className={`form-chapp ${errors.name ? 'border-red-500 focus:ring-red-500 focus:border-red-500' : ''}`}
-                  placeholder="Il tuo nome"
+                  className="form-chapp"
+                  placeholder="Nome dell'azienda (opzionale)"
                 />
-                {errors.name && (
-                  <p className="mt-2 text-body-sm text-red-400 flex items-center gap-1">
-                    <AlertCircle size={14} />
-                    {errors.name}
-                  </p>
-                )}
               </div>
 
-              {/* Email */}
+              {/* Messaggio */}
               <div>
-                <label htmlFor="email" className="flex items-center gap-2 text-body-sm font-semibold text-chapp-white mb-3">
-                  <Mail size={16} className="text-chapp-accent-blue" />
-                  Email *
+                <label htmlFor="message" className="flex items-center gap-2 text-body-sm font-semibold text-chapp-white mb-3">
+                  <MessageSquare size={16} className="text-chapp-accent-blue" />
+                  Messaggio *
                 </label>
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  value={formData.email}
+                <textarea
+                  id="message"
+                  name="message"
+                  rows={6}
+                  value={formData.message}
                   onChange={handleChange}
-                  className={`form-chapp ${errors.email ? 'border-red-500 focus:ring-red-500 focus:border-red-500' : ''}`}
-                  placeholder="la.tua@email.com"
+                  className={`form-textarea-chapp ${errors.message ? 'border-red-500 focus:ring-red-500 focus:border-red-500' : ''}`}
+                  placeholder="Descrivi il tuo progetto web o le tue esigenze di Business Intelligence..."
                 />
-                {errors.email && (
+                {errors.message && (
                   <p className="mt-2 text-body-sm text-red-400 flex items-center gap-1">
                     <AlertCircle size={14} />
-                    {errors.email}
+                    {errors.message}
                   </p>
                 )}
               </div>
+
+              {/* Submit Button */}
+              <button
+                type="submit"
+                disabled={status === 'loading'}
+                className={`btn-chapp-accent w-full justify-center flex items-center hover-glow-blue ${
+                  status === 'loading' ? 'opacity-75 cursor-not-allowed' : ''
+                }`}
+              >
+                {status === 'loading' ? (
+                  <>
+                    <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin mr-2"></div>
+                    Invio in corso...
+                  </>
+                ) : (
+                  <>
+                    Richiedi Consulenza
+                    <Send size={18} className="ml-2" />
+                  </>
+                )}
+              </button>
+
+              <p className="text-body-sm text-chapp-gray-400 text-center">
+                Rispettiamo la tua privacy. Le informazioni fornite verranno utilizzate 
+                esclusivamente per contattarti in merito alla tua richiesta.
+              </p>
+            </form>
+          </div>
+
+          {/* Map & Contact Info */}
+          <div className="space-y-8">
+            {/* Map */}
+            <div className="h-80">
+              <ChappMap className="h-full" />
             </div>
 
-            {/* Azienda */}
-            <div>
-              <label htmlFor="company" className="flex items-center gap-2 text-body-sm font-semibold text-chapp-white mb-3">
-                <Building size={16} className="text-chapp-accent-blue" />
-                Azienda
-              </label>
-              <input
-                type="text"
-                id="company"
-                name="company"
-                value={formData.company}
-                onChange={handleChange}
-                className="form-chapp"
-                placeholder="Nome dell'azienda (opzionale)"
-              />
+            {/* Contact Info Card */}
+            <div className="card-premium-dark p-8">
+              <h3 className="text-heading-lg text-chapp-title mb-6">
+                Informazioni di Contatto
+              </h3>
+              
+              <div className="space-y-6">
+                <div className="flex items-start gap-4">
+                  <div className="w-10 h-10 bg-chapp-accent-blue/10 border border-chapp-accent-blue/30 rounded-xl flex items-center justify-center flex-shrink-0">
+                    <Mail className="text-chapp-accent-blue" size={18} />
+                  </div>
+                  <div>
+                    <h4 className="text-body-lg font-medium text-chapp-white mb-2">Email</h4>
+                    <p className="text-chapp-gray-300 text-body-md">info@chapp.it</p>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-4">
+                  <div className="w-10 h-10 bg-chapp-accent-blue/10 border border-chapp-accent-blue/30 rounded-xl flex items-center justify-center flex-shrink-0">
+                    <Building className="text-chapp-accent-blue" size={18} />
+                  </div>
+                  <div>
+                    <h4 className="text-body-lg font-medium text-chapp-white mb-2">Sede</h4>
+                    <p className="text-chapp-gray-300 text-body-md">
+                      Via della Consulenza, 123<br />
+                      20121 Milano, Italia
+                    </p>
+                  </div>
+                </div>
+              </div>
             </div>
-
-            {/* Messaggio */}
-            <div>
-              <label htmlFor="message" className="flex items-center gap-2 text-body-sm font-semibold text-chapp-white mb-3">
-                <MessageSquare size={16} className="text-chapp-accent-blue" />
-                Messaggio *
-              </label>
-              <textarea
-                id="message"
-                name="message"
-                rows={6}
-                value={formData.message}
-                onChange={handleChange}
-                className={`form-textarea-chapp ${errors.message ? 'border-red-500 focus:ring-red-500 focus:border-red-500' : ''}`}
-                placeholder="Descrivi il tuo progetto web o le tue esigenze di Business Intelligence..."
-              />
-              {errors.message && (
-                <p className="mt-2 text-body-sm text-red-400 flex items-center gap-1">
-                  <AlertCircle size={14} />
-                  {errors.message}
-                </p>
-              )}
-            </div>
-
-            {/* Submit Button */}
-            <button
-              type="submit"
-              disabled={status === 'loading'}
-              className={`btn-chapp-accent w-full justify-center flex items-center hover-glow-blue ${
-                status === 'loading' ? 'opacity-75 cursor-not-allowed' : ''
-              }`}
-            >
-              {status === 'loading' ? (
-                <>
-                  <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin mr-2"></div>
-                  Invio in corso...
-                </>
-              ) : (
-                <>
-                  Richiedi Consulenza
-                  <Send size={18} className="ml-2" />
-                </>
-              )}
-            </button>
-
-            <p className="text-body-sm text-chapp-gray-400 text-center">
-              Rispettiamo la tua privacy. Le informazioni fornite verranno utilizzate 
-              esclusivamente per contattarti in merito alla tua richiesta.
-            </p>
-          </form>
+          </div>
         </div>
       </div>
     </section>
