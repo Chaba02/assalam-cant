@@ -96,7 +96,11 @@ const ChappNavbar = () => {
         <div className="flex items-center justify-between h-14 sm:h-16">
           {/* Logo */}
           <div className="flex items-center">
+<<<<<<< HEAD
             <button
+=======
+            <button 
+>>>>>>> cc7086fbd4e932fbbdde2cb705472eb935955242
               onClick={handleLogoClick}
               className="text-heading-lg text-chapp-white font-display hover:text-chapp-accent-blue transition-colors duration-300"
             >
