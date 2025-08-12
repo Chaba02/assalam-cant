@@ -43,6 +43,14 @@ const ChappNavbar = () => {
     }
   };
 
+  const handleLogoClick = () => {
+    if (location.pathname !== '/') {
+      navigate('/');
+    } else {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  };
+
   const handleContactClick = () => {
     setIsOpen(false);
     if (location.pathname !== '/') {
@@ -88,12 +96,12 @@ const ChappNavbar = () => {
         <div className="flex items-center justify-between h-14 sm:h-16">
           {/* Logo */}
           <div className="flex items-center">
-            <Link 
-              to="/" 
+            <button 
+              onClick={handleLogoClick}
               className="text-heading-lg text-chapp-white font-display hover:text-chapp-accent-blue transition-colors duration-300"
             >
               Novaresin s.p.a
-            </Link>
+            </button>
           </div>
 
           {/* Desktop Navigation */}
