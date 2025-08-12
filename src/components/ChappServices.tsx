@@ -1,8 +1,8 @@
 import React from 'react';
-import { 
-  Factory, 
-  Droplets, 
-  Layers3, 
+import {
+  Factory,
+  Droplets,
+  Layers3,
   Shield,
   ArrowRight,
   Sparkles,
@@ -58,7 +58,7 @@ const ChappServices = () => {
       {/* Background Elements */}
       <div className="absolute top-0 right-0 w-96 h-96 bg-blue-100 rounded-full blur-3xl opacity-30"></div>
       <div className="absolute bottom-0 left-0 w-80 h-80 bg-purple-100 rounded-full blur-3xl opacity-20"></div>
-      
+
       <div className="relative z-10 max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
         {/* Header */}
         <div className="text-center mb-20">
@@ -73,7 +73,7 @@ const ChappServices = () => {
             </span>
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-            Offriamo servizi specializzati di resinatura, accoppiatura e membrane tecniche 
+            Offriamo servizi specializzati di resinatura, accoppiatura e membrane tecniche
             per diversi settori industriali, garantendo qualità e innovazione in ogni progetto.
           </p>
         </div>
@@ -81,46 +81,57 @@ const ChappServices = () => {
         {/* Services Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-20">
           {services.map((service, index) => (
-            <div
-              key={index}
-              className="group relative bg-white rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-all duration-500 border border-gray-100 hover:border-gray-200 hover:-translate-y-2"
-            >
-              {/* Highlight Badge */}
-              <div className="absolute top-6 right-6">
-                <span className="bg-gray-100 text-gray-600 px-3 py-1 rounded-full text-xs font-medium">
-                  {service.highlight}
-                </span>
+            <React.Fragment key={index}>
+              <div
+                className="group relative bg-white rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-all duration-500 border border-gray-100 hover:border-gray-200 hover:-translate-y-2"
+              >
+                {/* Highlight Badge */}
+                <div className="absolute top-6 right-6">
+                  <span className="bg-gray-100 text-gray-600 px-3 py-1 rounded-full text-xs font-medium">
+                    {service.highlight}
+                  </span>
+                </div>
+
+                {/* Icon */}
+                <div className={`w-16 h-16 rounded-2xl bg-gradient-to-r ${service.color} flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg`}>
+                  <service.icon className="text-white" size={28} />
+                </div>
+
+                {/* Content */}
+                <h3 className="text-2xl font-semibold text-gray-900 mb-4">
+                  {service.title}
+                </h3>
+                <p className="text-gray-600 mb-6 leading-relaxed">
+                  {service.description}
+                </p>
+
+                {/* Features with animated gradient separators */}
+                <ul className="space-y-6 mb-8">
+                  {service.features.map((feature, featureIndex) => (
+                    <li
+                      key={featureIndex}
+                      className="relative flex items-center text-gray-700 pl-6 before:absolute before:left-0 before:top-1/2 before:-translate-y-1/2 before:h-[2px] before:w-4 before:rounded before:bg-gradient-to-r before:from-blue-400 before:to-purple-600 before:transition-all before:duration-300 group-hover:before:w-8"
+                    >
+                      <div className="w-3 h-3 bg-blue-600 rounded-full mr-4 flex-shrink-0 shadow-md"></div>
+                      <span className="text-sm font-semibold">{feature}</span>
+                    </li>
+                  ))}
+                </ul>
+
+                {/* CTA */}
+                <button className="w-full flex items-center justify-center gap-2 bg-gray-50 hover:bg-gray-100 text-gray-700 hover:text-gray-900 px-6 py-3 rounded-xl font-medium transition-all duration-300 group-hover:bg-blue-50 group-hover:text-blue-700">
+                  Scopri di più
+                  <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform duration-200" />
+                </button>
               </div>
 
-              {/* Icon */}
-              <div className={`w-16 h-16 rounded-2xl bg-gradient-to-r ${service.color} flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg`}>
-                <service.icon className="text-white" size={28} />
-              </div>
-
-              {/* Content */}
-              <h3 className="text-2xl font-semibold text-gray-900 mb-4">
-                {service.title}
-              </h3>
-              <p className="text-gray-600 mb-6 leading-relaxed">
-                {service.description}
-              </p>
-
-              {/* Features */}
-              <ul className="space-y-3 mb-8">
-                {service.features.map((feature, featureIndex) => (
-                  <li key={featureIndex} className="flex items-center text-gray-700">
-                    <div className="w-2 h-2 bg-blue-500 rounded-full mr-3 flex-shrink-0"></div>
-                    <span className="text-sm font-medium">{feature}</span>
-                  </li>
-                ))}
-              </ul>
-
-              {/* CTA */}
-              <button className="w-full flex items-center justify-center gap-2 bg-gray-50 hover:bg-gray-100 text-gray-700 hover:text-gray-900 px-6 py-3 rounded-xl font-medium transition-all duration-300 group-hover:bg-blue-50 group-hover:text-blue-700">
-                Scopri di più
-                <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform duration-200" />
-              </button>
-            </div>
+              {/* Separator between services, except after last */}
+              {index !== services.length - 1 && (
+                <div className="flex justify-center my-12">
+                  <span className="inline-block w-24 h-1 rounded-full bg-gradient-to-r from-blue-500 via-purple-600 to-blue-700 shadow-lg animate-pulse"></span>
+                </div>
+              )}
+            </React.Fragment>
           ))}
         </div>
 
@@ -151,7 +162,7 @@ const ChappServices = () => {
               Hai un progetto tessile in mente?
             </h3>
             <p className="text-xl text-white text-opacity-90 mb-8 max-w-2xl mx-auto leading-relaxed">
-              I nostri esperti tessili sono pronti ad analizzare le tue esigenze 
+              I nostri esperti tessili sono pronti ad analizzare le tue esigenze
               e proporti la soluzione più innovativa per il tuo settore.
             </p>
             <button className="bg-white text-gray-900 px-8 py-4 rounded-full font-semibold hover:bg-gray-100 transform hover:scale-105 transition-all duration-300 shadow-lg">

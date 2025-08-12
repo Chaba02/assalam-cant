@@ -5,7 +5,6 @@ import { useLanguage } from '../contexts/LanguageContext';
 const ChappHero = () => {
   const { t } = useLanguage();
 
-  // Placeholder images
   const clientLogos = [
     '/burberry.png',
     '/gucci.png',
@@ -16,8 +15,11 @@ const ChappHero = () => {
   ];
 
   return (
-    <section className="relative min-h-screen bg-black text-white overflow-hidden font-sans">
-      {/* Premium animated lines that draw on load */}
+    <section
+      className="relative min-h-screen text-white overflow-hidden font-sans"
+      style={{ backgroundColor: 'hsl(0 0% 1%)' }}
+    >
+      {/* Premium animated lines */}
       <svg
         className="absolute inset-0 w-full h-full opacity-70"
         xmlns="http://www.w3.org/2000/svg"
@@ -42,7 +44,7 @@ const ChappHero = () => {
           </linearGradient>
         </defs>
 
-        {/* Prima linea premium - si disegna e poi ondeggia */}
+        {/* Linee animate */}
         <path
           d="M0,250 Q300,150 600,250 T1200,250"
           stroke="url(#premiumGold)"
@@ -72,7 +74,6 @@ const ChappHero = () => {
           />
         </path>
 
-        {/* Seconda linea premium */}
         <path
           d="M0,450 Q300,550 600,450 T1200,450"
           stroke="url(#premiumSilver)"
@@ -103,7 +104,6 @@ const ChappHero = () => {
           />
         </path>
 
-        {/* Terza linea premium */}
         <path
           d="M0,350 Q400,250 800,350 Q1000,400 1200,350"
           stroke="url(#premiumPlatinum)"
@@ -134,9 +134,6 @@ const ChappHero = () => {
           />
         </path>
 
-
-
-        {/* Quinta linea elegante */}
         <path
           d="M0,600 Q300,500 600,600 Q900,700 1200,600"
           stroke="url(#premiumSilver)"
@@ -168,26 +165,19 @@ const ChappHero = () => {
         </path>
       </svg>
 
-      {/* Centered content */}
+      {/* Content */}
       <div className="relative z-10 flex flex-col items-center justify-center min-h-screen px-4 text-center">
-        {/* Badge */}
         <div className="inline-flex items-center gap-2 glass-dark text-chapp-gray-300 px-6 py-3 rounded-full text-sm font-medium mb-8 animate-fade-in apple-glow">
           {t('hero.badge') || 'Eccellenza Tessile Italiana'}
         </div>
 
-        {/* Main heading with original glow effect - testo più piccolo */}
         <h1 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-extralight mb-8 animate-fade-in-up leading-tight tracking-tight">
           Innoviamo il{' '}
-          <span className="text-glow-cyan-magenta font-light">
-            Tessuto
-          </span>
+          <span className="text-glow-cyan-magenta font-light">Tessuto</span>
           <br />
-          <span className="font-light text-chapp-gray-200">
-            Filo Dopo Filo
-          </span>
+          <span className="font-light text-chapp-gray-200">Filo Dopo Filo</span>
         </h1>
 
-        {/* Subtitle - ridotta */}
         <p
           className="max-w-2xl text-lg sm:text-xl text-chapp-gray-400 mb-10 leading-relaxed font-light animate-fade-in-up"
           style={{ animationDelay: '0.2s' }}
@@ -195,7 +185,6 @@ const ChappHero = () => {
           Materiali pregiati, cura artigianale e tecnologie d'avanguardia per tessuti che ispirano il futuro.
         </p>
 
-        {/* CTA Buttons - tornati alle dimensioni originali */}
         <div
           className="flex flex-col sm:flex-row gap-4 animate-fade-in-up"
           style={{ animationDelay: '0.4s' }}
@@ -217,8 +206,8 @@ const ChappHero = () => {
         </div>
       </div>
 
-      {/* Infinite Scroll Section - Moved below Hero */}
-      <section className="py-16 bg-black">
+      {/* Scroll section */}
+      <section className="py-16" style={{ backgroundColor: 'hsl(0 0% 1%)' }}>
         <div className="container-chapp">
           <div className="text-center mb-12">
             <h3 className="text-heading-lg text-chapp-gray-400 font-light mb-8">
@@ -226,6 +215,26 @@ const ChappHero = () => {
             </h3>
           </div>
           <div className="relative overflow-hidden w-full">
+            {/* Left black fade */}
+            <div
+              className="pointer-events-none absolute left-0 top-0 h-full w-20"
+              style={{
+                background:
+                  'linear-gradient(to right, rgba(3,3,3,0.95), transparent)',
+                zIndex: 10,
+              }}
+            />
+
+            {/* Right black fade */}
+            <div
+              className="pointer-events-none absolute right-0 top-0 h-full w-20"
+              style={{
+                background:
+                  'linear-gradient(to left, rgba(3,3,3,0.95), transparent)',
+                zIndex: 10,
+              }}
+            />
+
             <div className="flex animate-scroll-x space-x-12 will-change-transform">
               {[...clientLogos, ...clientLogos].map((logo, index) => (
                 <div
@@ -241,8 +250,6 @@ const ChappHero = () => {
               ))}
             </div>
           </div>
-
-
         </div>
       </section>
     </section>

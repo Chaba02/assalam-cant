@@ -66,7 +66,7 @@ export default {
 				// Dark mode premium color palette with elegant blue tones
 				chapp: {
 					black: 'hsl(0 0% 5%)',
-					'dark-bg': 'hsl(0 0% 7%)',
+					'dark-bg': 'hsl(0 0%, 1%)',
 					'dark-card': 'hsl(0 0% 10%)',
 					'dark-border': 'hsl(0 0% 15%)',
 					white: 'hsl(0 0% 100%)',

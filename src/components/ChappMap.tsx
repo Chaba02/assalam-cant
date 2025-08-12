@@ -64,16 +64,17 @@ const ChappMap: React.FC<ChappMapProps> = ({ className = '' }) => {
     L.marker(nibionnoCoords, { icon: customIcon })
       .addTo(map)
       .bindPopup(`
-        <div class="p-4 bg-chapp-dark-card text-chapp-white rounded-lg border border-chapp-dark-border/30 shadow-lg max-w-xs">
-          <h3 class="font-semibold mb-2 text-lg">Novaresin S.p.A.</h3>
-          <p class="text-sm text-chapp-gray-300 leading-relaxed">
-            Via Montegrappa, 28<br/>
-            23895 Nibionno (LC), Italy<br/>
-            P.IVA: 00230560138<br/>
-            Tel: 031 690.703
-          </p>
-        </div>
-      `)
+  <div class="p-5 bg-chapp-dark-card text-chapp-white rounded-xl border border-chapp-dark-border/40 shadow-xl max-w-xs font-sans">
+    <h3 class="font-bold mb-3 text-xl tracking-wide">Novaresin S.p.A.</h3>
+    <address class="not-italic text-sm text-chapp-gray-300 leading-relaxed space-y-1">
+      <div>Via Montegrappa, 28</div>
+      <div>23895 Nibionno (LC), Italy</div>
+      <div>P.IVA: 00230560138</div>
+      <div>Tel: <a href="tel:+39031690703" class="text-chapp-accent-blue hover:underline">031 690.703</a></div>
+    </address>
+  </div>
+`)
+
       .openPopup();
 
     mapInstanceRef.current = map;
