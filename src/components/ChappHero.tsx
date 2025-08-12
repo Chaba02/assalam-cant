@@ -7,12 +7,12 @@ const ChappHero = () => {
 
   // Placeholder images
   const clientLogos = [
-    '/placeholder.svg',
-    '/placeholder.svg',
-    '/placeholder.svg',
-    '/placeholder.svg',
-    '/placeholder.svg',
-    '/placeholder.svg',
+    '/burberry.png',
+    '/gucci.png',
+    '/fendi.png',
+    '/dior.png',
+    '/zegna.png',
+    '/loro_piana.png',
   ];
 
   return (
@@ -226,21 +226,23 @@ const ChappHero = () => {
             </h3>
           </div>
           <div className="relative overflow-hidden w-full">
-            <div className="flex space-x-8 animate-scroll-x will-change-transform">
-              {[...Array(18)].map((_, index) => (
+            <div className="flex animate-scroll-x space-x-12 will-change-transform">
+              {[...clientLogos, ...clientLogos].map((logo, index) => (
                 <div
                   key={index}
-                  className="flex-shrink-0 h-16 w-32 bg-chapp-white/5 rounded-lg flex items-center justify-center opacity-60 hover:opacity-100 transition-all duration-300 border border-chapp-white/10"
+                  className="flex-shrink-0 h-32 w-32 rounded-lg flex items-center justify-center hover:opacity-100 transition-opacity duration-300 opacity-70"
                 >
                   <img
-                    src="/placeholder.svg"
+                    src={logo}
                     alt={`Cliente ${index + 1}`}
-                    className="max-h-10 object-contain filter invert opacity-70"
+                    className="max-h-20 object-contain"
                   />
                 </div>
               ))}
             </div>
           </div>
+
+
         </div>
       </section>
     </section>

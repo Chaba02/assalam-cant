@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Send, CheckCircle, AlertCircle, User, Mail, Building, MessageSquare } from 'lucide-react';
 import ChappMap from './ChappMap';
@@ -21,9 +20,9 @@ const ChappContactForm = () => {
     }
 
     if (!formData.email.trim()) {
-      newErrors.email = 'L\'email è obbligatoria';
+      newErrors.email = "L'email è obbligatoria";
     } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
-      newErrors.email = 'Inserisci un\'email valida';
+      newErrors.email = "Inserisci un'email valida";
     }
 
     if (!formData.message.trim()) {
@@ -36,12 +35,12 @@ const ChappContactForm = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     if (!validateForm()) return;
 
     setStatus('loading');
 
-    // Simulation of form submission
+    // Simulazione invio form
     setTimeout(() => {
       setStatus('success');
       setFormData({
@@ -55,15 +54,16 @@ const ChappContactForm = () => {
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
     setFormData(prev => ({
       ...prev,
-      [e.target.name]: e.target.value
+      [name]: value
     }));
-    // Remove error when user starts typing
-    if (errors[e.target.name]) {
+
+    if (errors[name]) {
       setErrors(prev => ({
         ...prev,
-        [e.target.name]: ''
+        [name]: ''
       }));
     }
   };
@@ -83,8 +83,7 @@ const ChappContactForm = () => {
             </span>
           </h2>
           <p className="text-body-xl text-chapp-body max-w-2xl mx-auto">
-            Contattaci per una consulenza gratuita e personalizzata. 
-            Il nostro team di esperti è pronto ad analizzare le tue esigenze tecnologiche.
+            Contattaci per una consulenza gratuita e personalizzata. Il nostro team di esperti è pronto ad analizzare le tue esigenze tecnologiche.
           </p>
         </div>
 
@@ -105,13 +104,13 @@ const ChappContactForm = () => {
               </div>
             )}
 
-            <form onSubmit={handleSubmit} className="space-y-6">
+            <form onSubmit={handleSubmit} className="space-y-6" noValidate>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {/* Nome */}
                 <div>
                   <label htmlFor="name" className="flex items-center gap-2 text-body-sm font-semibold text-chapp-white mb-3">
                     <User size={16} className="text-chapp-accent-blue" />
-                    Nome *
+                    Nome <span className="text-red-400">*</span>
                   </label>
                   <input
                     type="text"
@@ -121,9 +120,11 @@ const ChappContactForm = () => {
                     onChange={handleChange}
                     className={`form-chapp ${errors.name ? 'border-red-500 focus:ring-red-500 focus:border-red-500' : ''}`}
                     placeholder="Il tuo nome"
+                    aria-invalid={errors.name ? 'true' : 'false'}
+                    aria-describedby={errors.name ? 'name-error' : undefined}
                   />
                   {errors.name && (
-                    <p className="mt-2 text-body-sm text-red-400 flex items-center gap-1">
+                    <p id="name-error" className="mt-2 text-body-sm text-red-400 flex items-center gap-1" role="alert">
                       <AlertCircle size={14} />
                       {errors.name}
                     </p>
@@ -134,7 +135,7 @@ const ChappContactForm = () => {
                 <div>
                   <label htmlFor="email" className="flex items-center gap-2 text-body-sm font-semibold text-chapp-white mb-3">
                     <Mail size={16} className="text-chapp-accent-blue" />
-                    Email *
+                    Email <span className="text-red-400">*</span>
                   </label>
                   <input
                     type="email"
@@ -144,9 +145,11 @@ const ChappContactForm = () => {
                     onChange={handleChange}
                     className={`form-chapp ${errors.email ? 'border-red-500 focus:ring-red-500 focus:border-red-500' : ''}`}
                     placeholder="la.tua@email.com"
+                    aria-invalid={errors.email ? 'true' : 'false'}
+                    aria-describedby={errors.email ? 'email-error' : undefined}
                   />
                   {errors.email && (
-                    <p className="mt-2 text-body-sm text-red-400 flex items-center gap-1">
+                    <p id="email-error" className="mt-2 text-body-sm text-red-400 flex items-center gap-1" role="alert">
                       <AlertCircle size={14} />
                       {errors.email}
                     </p>
@@ -168,6 +171,7 @@ const ChappContactForm = () => {
                   onChange={handleChange}
                   className="form-chapp"
                   placeholder="Nome dell'azienda (opzionale)"
+                  aria-describedby="company-desc"
                 />
               </div>
 
@@ -175,7 +179,7 @@ const ChappContactForm = () => {
               <div>
                 <label htmlFor="message" className="flex items-center gap-2 text-body-sm font-semibold text-chapp-white mb-3">
                   <MessageSquare size={16} className="text-chapp-accent-blue" />
-                  Messaggio *
+                  Messaggio <span className="text-red-400">*</span>
                 </label>
                 <textarea
                   id="message"
@@ -185,9 +189,11 @@ const ChappContactForm = () => {
                   onChange={handleChange}
                   className={`form-textarea-chapp ${errors.message ? 'border-red-500 focus:ring-red-500 focus:border-red-500' : ''}`}
                   placeholder="Descrivi il tuo progetto web o le tue esigenze di Business Intelligence..."
+                  aria-invalid={errors.message ? 'true' : 'false'}
+                  aria-describedby={errors.message ? 'message-error' : undefined}
                 />
                 {errors.message && (
-                  <p className="mt-2 text-body-sm text-red-400 flex items-center gap-1">
+                  <p id="message-error" className="mt-2 text-body-sm text-red-400 flex items-center gap-1" role="alert">
                     <AlertCircle size={14} />
                     {errors.message}
                   </p>
@@ -198,13 +204,12 @@ const ChappContactForm = () => {
               <button
                 type="submit"
                 disabled={status === 'loading'}
-                className={`btn-chapp-accent w-full justify-center flex items-center hover-glow-blue ${
-                  status === 'loading' ? 'opacity-75 cursor-not-allowed' : ''
-                }`}
+                className={`btn-chapp-accent w-full justify-center flex items-center hover-glow-blue ${status === 'loading' ? 'opacity-75 cursor-not-allowed' : ''
+                  }`}
               >
                 {status === 'loading' ? (
                   <>
-                    <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin mr-2"></div>
+                    <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin mr-2" />
                     Invio in corso...
                   </>
                 ) : (
@@ -215,9 +220,8 @@ const ChappContactForm = () => {
                 )}
               </button>
 
-              <p className="text-body-sm text-chapp-gray-400 text-center">
-                Rispettiamo la tua privacy. Le informazioni fornite verranno utilizzate 
-                esclusivamente per contattarti in merito alla tua richiesta.
+              <p className="text-body-sm text-chapp-gray-400 text-center mt-6">
+                Rispettiamo la tua privacy. Le informazioni fornite verranno utilizzate esclusivamente per contattarti in merito alla tua richiesta.
               </p>
             </form>
           </div>
@@ -225,16 +229,16 @@ const ChappContactForm = () => {
           {/* Map & Contact Info */}
           <div className="space-y-8">
             {/* Map */}
-            <div className="h-80">
-              <ChappMap className="h-full" />
+            <div className="h-80 rounded-2xl overflow-hidden border border-chapp-dark-border/30">
+              <ChappMap className="h-full w-full" />
             </div>
 
             {/* Contact Info Card */}
-            <div className="card-premium-dark p-8">
+            <div className="card-premium-dark p-8 rounded-2xl">
               <h3 className="text-heading-lg text-chapp-title mb-6">
                 Informazioni di Contatto
               </h3>
-              
+
               <div className="space-y-6">
                 <div className="flex items-start gap-4">
                   <div className="w-10 h-10 bg-chapp-accent-blue/10 border border-chapp-accent-blue/30 rounded-xl flex items-center justify-center flex-shrink-0">
@@ -242,7 +246,7 @@ const ChappContactForm = () => {
                   </div>
                   <div>
                     <h4 className="text-body-lg font-medium text-chapp-white mb-2">Email</h4>
-                    <p className="text-chapp-gray-300 text-body-md">info@chapp.it</p>
+                    <p className="text-chapp-gray-300 text-body-md">info@novaresin.it</p>
                   </div>
                 </div>
 
@@ -252,10 +256,11 @@ const ChappContactForm = () => {
                   </div>
                   <div>
                     <h4 className="text-body-lg font-medium text-chapp-white mb-2">Sede</h4>
-                    <p className="text-chapp-gray-300 text-body-md">
-                      Via della Consulenza, 123<br />
-                      20121 Milano, Italia
-                    </p>
+                    <address className="not-italic text-chapp-gray-300 text-body-md">
+                      Via Montegrappa, 28<br />
+                      23895 Nibionno (LC)<br />
+                      Italia
+                    </address>
                   </div>
                 </div>
               </div>
