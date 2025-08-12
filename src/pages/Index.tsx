@@ -1,23 +1,44 @@
-import HeroSection from "@/components/HeroSection";
-import PrayerTimes from "@/components/PrayerTimes";
-import IslamicCalendar from "@/components/IslamicCalendar";
-import Activities from "@/components/Activities";
-import Donations from "@/components/Donations";
-import Gallery from "@/components/Gallery";
-import Contact from "@/components/Contact";
-import Footer from "@/components/Footer";
+
+import React, { useEffect } from 'react';
+import ChappNavbar from '../components/ChappNavbar';
+import ChappHero from '../components/ChappHero';
+import ChappSectors from '../components/ChappSectors';
+import ChappAbout from '../components/ChappAbout';
+import ChappBIDashboard from '../components/ChappBIDashboard';
+import ChappContactForm from '../components/ChappContactForm';
+import ChappFooter from '../components/ChappFooter';
 
 const Index = () => {
+  useEffect(() => {
+    // Enhanced Intersection Observer for scroll animations
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -80px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in-view');
+        }
+      });
+    }, observerOptions);
+
+    // Observe all elements with animate-on-scroll class
+    const animatedElements = document.querySelectorAll('.animate-on-scroll');
+    animatedElements.forEach((el) => observer.observe(el));
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
-    <div className="min-h-screen">
-      <HeroSection />
-      <PrayerTimes />
-      <IslamicCalendar />
-      <Activities />
-      <Donations />
-      <Gallery />
-      <Contact />
-      <Footer />
+    <div className="min-h-screen bg-chapp-dark-bg overflow-x-hidden">
+      <ChappNavbar />
+      <ChappHero />
+      <ChappSectors />
+      <ChappAbout />
+      <ChappContactForm />
+      <ChappFooter />
     </div>
   );
 };

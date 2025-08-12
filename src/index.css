@@ -1,107 +1,50 @@
 
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
-
+/* Dark Mode Premium Design System */
 @layer base {
   :root {
-    --background: 35 25% 96%;
-    --foreground: 220 30% 15%;
+    --background: 0 0% 7%;
+    --foreground: 0 0% 100%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 220 30% 15%;
+    --card: 0 0% 10%;
+    --card-foreground: 0 0% 100%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 220 30% 15%;
+    --popover: 0 0% 10%;
+    --popover-foreground: 0 0% 100%;
 
-    --primary: 220 80% 25%;
-    --primary-foreground: 35 40% 95%;
+    --primary: 0 0% 100%;
+    --primary-foreground: 0 0% 7%;
 
-    --secondary: 35 30% 88%;
-    --secondary-foreground: 220 30% 15%;
+    --secondary: 0 0% 15%;
+    --secondary-foreground: 0 0% 100%;
 
-    --muted: 35 20% 90%;
-    --muted-foreground: 220 15% 45%;
+    --muted: 0 0% 15%;
+    --muted-foreground: 0 0% 64%;
 
-    --accent: 220 30% 20%;
-    --accent-foreground: 35 40% 95%;
+    --accent: 212 95% 54%;
+    --accent-foreground: 0 0% 100%;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 35 20% 82%;
-    --input: 35 20% 88%;
-    --ring: 45 90% 55%;
-
-    /* Islamic-inspired color palette with better contrast */
-    --gold: 45 90% 55%;
-    --gold-foreground: 220 30% 15%;
-    --beige: 35 30% 88%;
-    --beige-foreground: 220 30% 15%;
-    --night-blue: 220 80% 25%;
-    --night-blue-foreground: 35 40% 95%;
-    --warm-white: 35 25% 96%;
-    --soft-shadow: 220 30% 15%;
-
-    /* Improved contrast colors */
-    --gold-dark: 45 70% 45%;
-    --beige-dark: 35 25% 75%;
-    --accent-gold: 40 85% 50%;
-
-    /* Gradients */
-    --gradient-sunset: linear-gradient(135deg, hsl(45, 80%, 70%), hsl(35, 70%, 60%), hsl(220, 60%, 40%));
-    --gradient-peaceful: linear-gradient(180deg, hsl(35, 25%, 96%), hsl(35, 30%, 92%));
-    --gradient-gold: linear-gradient(135deg, hsl(45, 90%, 65%), hsl(45, 70%, 45%));
-
-    /* Shadows */
-    --shadow-gentle: 0 4px 20px hsla(220, 30%, 15%, 0.08);
-    --shadow-elevated: 0 8px 30px hsla(220, 30%, 15%, 0.12);
-    --shadow-gold: 0 4px 20px hsla(45, 90%, 55%, 0.2);
-
-    --radius: 0.5rem;
-
-    --sidebar-background: 0 0% 98%;
-    --sidebar-foreground: 240 5.3% 26.1%;
-    --sidebar-primary: 240 5.9% 10%;
-    --sidebar-primary-foreground: 0 0% 98%;
-    --sidebar-accent: 240 4.8% 95.9%;
-    --sidebar-accent-foreground: 240 5.9% 10%;
-    --sidebar-border: 220 13% 91%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
-  }
-
-  .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
     --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 0 0% 15%;
+    --input: 0 0% 15%;
+    --ring: 212 95% 54%;
+
+    --radius: 0.75rem;
+
+    --sidebar-background: 0 0% 9%;
+    --sidebar-foreground: 0 0% 82%;
+    --sidebar-primary: 0 0% 100%;
+    --sidebar-primary-foreground: 0 0% 9%;
+    --sidebar-accent: 0 0% 15%;
+    --sidebar-accent-foreground: 0 0% 100%;
+    --sidebar-border: 0 0% 15%;
+    --sidebar-ring: 212 95% 54%;
   }
 }
 
@@ -111,142 +54,341 @@ All colors MUST be HSL.
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-chapp-dark-bg text-chapp-white font-sans antialiased;
+    font-feature-settings: 'rlig' 1, 'calt' 1;
+  }
+
+  html {
     scroll-behavior: smooth;
   }
 
-  /* Custom fonts for Islamic feel */
-  .font-arabic {
-    font-family: 'Amiri', 'Times New Roman', serif;
+  /* Dark mode selection */
+  ::selection {
+    @apply bg-chapp-accent-blue/30;
   }
 
-  .font-elegant {
-    font-family: 'Playfair Display', serif;
-  }
-
-  /* Enhanced animations */
-  .fade-in {
-    animation: fadeIn 0.8s ease-in-out;
-  }
-
-  .slide-up {
-    animation: slideUp 0.6s ease-out;
-  }
-
-  .scale-in {
-    animation: scaleIn 0.4s ease-out;
-  }
-
-  .hover-lift {
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-  }
-
-  .hover-lift:hover {
-    transform: translateY(-4px);
-    box-shadow: var(--shadow-elevated);
-  }
-
-  @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-
-  @keyframes slideUp {
-    from { opacity: 0; transform: translateY(40px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-
-  @keyframes scaleIn {
-    from { opacity: 0; transform: scale(0.9); }
-    to { opacity: 1; transform: scale(1); }
-  }
-
-  .gradient-text {
-    background: var(--gradient-gold);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-  }
-
-  /* Improved button styles */
-  .btn-gold {
-    background: hsl(var(--gold));
-    color: hsl(var(--gold-foreground));
-    border: 1px solid hsl(var(--gold));
-    transition: all 0.3s ease;
-  }
-
-  .btn-gold:hover {
-    background: hsl(var(--gold-dark));
-    border-color: hsl(var(--gold-dark));
-    transform: translateY(-1px);
-  }
-
-  /* Smooth scrolling between sections */
-  .scroll-smooth {
-    scroll-behavior: smooth;
+  /* Custom select styling */
+  select {
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%23d1d5db' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e");
+    background-position: right 0.5rem center;
+    background-repeat: no-repeat;
+    background-size: 1.5em 1.5em;
+    padding-right: 2.5rem;
   }
 }
 
-/* Animation utility classes */
-@layer utilities {
-  .animate-fade-in-up {
-    animation: fadeInUp 0.6s ease-out forwards;
-    opacity: 0;
+/* Dark Mode Premium Component Variants */
+@layer components {
+  /* Button Variants - Dark Mode */
+  .btn-chapp-primary {
+    @apply inline-flex items-center justify-center px-8 py-4 bg-chapp-white text-chapp-dark-bg font-medium rounded-2xl text-body-lg hover:bg-chapp-gray-100 active:bg-chapp-gray-200 transition-all duration-300 hover:scale-[1.02] focus:ring-2 focus:ring-chapp-accent-blue focus:ring-offset-2 focus:ring-offset-chapp-dark-bg shadow-chapp-md hover:shadow-chapp-lg;
   }
 
-  .animate-slide-in-left {
-    animation: slideInLeft 0.6s ease-out forwards;
-    opacity: 0;
+  .btn-chapp-secondary {
+    @apply inline-flex items-center justify-center px-8 py-4 bg-transparent text-chapp-white border-2 border-chapp-white font-medium rounded-2xl text-body-lg hover:bg-chapp-white hover:text-chapp-dark-bg active:bg-chapp-gray-100 transition-all duration-300 hover:scale-[1.02] focus:ring-2 focus:ring-chapp-white focus:ring-offset-2 focus:ring-offset-chapp-dark-bg shadow-chapp;
   }
 
-  .animate-slide-in-right {
-    animation: slideInRight 0.6s ease-out forwards;
-    opacity: 0;
+  .btn-chapp-accent {
+    @apply inline-flex items-center justify-center px-8 py-4 bg-chapp-accent-blue text-chapp-white font-medium rounded-2xl text-body-lg hover:bg-chapp-accent-blue-dark active:bg-chapp-accent-blue-dark transition-all duration-300 hover:scale-[1.02] hover:shadow-glow-blue focus:ring-2 focus:ring-chapp-accent-blue focus:ring-offset-2 focus:ring-offset-chapp-dark-bg shadow-chapp-md;
   }
 
-  @keyframes fadeInUp {
-    from {
-      opacity: 0;
-      transform: translateY(30px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
+  .btn-chapp-small {
+    @apply inline-flex items-center justify-center px-6 py-3 bg-chapp-accent-blue text-chapp-white font-medium rounded-xl text-body-md hover:bg-chapp-accent-blue-dark active:bg-chapp-accent-blue-dark transition-all duration-300 hover:scale-[1.02] hover:shadow-glow-blue focus:ring-2 focus:ring-chapp-accent-blue focus:ring-offset-2 focus:ring-offset-chapp-dark-bg shadow-chapp;
   }
 
-  @keyframes slideInLeft {
-    from {
-      opacity: 0;
-      transform: translateX(-30px);
-    }
-    to {
-      opacity: 1;
-      transform: translateX(0);
-    }
+  .btn-chapp-ghost {
+    @apply inline-flex items-center justify-center px-6 py-3 text-chapp-gray-300 font-medium text-body-lg hover:text-chapp-white hover:bg-chapp-dark-card rounded-xl transition-all duration-300 hover:scale-[1.02] focus:ring-2 focus:ring-chapp-gray-500 focus:ring-offset-2 focus:ring-offset-chapp-dark-bg;
   }
 
-  @keyframes slideInRight {
-    from {
-      opacity: 0;
-      transform: translateX(30px);
-    }
-    to {
-      opacity: 1;
-      transform: translateX(0);
-    }
+  /* Card Variants - Dark Mode Premium */
+  .card-chapp {
+    @apply bg-chapp-dark-card/95 backdrop-blur-xl rounded-3xl shadow-chapp-lg border border-chapp-dark-border/60 overflow-hidden transition-all duration-500 hover:shadow-chapp-xl hover:-translate-y-2 hover:scale-[1.02] hover:bg-chapp-dark-card;
   }
 
-  .animation-delay-200 {
-    animation-delay: 200ms;
+  .card-glass-dark {
+    @apply bg-chapp-dark-card/70 backdrop-blur-xl rounded-3xl shadow-glass-dark border border-chapp-white/10 overflow-hidden transition-all duration-500 hover:bg-chapp-dark-card/80 hover:shadow-chapp-xl hover:-translate-y-1 hover:scale-[1.02];
   }
 
-  .animation-delay-400 {
-    animation-delay: 400ms;
+  .card-premium-dark {
+    @apply bg-gradient-to-br from-chapp-dark-card via-chapp-gray-900 to-chapp-dark-card rounded-3xl shadow-chapp-lg border border-chapp-dark-border/80 overflow-hidden transition-all duration-500 hover:shadow-chapp-xl hover:-translate-y-2 hover:scale-[1.02] hover:from-chapp-dark-card hover:via-chapp-dark-card hover:to-chapp-dark-card;
   }
 
-  .animation-delay-600 {
-    animation-delay: 600ms;
+  /* Text Variants - Dark Mode */
+  .text-chapp-hero {
+    @apply font-display font-semibold tracking-tight text-chapp-white;
   }
+
+  .text-chapp-title {
+    @apply font-display font-semibold text-chapp-white;
+  }
+
+  .text-chapp-body {
+    @apply text-chapp-gray-300 leading-relaxed;
+  }
+
+  .text-chapp-caption {
+    @apply text-chapp-gray-400 font-medium;
+  }
+
+  /* Layout Variants - Enhanced Padding */
+  .section-chapp {
+    @apply py-24 sm:py-32;
+  }
+
+  .section-chapp-sm {
+    @apply py-16 sm:py-20;
+  }
+
+  .container-chapp {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  .container-chapp-narrow {
+    @apply max-w-4xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  /* Dark Glassmorphism Effect */
+  .glass-dark {
+    @apply bg-chapp-white/5 backdrop-blur-xl border border-chapp-white/10 shadow-glass-dark;
+  }
+
+  /* Animation Classes */
+  .animate-on-scroll {
+    @apply opacity-0 translate-y-8 transition-all duration-700 ease-out;
+  }
+
+  .animate-on-scroll.in-view {
+    @apply opacity-100 translate-y-0;
+  }
+
+  /* Hover Effects - Dark Mode */
+  .hover-lift-dark {
+    @apply transition-all duration-500 hover:-translate-y-3 hover:shadow-chapp-xl;
+  }
+
+  .hover-scale-dark {
+    @apply transition-transform duration-300 hover:scale-[1.02];
+  }
+
+  .hover-glow-blue {
+    @apply transition-all duration-300 hover:shadow-glow-blue;
+  }
+
+  /* Form Styles - Dark Mode */
+  .form-chapp {
+    @apply w-full px-5 py-4 rounded-2xl border border-chapp-dark-border bg-chapp-dark-card/95 backdrop-blur-sm text-chapp-white placeholder:text-chapp-gray-500 focus:ring-2 focus:ring-chapp-accent-blue focus:border-chapp-accent-blue transition-all duration-300 shadow-chapp hover:shadow-chapp-md focus:shadow-chapp-lg;
+  }
+
+  .form-textarea-chapp {
+    @apply w-full px-5 py-4 rounded-2xl border border-chapp-dark-border bg-chapp-dark-card/95 backdrop-blur-sm text-chapp-white placeholder:text-chapp-gray-500 focus:ring-2 focus:ring-chapp-accent-blue focus:border-chapp-accent-blue transition-all duration-300 shadow-chapp hover:shadow-chapp-md focus:shadow-chapp-lg resize-none;
+  }
+
+  /* Link Hover Effects - Dark Mode */
+  .link-hover-dark {
+    @apply relative transition-colors duration-300 hover:text-chapp-accent-blue;
+  }
+
+  .link-hover-dark::after {
+    @apply absolute -bottom-0.5 left-0 w-0 h-0.5 bg-chapp-accent-blue transition-all duration-300;
+    content: '';
+  }
+
+  .link-hover-dark:hover::after {
+    @apply w-full;
+  }
+
+  /* Interactive Dashboard Elements */
+  .dashboard-card {
+    @apply bg-chapp-white/5 backdrop-blur-sm border border-chapp-white/10 rounded-2xl transition-all duration-300 hover:bg-chapp-white/10 hover:scale-105;
+  }
+
+  .chart-bar {
+    @apply bg-gradient-to-t from-chapp-accent-blue to-chapp-accent-blue-light rounded-t-lg transition-all duration-1000;
+  }
+
+  .filter-select {
+    @apply bg-chapp-white/10 backdrop-blur-sm border border-chapp-white/20 rounded-xl text-chapp-white focus:ring-2 focus:ring-chapp-accent-blue focus:border-chapp-accent-blue transition-all duration-300;
+  }
+}
+
+/* Dark Mode Scrollbar Styling */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-chapp-dark-bg;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-chapp-gray-700 rounded-full;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-chapp-gray-600;
+}
+
+/* Smooth transitions for all interactive elements */
+a, button, [role="button"], select {
+  @apply transition-all duration-300;
+}
+
+/* Dark mode focus styles */
+*:focus-visible {
+  @apply ring-2 ring-chapp-accent-blue ring-offset-2 ring-offset-chapp-dark-bg outline-none;
+}
+
+/* Enhanced animations for BI Dashboard */
+@keyframes data-update {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+.animate-data-update {
+  animation: data-update 0.6s ease-in-out;
+}
+
+/* Loading states */
+.loading-shimmer {
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.1),
+    transparent
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+/* Apple-style infinite scroll animation - faster speed */
+@keyframes scroll-x {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-scroll-x {
+  animation: scroll-x 25s linear infinite;
+}
+
+/* Text glow effect for hero */
+.text-glow-blue {
+  text-shadow: 0 0 30px hsl(212 95% 54%), 0 0 60px hsl(212 95% 54%), 0 0 90px hsl(212 95% 54%);
+  animation: glow-pulse 3s ease-in-out infinite alternate;
+}
+
+@keyframes glow-pulse {
+  from {
+    text-shadow: 0 0 30px hsl(212 95% 54%), 0 0 60px hsl(212 95% 54%);
+  }
+  to {
+    text-shadow: 0 0 40px hsl(212 95% 54%), 0 0 70px hsl(212 95% 54%), 0 0 100px hsl(212 95% 54%);
+  }
+}
+
+/* Ferrari-inspired elegant styles */
+.ferrari-elegant {
+  background: linear-gradient(135deg, hsl(0 0% 7%) 0%, hsl(0 0% 10%) 50%, hsl(0 0% 7%) 100%);
+  border: 1px solid hsl(0 0% 15%);
+}
+
+.ferrari-card {
+  @apply bg-chapp-dark-card/80 backdrop-blur-xl rounded-3xl border border-chapp-dark-border/40 shadow-chapp-xl transition-all duration-500 hover:shadow-2xl hover:border-chapp-dark-border/60 hover:bg-chapp-dark-card/90;
+}
+
+/* Apple-style soft glow effect */
+.apple-glow {
+  position: relative;
+}
+
+.apple-glow::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+  border-radius: inherit;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: -1;
+}
+
+.apple-glow:hover::before {
+  opacity: 1;
+}
+
+/* Operational sectors card style */
+.sector-card {
+  @apply card-glass-dark p-8 text-center hover-lift-dark;
+}
+
+.sector-icon {
+  @apply w-16 h-16 mx-auto mb-6 bg-gradient-to-br from-chapp-accent-blue to-chapp-accent-blue-light rounded-2xl flex items-center justify-center shadow-glow-blue hover:shadow-glow-blue-strong transition-all duration-500;
+}
+
+/* Scroll Animation - Faster */
+@keyframes scroll-x {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-scroll-x {
+  animation: scroll-x 15s linear infinite;
+}
+
+/* Animated Flowing Lines Background */
+@keyframes flow {
+  0%, 100% {
+    transform: translateX(-100px) translateY(-50px) rotate(0deg);
+    opacity: 0.1;
+  }
+  25% {
+    transform: translateX(100vw) translateY(50px) rotate(90deg);
+    opacity: 0.3;
+  }
+  50% {
+    transform: translateX(50vw) translateY(-100px) rotate(180deg);
+    opacity: 0.2;
+  }
+  75% {
+    transform: translateX(-50px) translateY(100px) rotate(270deg);
+    opacity: 0.4;
+  }
+}
+
+.flowing-lines::before,
+.flowing-lines::after {
+  content: '';
+  position: absolute;
+  width: 2px;
+  height: 200px;
+  background: linear-gradient(45deg, transparent, rgba(6, 182, 212, 0.3), transparent);
+  animation: flow 20s ease-in-out infinite;
+}
+
+.flowing-lines::after {
+  animation-delay: 10s;
+  background: linear-gradient(45deg, transparent, rgba(236, 72, 153, 0.2), transparent);
+}
+
+/* Cyan-Magenta Glow Effect */
+.text-glow-cyan-magenta {
+  background: linear-gradient(45deg, #06b6d4, #ec4899);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 0 30px rgba(6, 182, 212, 0.5), 0 0 60px rgba(236, 72, 153, 0.3);
+  filter: drop-shadow(0 0 10px rgba(6, 182, 212, 0.4));
 }
