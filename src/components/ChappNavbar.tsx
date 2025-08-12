@@ -23,7 +23,7 @@ const ChappNavbar = () => {
 
   const handleNavClick = (href: string) => {
     setIsOpen(false);
-    
+
     if (href.startsWith('/#')) {
       const targetId = href.substring(2);
       if (location.pathname !== '/') {
@@ -40,6 +40,14 @@ const ChappNavbar = () => {
           element.scrollIntoView({ behavior: 'smooth' });
         }
       }
+    }
+  };
+
+  const handleLogoClick = () => {
+    if (location.pathname !== '/') {
+      navigate('/');
+    } else {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   };
 
@@ -80,20 +88,20 @@ const ChappNavbar = () => {
   return (
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${isScrolled
-          ? 'glass-dark shadow-glass-dark backdrop-blur-xl opacity-95'
-          : 'bg-transparent backdrop-blur-sm opacity-100'
+        ? 'glass-dark shadow-glass-dark backdrop-blur-xl opacity-95'
+        : 'bg-transparent backdrop-blur-sm opacity-100'
         }`}
     >
       <div className="container-chapp mt-3">
         <div className="flex items-center justify-between h-14 sm:h-16">
           {/* Logo */}
           <div className="flex items-center">
-            <Link 
-              to="/" 
+            <button
+              onClick={handleLogoClick}
               className="text-heading-lg text-chapp-white font-display hover:text-chapp-accent-blue transition-colors duration-300"
             >
               Novaresin s.p.a
-            </Link>
+            </button>
           </div>
 
           {/* Desktop Navigation */}
@@ -147,8 +155,8 @@ const ChappNavbar = () => {
                       key={langItem.code}
                       onClick={() => handleLanguageSelect(langItem.code)}
                       className={`w-full flex items-center space-x-3 px-3 py-2 text-left text-body-sm font-medium transition-all duration-300 hover:bg-chapp-white/10 ${language === langItem.code
-                          ? 'text-chapp-accent-blue bg-chapp-white/5'
-                          : 'text-chapp-gray-300 hover:text-chapp-white'
+                        ? 'text-chapp-accent-blue bg-chapp-white/5'
+                        : 'text-chapp-gray-300 hover:text-chapp-white'
                         }`}
                     >
                       <span className="text-sm">{langItem.flag}</span>
@@ -163,7 +171,7 @@ const ChappNavbar = () => {
             </div>
 
             {/* CTA Button */}
-            <button 
+            <button
               onClick={handleContactClick}
               className={`px-5 py-2 bg-chapp-accent-blue text-chapp-white font-medium rounded-xl text-body-md hover:bg-chapp-accent-blue-dark transition-all duration-300 hover:scale-[1.02] hover:shadow-glow-blue ${isLoading ? 'opacity-50 cursor-not-allowed' : ''}`}
             >
@@ -228,8 +236,8 @@ const ChappNavbar = () => {
                     key={langItem.code}
                     onClick={() => handleLanguageSelect(langItem.code)}
                     className={`w-full flex items-center space-x-2 px-2 py-1.5 text-left text-body-sm font-medium rounded-lg transition-all duration-300 ${language === langItem.code
-                        ? 'text-chapp-accent-blue bg-chapp-white/10'
-                        : 'text-chapp-gray-300 hover:text-chapp-white hover:bg-chapp-white/5'
+                      ? 'text-chapp-accent-blue bg-chapp-white/10'
+                      : 'text-chapp-gray-300 hover:text-chapp-white hover:bg-chapp-white/5'
                       }`}
                   >
                     <span>{langItem.flag}</span>
@@ -240,7 +248,7 @@ const ChappNavbar = () => {
             )}
 
             <div className="px-3 pt-1">
-              <button 
+              <button
                 onClick={handleContactClick}
                 className={`w-full px-4 py-2 bg-chapp-accent-blue text-chapp-white font-medium rounded-lg text-body-md hover:bg-chapp-accent-blue-dark transition-all duration-300 ${isLoading ? 'opacity-50 cursor-not-allowed' : ''}`}
               >
