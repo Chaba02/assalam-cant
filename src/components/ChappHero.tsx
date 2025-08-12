@@ -189,14 +189,14 @@ const ChappHero = () => {
           className="flex flex-col sm:flex-row gap-4 animate-fade-in-up"
           style={{ animationDelay: '0.4s' }}
         >
-          <button className="btn-chapp-primary group">
+          <button className="inline-flex items-center justify-center px-8 py-4 bg-gradient-to-r from-blue-600 to-blue-700 text-white font-medium rounded-2xl text-body-lg hover:from-blue-700 hover:to-blue-800 active:from-blue-800 active:to-blue-900 transition-all duration-300 hover:scale-[1.02] hover:shadow-[0_0_30px_rgba(59,130,246,0.5)] focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-chapp-dark-bg shadow-lg group">
             Scopri di più
             <ArrowRight
               size={20}
               className="ml-2 group-hover:translate-x-1 transition-transform duration-300"
             />
           </button>
-          <button className="btn-chapp-secondary group">
+          <button className="inline-flex items-center justify-center px-8 py-4 bg-transparent text-white border-2 border-blue-500 font-medium rounded-2xl text-body-lg hover:bg-blue-500 hover:text-white hover:border-blue-500 active:bg-blue-600 transition-all duration-300 hover:scale-[1.02] hover:shadow-[0_0_20px_rgba(59,130,246,0.3)] focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-chapp-dark-bg shadow-md group">
             <Play
               size={18}
               className="mr-2 group-hover:scale-110 transition-transform duration-300"

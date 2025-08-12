@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { 
   Droplets, 
@@ -120,21 +119,27 @@ const Services = () => {
               {t('services.subtitle')}
             </p>
 
-            {/* Enhanced Stats Cards */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
+            {/* Enhanced Professional Stats Cards */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
               {stats.map((stat, index) => (
                 <div key={index} className="group">
-                  <div className="card-premium-dark p-8 apple-glow hover:bg-white/10 transition-all duration-500 hover:-translate-y-2 relative overflow-hidden">
-                    {/* Background gradient */}
-                    <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-purple-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                  <div className="relative bg-gradient-to-br from-chapp-dark-card/95 via-chapp-gray-900/90 to-chapp-dark-card/95 backdrop-blur-xl rounded-3xl p-10 border border-chapp-white/10 shadow-[0_20px_40px_rgba(0,0,0,0.3)] hover:shadow-[0_30px_60px_rgba(0,0,0,0.4)] transition-all duration-700 hover:-translate-y-3 hover:scale-[1.02] overflow-hidden">
+                    {/* Subtle gradient overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 via-transparent to-purple-500/5 opacity-0 group-hover:opacity-100 transition-all duration-700"></div>
+                    
+                    {/* Animated border glow */}
+                    <div className="absolute inset-0 rounded-3xl bg-gradient-to-r from-blue-500/20 via-purple-500/20 to-blue-500/20 opacity-0 group-hover:opacity-100 blur-xl transition-all duration-700"></div>
                     
                     <div className="relative z-10">
-                      <div className="w-16 h-16 mx-auto mb-6 bg-gradient-to-br from-chapp-accent-blue to-blue-600 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-lg">
-                        <stat.icon className="text-chapp-white" size={28} />
+                      <div className="w-20 h-20 mx-auto mb-8 bg-gradient-to-br from-blue-600 via-blue-700 to-blue-800 rounded-3xl flex items-center justify-center group-hover:scale-110 group-hover:rotate-3 transition-all duration-500 shadow-[0_10px_30px_rgba(59,130,246,0.3)] group-hover:shadow-[0_15px_40px_rgba(59,130,246,0.5)]">
+                        <stat.icon className="text-white" size={32} />
                       </div>
-                      <div className="text-display-sm text-chapp-white font-bold mb-3 group-hover:text-blue-300 transition-colors duration-300">{stat.value}</div>
-                      <div className="text-chapp-gray-300 text-body-md group-hover:text-white transition-colors duration-300">{stat.label}</div>
+                      <div className="text-4xl text-white font-bold mb-4 group-hover:text-blue-300 transition-colors duration-500">{stat.value}</div>
+                      <div className="text-chapp-gray-300 text-lg font-medium group-hover:text-white transition-colors duration-500 leading-relaxed">{stat.label}</div>
                     </div>
+                    
+                    {/* Subtle inner glow */}
+                    <div className="absolute inset-x-4 bottom-0 h-px bg-gradient-to-r from-transparent via-blue-400/30 to-transparent group-hover:via-blue-400/60 transition-all duration-700"></div>
                   </div>
                 </div>
               ))}
