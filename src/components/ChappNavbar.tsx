@@ -19,6 +19,11 @@ const ChappNavbar = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Scroll to top on page refresh
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       const target = event.target as Element;
@@ -87,7 +92,7 @@ const ChappNavbar = () => {
 
   return (
     <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${isScrolled
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 animate-navbar-appear ${isScrolled
         ? 'glass-dark shadow-glass-dark backdrop-blur-xl opacity-95'
         : 'bg-transparent backdrop-blur-sm opacity-100'
         }`}
@@ -96,11 +101,16 @@ const ChappNavbar = () => {
         <div className="flex items-center justify-between h-14 sm:h-16">
           {/* Logo */}
           <div className="flex items-center">
-            <button
-              onClick={handleLogoClick}
-              className="text-heading-lg text-chapp-white font-display hover:text-chapp-accent-blue transition-colors duration-300"
-            >
-              Novaresin s.p.a
+                         <button
+               onClick={handleLogoClick}
+               className="group transition-all duration-300 hover:scale-105 focus:outline-none rounded-lg p-1"
+               aria-label="Torna all'inizio"
+             >
+              <img 
+                src={"/novaresin_logo.png"} 
+                alt="Novaresin s.p.a" 
+                className="w-22 h-12 transition-all duration-300 group-hover:drop-shadow-[0_0_8px_rgba(59,130,246,0.3)] group-hover:brightness-110" 
+              />
             </button>
           </div>
 

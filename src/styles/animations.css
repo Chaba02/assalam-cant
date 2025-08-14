@@ -79,6 +79,22 @@ html {
   scroll-behavior: smooth;
 }
 
+/* Animazione per la comparsa della navbar */
+@keyframes navbar-appear {
+  0% {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.animate-navbar-appear {
+  animation: navbar-appear 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
 /* Ottimizzazioni per performance */
 .animate-scroll-smooth {
   will-change: transform;
@@ -86,6 +102,7 @@ html {
 
 .animate-float,
 .animate-float-delayed,
-.animate-pulse-slow {
+.animate-pulse-slow,
+.animate-navbar-appear {
   will-change: transform, opacity;
 }
