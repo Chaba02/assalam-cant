@@ -21,6 +21,19 @@ const ChappNavbar = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Chiudi i dropdown quando si clicca fuori
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      const target = event.target as Element;
+      if (!target.closest('.language-dropdown')) {
+        setIsLanguageOpen(false);
+      }
+    };
+
+    document.addEventListener('click', handleClickOutside);
+    return () => document.removeEventListener('click', handleClickOutside);
+  }, []);
+
   const handleNavClick = (href: string) => {
     setIsOpen(false);
 
@@ -85,6 +98,11 @@ const ChappNavbar = () => {
     setIsLanguageOpen(false);
   };
 
+  const toggleMobileLanguage = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    setIsLanguageOpen(!isLanguageOpen);
+  };
+
   return (
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${isScrolled
@@ -132,7 +150,7 @@ const ChappNavbar = () => {
           {/* Language Dropdown & CTA */}
           <div className="hidden md:flex items-center space-x-3">
             {/* Language Dropdown */}
-            <div className="relative">
+            <div className="relative language-dropdown">
               <button
                 onClick={() => setIsLanguageOpen(!isLanguageOpen)}
                 className="flex items-center space-x-2 px-3 py-2 bg-chapp-white/10 backdrop-blur-sm border border-chapp-white/20 rounded-lg text-chapp-gray-300 hover:text-chapp-white hover:bg-chapp-white/15 transition-all duration-300 group"
@@ -174,6 +192,7 @@ const ChappNavbar = () => {
             <button
               onClick={handleContactClick}
               className={`px-5 py-2 bg-chapp-accent-blue text-chapp-white font-medium rounded-xl text-body-md hover:bg-chapp-accent-blue-dark transition-all duration-300 hover:scale-[1.02] hover:shadow-glow-blue ${isLoading ? 'opacity-50 cursor-not-allowed' : ''}`}
+              disabled={isLoading}
             >
               {t('nav.cta')}
             </button>
@@ -182,18 +201,43 @@ const ChappNavbar = () => {
           {/* Mobile menu button */}
           <div className="md:hidden flex items-center space-x-2">
             {/* Mobile Language Selector */}
-            <button
-              onClick={() => setIsLanguageOpen(!isLanguageOpen)}
-              className="flex items-center space-x-1 px-2 py-1.5 bg-chapp-white/10 backdrop-blur-sm border border-chapp-white/20 rounded-lg text-chapp-gray-300 hover:text-chapp-white transition-all duration-300"
-            >
-              <span className="text-xs">
-                {languages.find(lang => lang.code === language)?.flag}
-              </span>
-            </button>
+            <div className="relative language-dropdown">
+              <button
+                onClick={toggleMobileLanguage}
+                className="flex items-center space-x-1 px-2 py-1.5 bg-chapp-white/10 backdrop-blur-sm border border-chapp-white/20 rounded-lg text-chapp-gray-300 hover:text-chapp-white transition-all duration-300 touch-manipulation"
+              >
+                <span className="text-xs">
+                  {languages.find(lang => lang.code === language)?.flag}
+                </span>
+                <ChevronDown
+                  size={10}
+                  className={`transition-transform duration-300 ${isLanguageOpen ? 'rotate-180' : ''}`}
+                />
+              </button>
+
+              {/* Mobile Language Dropdown */}
+              {isLanguageOpen && (
+                <div className="absolute top-full right-0 mt-1 w-32 bg-chapp-dark-card/95 backdrop-blur-xl border border-chapp-white/20 rounded-lg shadow-glass-dark overflow-hidden z-[70]">
+                  {languages.map((langItem) => (
+                    <button
+                      key={langItem.code}
+                      onClick={() => handleLanguageSelect(langItem.code)}
+                      className={`w-full flex items-center space-x-2 px-2 py-1.5 text-left text-body-sm font-medium transition-all duration-300 hover:bg-chapp-white/10 touch-manipulation ${language === langItem.code
+                        ? 'text-chapp-accent-blue bg-chapp-white/5'
+                        : 'text-chapp-gray-300 hover:text-chapp-white'
+                        }`}
+                    >
+                      <span className="text-xs">{langItem.flag}</span>
+                      <span className="text-xs">{langItem.name}</span>
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
 
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="text-chapp-gray-300 hover:text-chapp-white transition-colors duration-300 p-1.5 bg-chapp-white/10 backdrop-blur-sm border border-chapp-white/20 rounded-lg"
+              className="text-chapp-gray-300 hover:text-chapp-white transition-colors duration-300 p-1.5 bg-chapp-white/10 backdrop-blur-sm border border-chapp-white/20 rounded-lg touch-manipulation"
               aria-label="Toggle menu"
             >
               {isOpen ? <X size={20} /> : <Menu size={20} />}
@@ -212,7 +256,7 @@ const ChappNavbar = () => {
                 <Link
                   key={link.name}
                   to={link.href}
-                  className="text-body-md font-medium text-chapp-gray-300 hover:text-chapp-white transition-colors duration-300 px-3 py-2 hover:bg-chapp-white/10 rounded-lg"
+                  className="text-body-md font-medium text-chapp-gray-300 hover:text-chapp-white transition-colors duration-300 px-3 py-2 hover:bg-chapp-white/10 rounded-lg touch-manipulation"
                   onClick={() => setIsOpen(false)}
                 >
                   {link.name}
@@ -221,36 +265,18 @@ const ChappNavbar = () => {
                 <button
                   key={link.name}
                   onClick={link.action}
-                  className="text-body-md font-medium text-chapp-gray-300 hover:text-chapp-white transition-colors duration-300 px-3 py-2 hover:bg-chapp-white/10 rounded-lg text-left"
+                  className="text-body-md font-medium text-chapp-gray-300 hover:text-chapp-white transition-colors duration-300 px-3 py-2 hover:bg-chapp-white/10 rounded-lg text-left touch-manipulation"
                 >
                   {link.name}
                 </button>
               )
             ))}
 
-            {/* Mobile Language Options */}
-            {isLanguageOpen && (
-              <div className="px-3 space-y-1">
-                {languages.map((langItem) => (
-                  <button
-                    key={langItem.code}
-                    onClick={() => handleLanguageSelect(langItem.code)}
-                    className={`w-full flex items-center space-x-2 px-2 py-1.5 text-left text-body-sm font-medium rounded-lg transition-all duration-300 ${language === langItem.code
-                      ? 'text-chapp-accent-blue bg-chapp-white/10'
-                      : 'text-chapp-gray-300 hover:text-chapp-white hover:bg-chapp-white/5'
-                      }`}
-                  >
-                    <span>{langItem.flag}</span>
-                    <span>{langItem.name}</span>
-                  </button>
-                ))}
-              </div>
-            )}
-
             <div className="px-3 pt-1">
               <button
                 onClick={handleContactClick}
-                className={`w-full px-4 py-2 bg-chapp-accent-blue text-chapp-white font-medium rounded-lg text-body-md hover:bg-chapp-accent-blue-dark transition-all duration-300 ${isLoading ? 'opacity-50 cursor-not-allowed' : ''}`}
+                className={`w-full px-4 py-2 bg-chapp-accent-blue text-chapp-white font-medium rounded-lg text-body-md hover:bg-chapp-accent-blue-dark transition-all duration-300 touch-manipulation ${isLoading ? 'opacity-50 cursor-not-allowed' : ''}`}
+                disabled={isLoading}
               >
                 {t('nav.cta')}
               </button>
@@ -258,14 +284,6 @@ const ChappNavbar = () => {
           </div>
         </div>
       </div>
-
-      {/* Click outside to close language dropdown */}
-      {isLanguageOpen && (
-        <div
-          className="fixed inset-0 z-40"
-          onClick={() => setIsLanguageOpen(false)}
-        />
-      )}
     </nav>
   );
 };
