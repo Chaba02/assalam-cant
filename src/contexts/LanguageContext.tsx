@@ -105,7 +105,25 @@ const translations: Translations = {
   'services.cta.description': { IT: 'Contattaci oggi per discutere le tue esigenze e scoprire come i nostri servizi possono trasformare la tua idea in realtà.', EN: 'Contact us today to discuss your needs and discover how our services can transform your idea into reality.' },
   'services.cta.primary': { IT: 'Contattaci Ora', EN: 'Contact Us Now' },
   'services.cta.secondary': { IT: 'Scarica Brochure', EN: 'Download Brochure' },
-  
+
+  // Certifications Section
+  'certifications.certifiedBy': { IT: 'CERTIFICATO DA', EN: 'CERTIFIED BY' },
+  'certifications.grs.title': { IT: 'GRS Certified', EN: 'GRS Certified' },
+  'certifications.grs.subtitle': { IT: 'Global Recycled Standard', EN: 'Global Recycled Standard' },
+  'certifications.grs.certifier': { IT: 'ICEA (ICEA-TX-2978)', EN: 'ICEA (ICEA-TX-2978)' },
+  'certifications.grs.description': { IT: 'Processi di nobilitazione tessile conformi GRS', EN: 'GRS-compliant Textile Ennobling Processes' },
+  'certifications.grs.note': { IT: 'Solo i processi coperti da un certificato valido sono certificati GRS', EN: 'Only processes covered by a valid certificate are GRS certified' },
+  'certifications.iso.title': { IT: 'ISO 9001 Certified', EN: 'ISO 9001 Certified' },
+  'certifications.iso.subtitle': { IT: 'Sistema di Gestione Qualità', EN: 'Quality Management System' },
+  'certifications.iso.certifier': { IT: 'Certificazione attiva dal 2017', EN: 'Certification active since 2017' },
+  'certifications.iso.description': { IT: 'Garantisce standard di qualità elevati nei servizi ai partner', EN: 'Ensures high quality standards in partner services' },
+  'certifications.iso.note': { IT: 'Sistema di gestione qualità riconosciuto internazionalmente', EN: 'Internationally recognized quality management system' },
+  'certifications.swiss.title': { IT: 'Swiss Antimicrobial Expertise', EN: 'Swiss Antimicrobial Expertise' },
+  'certifications.swiss.subtitle': { IT: 'Soluzioni Antimicrobiche', EN: 'Antimicrobial Solutions' },
+  'certifications.swiss.certifier': { IT: 'Swiss Quality Standard', EN: 'Swiss Quality Standard' },
+  'certifications.swiss.description': { IT: 'Eccellenza svizzera nelle soluzioni antimicrobiche', EN: 'Swiss excellence in antimicrobial solutions' },
+  'certifications.swiss.note': { IT: 'Tecnologie avanzate per protezione e igiene', EN: 'Advanced technologies for protection and hygiene' },
+
   // About Section
   'about.badge': { IT: 'Chi Siamo', EN: 'About Us' },
   'about.title1': { IT: 'Il tuo', EN: 'Your trusted' },
@@ -132,7 +150,7 @@ const translations: Translations = {
   'about.team.badge': { IT: 'Certificati Full-Stack & BI', EN: 'Certified Full-Stack & BI' },
   'about.stat1': { IT: 'Anni di Esperienza', EN: 'Years of Experience' },
   'about.stat2': { IT: 'Piattaforme Sviluppate', EN: 'Platforms Developed' },
-  
+
   // BI Dashboard
   'bi.badge': { IT: 'Demo Interattiva', EN: 'Interactive Demo' },
   'bi.title': { IT: 'Dashboard', EN: 'Dashboard' },
@@ -162,7 +180,7 @@ const translations: Translations = {
   'bi.lastUpdate': { IT: 'Ultimo aggiornamento', EN: 'Last updated' },
   'bi.realTime': { IT: 'Dati in tempo reale', EN: 'Real-time data' },
   'bi.cta': { IT: 'Richiedi una Demo Personalizzata', EN: 'Request a Custom Demo' },
-  
+
   // Interactive Preview
   'preview.badge': { IT: 'Preview Interattiva', EN: 'Interactive Preview' },
   'preview.title1': { IT: 'Scopri le nostre', EN: 'Discover our' },
@@ -181,7 +199,35 @@ const translations: Translations = {
   'preview.play.idle': { IT: 'Avvia Demo', EN: 'Start Demo' },
   'preview.play.active': { IT: 'In riproduzione...', EN: 'Playing...' },
   'preview.cta': { IT: 'Richiedi una Demo Personalizzata', EN: 'Request a Custom Demo' },
-  
+
+  // Contact Section
+  'contact.badge': { IT: 'Contatti', EN: 'Contact' },
+  'contact.title': { IT: 'Iniziamo a collaborare', EN: 'Let\'s start collaborating' },
+  'contact.subtitle': { IT: 'Siamo pronti ad ascoltare le tue idee e trasformarle in realtà', EN: 'We are ready to listen to your ideas and turn them into reality' },
+  'contact.form.name': { IT: 'Nome', EN: 'Name' },
+  'contact.form.email': { IT: 'Email', EN: 'Email' },
+  'contact.form.message': { IT: 'Messaggio', EN: 'Message' },
+  'contact.form.send': { IT: 'Invia Messaggio', EN: 'Send Message' },
+  'contact.info.address': { IT: 'Indirizzo', EN: 'Address' },
+  'contact.info.phone': { IT: 'Telefono', EN: 'Phone' },
+  'contact.info.email': { IT: 'Email', EN: 'Email' },
+  'contact.info.hours': { IT: 'Orari', EN: 'Hours' },
+  'contact.info.hours.value': { IT: 'Lun - Ven: 9:00 - 18:00', EN: 'Mon - Fri: 9:00 - 18:00' },
+
+  // Footer
+  'footer.tagline': { IT: 'Eccellenza tessile italiana dal 1985', EN: 'Italian textile excellence since 1985' },
+  'footer.services.title': { IT: 'Servizi', EN: 'Services' },
+  'footer.company.title': { IT: 'Azienda', EN: 'Company' },
+  'footer.support.title': { IT: 'Supporto', EN: 'Support' },
+  'footer.legal.title': { IT: 'Legale', EN: 'Legal' },
+  'footer.privacy': { IT: 'Privacy Policy', EN: 'Privacy Policy' },
+  'footer.terms': { IT: 'Termini di Servizio', EN: 'Terms of Service' },
+  'footer.cookies': { IT: 'Cookie Policy', EN: 'Cookie Policy' },
+  'footer.support.faq': { IT: 'FAQ', EN: 'FAQ' },
+  'footer.support.help': { IT: 'Centro Assistenza', EN: 'Help Center' },
+  'footer.support.contact': { IT: 'Contattaci', EN: 'Contact Us' },
+  'footer.copyright': { IT: 'Tutti i diritti riservati.', EN: 'All rights reserved.' },
+
   // Loading and feedback
   'loading': { IT: 'Caricamento...', EN: 'Loading...' },
   'error': { IT: 'Errore', EN: 'Error' },
