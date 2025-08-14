@@ -1,3 +1,4 @@
+
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 
 // Language types
@@ -22,38 +23,43 @@ const translations: Translations = {
   
   // Hero Section
   'hero.badge': { IT: 'Eccellenza Tessile Italiana', EN: 'Italian Textile Excellence' },
-  'hero.title.part1': { IT: 'Tessiamo il Futuro', EN: 'Weaving the Future' },
-  'hero.title.part2': { IT: 'con Qualità e Stile', EN: 'with Quality and Style' },
+  'hero.title.part1': { IT: 'Innoviamo il', EN: 'We Innovate' },
+  'hero.title.highlight': { IT: 'Tessuto', EN: 'Textiles' },
+  'hero.title.part2': { IT: 'Filo Dopo Filo', EN: 'Thread by Thread' },
   'hero.subtitle': { 
-    IT: 'Dal filo al capolavoro: innovazione, artigianato e design senza tempo per trasformare ogni tessuto in un\'opera d\'arte.',
-    EN: 'From thread to masterpiece: innovation, craftsmanship and timeless design to transform every fabric into a work of art.'
+    IT: 'Materiali pregiati, cura artigianale e tecnologie d\'avanguardia per tessuti che ispirano il futuro.',
+    EN: 'Premium materials, artisan care and cutting-edge technologies for fabrics that inspire the future.'
   },
   'hero.cta.primary': { IT: 'Scopri di più', EN: 'Learn More' },
   'hero.cta.secondary': { IT: 'Guarda il video', EN: 'Watch Video' },
-  'hero.clients.label': { IT: 'Partner', EN: 'Partner' },
+  'hero.clients.label': { IT: 'Aziende che si Affidano a Noi', EN: 'Companies that Trust Us' },
   
   // Sectors Section
-  'sectors.badge': { IT: 'I Nostri Settori', EN: 'Our Sectors' },
-  'sectors.title.part1': { IT: 'Settori', EN: 'Operational' },
-  'sectors.title.part2': { IT: 'Operativi', EN: 'Sectors' },
+  'sectors.badge': { IT: 'Settori di applicazione', EN: 'Application Sectors' },
+  'sectors.title.part1': { IT: 'Tessuti per ogni', EN: 'Fabrics for every' },
+  'sectors.title.part2': { IT: 'Industria', EN: 'Industry' },
   'sectors.subtitle': { 
-    IT: 'Offriamo soluzioni tessili specializzate per diversi settori industriali, garantendo qualità e innovazione in ogni applicazione.',
-    EN: 'We offer specialized textile solutions for different industrial sectors, ensuring quality and innovation in every application.'
+    IT: 'Soluzioni tessili innovative per i più esigenti settori industriali, dove prestazioni e affidabilità fanno la differenza.',
+    EN: 'Innovative textile solutions for the most demanding industrial sectors, where performance and reliability make the difference.'
   },
-  'sectors.manufacturing.title': { IT: 'Manifatturiero', EN: 'Manufacturing' },
-  'sectors.manufacturing.description': { IT: 'Soluzioni tessili per l\'industria manifatturiera con focus su qualità e resistenza.', EN: 'Textile solutions for manufacturing industry focused on quality and resistance.' },
-  'sectors.automotive.title': { IT: 'Automotive', EN: 'Automotive' },
-  'sectors.automotive.description': { IT: 'Tessuti tecnici per interni auto, sedili e componenti di sicurezza.', EN: 'Technical fabrics for car interiors, seats and safety components.' },
-  'sectors.medical.title': { IT: 'Medicale', EN: 'Medical' },
-  'sectors.medical.description': { IT: 'Tessuti specializzati per dispositivi medici e abbigliamento sanitario.', EN: 'Specialized fabrics for medical devices and healthcare apparel.' },
+  'sectors.fashion.title': { IT: 'Fashion', EN: 'Fashion' },
+  'sectors.fashion.description': { IT: 'Tessuti pregiati per l\'alta moda e il prêt-à-porter, con focus su qualità e innovazione.', EN: 'Premium fabrics for haute couture and ready-to-wear, focusing on quality and innovation.' },
+  'sectors.children.title': { IT: 'Infanzia', EN: 'Children' },
+  'sectors.children.description': { IT: 'Materiali sicuri e certificati per l\'abbigliamento dei più piccoli, morbidi e anallergici.', EN: 'Safe and certified materials for children\'s clothing, soft and hypoallergenic.' },
+  'sectors.sport.title': { IT: 'Sport / Casual', EN: 'Sport / Casual' },
+  'sectors.sport.description': { IT: 'Tessuti performanti per sportswear e casual wear, traspiranti e resistenti.', EN: 'High-performance fabrics for sportswear and casual wear, breathable and resistant.' },
+  'sectors.ballistic.title': { IT: 'Balistica', EN: 'Ballistic' },
+  'sectors.ballistic.description': { IT: 'Materiali ad alta resistenza per applicazioni di protezione e sicurezza professionale.', EN: 'High-resistance materials for protection and professional security applications.' },
   'sectors.furnishing.title': { IT: 'Arredamento', EN: 'Furnishing' },
-  'sectors.furnishing.description': { IT: 'Tessuti per mobili, decorazioni e soluzioni d\'arredo innovative.', EN: 'Fabrics for furniture, decorations and innovative furnishing solutions.' },
-  'sectors.sports.title': { IT: 'Sport & Outdoor', EN: 'Sports & Outdoor' },
-  'sectors.sports.description': { IT: 'Materiali tecnici per abbigliamento sportivo e attrezzature outdoor.', EN: 'Technical materials for sportswear and outdoor equipment.' },
-  'sectors.technical.title': { IT: 'Tessuti Tecnici', EN: 'Technical Fabrics' },
-  'sectors.technical.description': { IT: 'Soluzioni avanzate per applicazioni industriali specializzate.', EN: 'Advanced solutions for specialized industrial applications.' },
-  'sectors.cta.title': { IT: 'Interessato a un settore specifico?', EN: 'Interested in a specific sector?' },
-  'sectors.cta.description': { IT: 'I nostri esperti sono pronti ad analizzare le tue esigenze e proporti la soluzione più innovativa per il tuo settore.', EN: 'Our experts are ready to analyze your needs and propose the most innovative solution for your sector.' },
+  'sectors.furnishing.description': { IT: 'Tessuti decorativi per interior design, tappezzeria e complementi d\'arredo di qualità.', EN: 'Decorative fabrics for interior design, upholstery and quality furnishing accessories.' },
+  'sectors.outdoor.title': { IT: 'Outdoor', EN: 'Outdoor' },
+  'sectors.outdoor.description': { IT: 'Materiali tecnici resistenti agli agenti atmosferici per abbigliamento e accessori outdoor.', EN: 'Weather-resistant technical materials for outdoor clothing and accessories.' },
+  'sectors.activesport.title': { IT: 'Sport Attivo', EN: 'Active Sports' },
+  'sectors.activesport.description': { IT: 'Tessuti high-tech per performance atletiche estreme, con proprietà termoregolanti.', EN: 'High-tech fabrics for extreme athletic performance, with thermoregulating properties.' },
+  'sectors.geotextile.title': { IT: 'Geotessile', EN: 'Geotextile' },
+  'sectors.geotextile.description': { IT: 'Soluzioni innovative per ingegneria civile, drenaggio e stabilizzazione del terreno.', EN: 'Innovative solutions for civil engineering, drainage and soil stabilization.' },
+  'sectors.cta.title': { IT: 'Consulenza Specializzata', EN: 'Specialized Consultation' },
+  'sectors.cta.description': { IT: 'I nostri esperti analizzano le tue esigenze specifiche per sviluppare soluzioni tessili innovative e personalizzate.', EN: 'Our experts analyze your specific needs to develop innovative and customized textile solutions.' },
   'sectors.cta.button': { IT: 'Richiedi Consulenza', EN: 'Request Consultation' },
   
   // Services Section
@@ -125,31 +131,35 @@ const translations: Translations = {
   'certifications.swiss.note': { IT: 'Tecnologie avanzate per protezione e igiene', EN: 'Advanced technologies for protection and hygiene' },
 
   // About Section
-  'about.badge': { IT: 'Chi Siamo', EN: 'About Us' },
-  'about.title1': { IT: 'Il tuo', EN: 'Your trusted' },
-  'about.title2': { IT: 'partner tecnologico', EN: 'technology partner' },
-  'about.title3': { IT: 'di fiducia', EN: '' },
+  'about.badge': { IT: 'La Nostra Storia', EN: 'Our Story' },
+  'about.title1': { IT: 'Novaresin:', EN: 'Novaresin:' },
+  'about.title2': { IT: 'Innovazione Tessile', EN: 'Textile Innovation' },
+  'about.title3': { IT: 'dal 1970', EN: 'since 1970' },
   'about.description1': {
-    IT: 'Chapp è specializzata nello sviluppo di web-app innovative e piattaforme di Business Intelligence. Con oltre 12 anni di esperienza nel settore tecnologico, aiutiamo le aziende a digitalizzare i propri processi attraverso soluzioni su misura.',
-    EN: 'Chapp specializes in developing innovative web apps and Business Intelligence platforms. With over 12 years of experience in the technology sector, we help companies digitize their processes through customized solutions.'
+    IT: 'La nostra storia inizia nel 1970 come Retex Srl, evolvendosi fino a diventare Novaresin S.p.A., leader nel finissaggio, accoppiatura e nobilitazione tessuti.',
+    EN: 'Our story begins in 1970 as Retex Srl, evolving to become Novaresin S.p.A., leader in finishing, coupling and textile ennobling.'
   },
   'about.description2': {
-    IT: 'La nostra metodologia combina tecnologie all\'avanguardia con design UX/UI di ultima generazione, garantendo piattaforme performanti, scalabili e orientate ai risultati di business.',
-    EN: 'Our methodology combines cutting-edge technologies with the latest generation UX/UI design, ensuring high-performance, scalable platforms oriented towards business results.'
+    IT: 'Grazie a investimenti continui e a un team specializzato, offriamo soluzioni innovative e tecnologie all\'avanguardia per il settore tessile tecnico e arredamento.',
+    EN: 'Thanks to continuous investments and a specialized team, we offer innovative solutions and cutting-edge technologies for the technical textile and furnishing sector.'
   },
-  'about.value1.title': { IT: 'Web-App Innovative', EN: 'Innovative Web Apps' },
-  'about.value1.desc': { IT: 'Sviluppiamo piattaforme web moderne e scalabili per il tuo business', EN: 'We develop modern and scalable web platforms for your business' },
-  'about.value2.title': { IT: 'Business Intelligence', EN: 'Business Intelligence' },
-  'about.value2.desc': { IT: 'Trasformiamo i dati in insights strategici con dashboard avanzate', EN: 'We transform data into strategic insights with advanced dashboards' },
-  'about.value3.title': { IT: 'Eccellenza Tecnica', EN: 'Technical Excellence' },
-  'about.value3.desc': { IT: 'Standard qualitativi premium in ogni progetto tecnologico', EN: 'Premium quality standards in every technological project' },
-  'about.value4.title': { IT: 'Crescita Digitale', EN: 'Digital Growth' },
-  'about.value4.desc': { IT: 'Focus sulla crescita sostenibile attraverso la tecnologia', EN: 'Focus on sustainable growth through technology' },
-  'about.team.title': { IT: 'Il Team Chapp', EN: 'The Chapp Team' },
-  'about.team.subtitle': { IT: 'Sviluppatori e Data Analyst esperti', EN: 'Expert Developers and Data Analysts' },
-  'about.team.badge': { IT: 'Certificati Full-Stack & BI', EN: 'Certified Full-Stack & BI' },
-  'about.stat1': { IT: 'Anni di Esperienza', EN: 'Years of Experience' },
-  'about.stat2': { IT: 'Piattaforme Sviluppate', EN: 'Platforms Developed' },
+  'about.description3': {
+    IT: 'Oggi siamo un punto di riferimento per aziende che cercano qualità, affidabilità e ricerca applicata nel mondo dei tessuti.',
+    EN: 'Today we are a reference point for companies seeking quality, reliability and applied research in the world of textiles.'
+  },
+  'about.value1.title': { IT: 'Tecnologie Avanzate', EN: 'Advanced Technologies' },
+  'about.value1.desc': { IT: 'Utilizziamo le più moderne tecnologie di finissaggio, accoppiatura e nobilitazione per tessuti di alta qualità.', EN: 'We use the most modern finishing, coupling and ennobling technologies for high-quality textiles.' },
+  'about.value2.title': { IT: 'Esperienza Industriale', EN: 'Industrial Experience' },
+  'about.value2.desc': { IT: 'Dal 1970, esperienza consolidata nel settore tessile, con un know-how unico e riconosciuto.', EN: 'Since 1970, consolidated experience in the textile sector, with unique and recognized know-how.' },
+  'about.value3.title': { IT: 'Qualità e Affidabilità', EN: 'Quality and Reliability' },
+  'about.value3.desc': { IT: 'Garantiamo prodotti con standard elevati, in grado di soddisfare clienti nazionali e internazionali.', EN: 'We guarantee products with high standards, capable of satisfying national and international customers.' },
+  'about.value4.title': { IT: 'Team Specializzato', EN: 'Specialized Team' },
+  'about.value4.desc': { IT: 'Un team di professionisti dedicati alla ricerca e allo sviluppo di soluzioni innovative.', EN: 'A team of professionals dedicated to research and development of innovative solutions.' },
+  'about.team.title': { IT: 'Il Nostro Team', EN: 'Our Team' },
+  'about.team.subtitle': { IT: 'Professionisti con esperienza consolidata nel settore tessile, dedicati alla ricerca e sviluppo di tecnologie innovative.', EN: 'Professionals with consolidated experience in the textile sector, dedicated to research and development of innovative technologies.' },
+  'about.team.badge': { IT: 'Eccellenza Certificata', EN: 'Certified Excellence' },
+  'about.stat1': { IT: 'Anni di esperienza', EN: 'Years of experience' },
+  'about.stat2': { IT: 'Clienti soddisfatti', EN: 'Satisfied customers' },
 
   // BI Dashboard
   'bi.badge': { IT: 'Demo Interattiva', EN: 'Interactive Demo' },
@@ -201,21 +211,34 @@ const translations: Translations = {
   'preview.cta': { IT: 'Richiedi una Demo Personalizzata', EN: 'Request a Custom Demo' },
 
   // Contact Section
-  'contact.badge': { IT: 'Contatti', EN: 'Contact' },
-  'contact.title': { IT: 'Iniziamo a collaborare', EN: 'Let\'s start collaborating' },
-  'contact.subtitle': { IT: 'Siamo pronti ad ascoltare le tue idee e trasformarle in realtà', EN: 'We are ready to listen to your ideas and turn them into reality' },
+  'contact.badge': { IT: 'Contattaci', EN: 'Contact Us' },
+  'contact.title': { IT: 'Inizia il Tuo', EN: 'Start Your' },
+  'contact.title.highlight': { IT: 'Progetto Tessile', EN: 'Textile Project' },
+  'contact.subtitle': { IT: 'Contattaci per una consulenza gratuita e personalizzata. Il nostro team di esperti è pronto ad analizzare le tue esigenze tessili.', EN: 'Contact us for a free and personalized consultation. Our team of experts is ready to analyze your textile needs.' },
+  'contact.form.title': { IT: 'Richiedi una Consulenza Gratuita', EN: 'Request a Free Consultation' },
   'contact.form.name': { IT: 'Nome', EN: 'Name' },
   'contact.form.email': { IT: 'Email', EN: 'Email' },
+  'contact.form.company': { IT: 'Azienda', EN: 'Company' },
+  'contact.form.company.placeholder': { IT: 'Nome dell\'azienda (opzionale)', EN: 'Company name (optional)' },
   'contact.form.message': { IT: 'Messaggio', EN: 'Message' },
-  'contact.form.send': { IT: 'Invia Messaggio', EN: 'Send Message' },
-  'contact.info.address': { IT: 'Indirizzo', EN: 'Address' },
+  'contact.form.message.placeholder': { IT: 'Descrivi il tuo progetto tessile o le tue esigenze...', EN: 'Describe your textile project or your needs...' },
+  'contact.form.send': { IT: 'Richiedi Consulenza', EN: 'Request Consultation' },
+  'contact.form.sending': { IT: 'Invio in corso...', EN: 'Sending...' },
+  'contact.form.success': { IT: 'Messaggio inviato con successo! Ti contatteremo presto.', EN: 'Message sent successfully! We will contact you soon.' },
+  'contact.form.privacy': { IT: 'Rispettiamo la tua privacy. Le informazioni fornite verranno utilizzate esclusivamente per contattarti.', EN: 'We respect your privacy. The information provided will be used exclusively to contact you.' },
+  'contact.info.title': { IT: 'Informazioni di Contatto', EN: 'Contact Information' },
+  'contact.info.address': { IT: 'Sede', EN: 'Address' },
   'contact.info.phone': { IT: 'Telefono', EN: 'Phone' },
   'contact.info.email': { IT: 'Email', EN: 'Email' },
   'contact.info.hours': { IT: 'Orari', EN: 'Hours' },
   'contact.info.hours.value': { IT: 'Lun - Ven: 9:00 - 18:00', EN: 'Mon - Fri: 9:00 - 18:00' },
+  'contact.errors.name': { IT: 'Il nome è obbligatorio', EN: 'Name is required' },
+  'contact.errors.email': { IT: 'L\'email è obbligatoria', EN: 'Email is required' },
+  'contact.errors.email.invalid': { IT: 'Inserisci un\'email valida', EN: 'Enter a valid email' },
+  'contact.errors.message': { IT: 'Il messaggio è obbligatorio', EN: 'Message is required' },
 
   // Footer
-  'footer.tagline': { IT: 'Eccellenza tessile italiana dal 1985', EN: 'Italian textile excellence since 1985' },
+  'footer.tagline': { IT: 'Eccellenza tessile italiana dal 1970', EN: 'Italian textile excellence since 1970' },
   'footer.services.title': { IT: 'Servizi', EN: 'Services' },
   'footer.company.title': { IT: 'Azienda', EN: 'Company' },
   'footer.support.title': { IT: 'Supporto', EN: 'Support' },

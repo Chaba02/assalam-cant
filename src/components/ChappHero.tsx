@@ -7,7 +7,7 @@ const ChappHero = () => {
 
   const clientLogos = [
     '/burberry.png',
-    '/gucci.png',
+    '/gucci.png', 
     '/fendi.png',
     '/dior.png',
     '/zegna.png',
@@ -44,7 +44,6 @@ const ChappHero = () => {
           </linearGradient>
         </defs>
 
-        {/* Linee animate */}
         <path
           d="M0,250 Q300,150 600,250 T1200,250"
           stroke="url(#glowBlue)"
@@ -168,21 +167,21 @@ const ChappHero = () => {
       {/* Content */}
       <div className="relative z-10 flex flex-col items-center justify-center min-h-screen px-4 text-center">
         <div className="inline-flex items-center gap-2 glass-dark text-chapp-gray-300 px-6 py-3 rounded-full text-sm font-medium mb-8 animate-fade-in apple-glow">
-          {t('hero.badge') || 'Eccellenza Tessile Italiana'}
+          {t('hero.badge')}
         </div>
 
         <h1 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-extralight mb-8 animate-fade-in-up leading-tight tracking-tight">
-          Innoviamo il{' '}
-          <span className="text-glow-cyan-magenta font-light">Tessuto</span>
+          {t('hero.title.part1')}{' '}
+          <span className="text-glow-cyan-magenta font-light">{t('hero.title.highlight')}</span>
           <br />
-          <span className="font-light text-chapp-gray-200">Filo Dopo Filo</span>
+          <span className="font-light text-chapp-gray-200">{t('hero.title.part2')}</span>
         </h1>
 
         <p
           className="max-w-2xl text-lg sm:text-xl text-chapp-gray-400 mb-10 leading-relaxed font-light animate-fade-in-up"
           style={{ animationDelay: '0.2s' }}
         >
-          Materiali pregiati, cura artigianale e tecnologie d'avanguardia per tessuti che ispirano il futuro.
+          {t('hero.subtitle')}
         </p>
 
         <div
@@ -190,7 +189,7 @@ const ChappHero = () => {
           style={{ animationDelay: '0.4s' }}
         >
           <button className="inline-flex items-center justify-center px-8 py-4 bg-gradient-to-r from-blue-600 to-blue-700 text-white font-medium rounded-2xl text-body-lg hover:from-blue-700 hover:to-blue-800 active:from-blue-800 active:to-blue-900 transition-all duration-300 hover:scale-[1.02] hover:shadow-[0_0_30px_rgba(59,130,246,0.5)] focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-chapp-dark-bg shadow-lg group">
-            Scopri di più
+            {t('hero.cta.primary')}
             <ArrowRight
               size={20}
               className="ml-2 group-hover:translate-x-1 transition-transform duration-300"
@@ -213,7 +212,7 @@ const ChappHero = () => {
               size={18}
               className="mr-2 group-hover:scale-110 transition-transform duration-300"
             />
-            Guarda il video
+            {t('hero.cta.secondary')}
           </button>
 
         </div>
@@ -224,7 +223,7 @@ const ChappHero = () => {
         <div className="container-chapp">
           <div className="text-center mb-12">
             <h3 className="text-heading-lg text-chapp-gray-400 font-light mb-8">
-              Aziende che si Affidano a Noi
+              {t('hero.clients.label')}
             </h3>
           </div>
           <div className="relative overflow-hidden w-full">

@@ -1,9 +1,11 @@
 
 import React, { useState } from 'react';
 import { Send, CheckCircle, AlertCircle, User, Mail, Building, MessageSquare } from 'lucide-react';
+import { useLanguage } from '../contexts/LanguageContext';
 import ChappMap from './ChappMap';
 
 const ChappContactForm = () => {
+  const { t } = useLanguage();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -17,17 +19,17 @@ const ChappContactForm = () => {
     const newErrors: Record<string, string> = {};
 
     if (!formData.name.trim()) {
-      newErrors.name = 'Il nome è obbligatorio';
+      newErrors.name = t('contact.errors.name');
     }
 
     if (!formData.email.trim()) {
-      newErrors.email = "L'email è obbligatoria";
+      newErrors.email = t('contact.errors.email');
     } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
-      newErrors.email = "Inserisci un'email valida";
+      newErrors.email = t('contact.errors.email.invalid');
     }
 
     if (!formData.message.trim()) {
-      newErrors.message = 'Il messaggio è obbligatorio';
+      newErrors.message = t('contact.errors.message');
     }
 
     setErrors(newErrors);
@@ -75,16 +77,16 @@ const ChappContactForm = () => {
         {/* Header */}
         <div className="text-center mb-16">
           <div className="inline-flex items-center gap-2 bg-chapp-accent-blue/20 text-chapp-accent-blue px-4 py-2 rounded-full text-body-sm font-semibold mb-6">
-            Contattaci
+            {t('contact.badge')}
           </div>
           <h2 className="text-display-lg text-chapp-title mb-6">
-            Inizia il Tuo{' '}
+            {t('contact.title')}{' '}
             <span className="bg-gradient-blue-elegant bg-clip-text text-transparent">
-              Progetto Tessile
+              {t('contact.title.highlight')}
             </span>
           </h2>
           <p className="text-body-xl text-chapp-body max-w-2xl mx-auto">
-            Contattaci per una consulenza gratuita e personalizzata. Il nostro team di esperti è pronto ad analizzare le tue esigenze tessili.
+            {t('contact.subtitle')}
           </p>
         </div>
 
@@ -93,14 +95,14 @@ const ChappContactForm = () => {
           {/* Contact Form */}
           <div className="card-premium-dark p-8 lg:p-12 flex flex-col h-full">
             <h3 className="text-heading-xl text-chapp-title mb-8">
-              Richiedi una Consulenza Gratuita
+              {t('contact.form.title')}
             </h3>
 
             {status === 'success' && (
               <div className="mb-8 p-4 bg-green-900/20 border border-green-500/30 rounded-2xl flex items-center gap-3">
                 <CheckCircle className="text-green-400" size={20} />
                 <p className="text-green-400">
-                  Messaggio inviato con successo! Ti contatteremo presto.
+                  {t('contact.form.success')}
                 </p>
               </div>
             )}
@@ -111,7 +113,7 @@ const ChappContactForm = () => {
                 <div>
                   <label htmlFor="name" className="flex items-center gap-2 text-body-sm font-semibold text-chapp-white mb-3">
                     <User size={16} className="text-chapp-accent-blue" />
-                    Nome <span className="text-red-400">*</span>
+                    {t('contact.form.name')} <span className="text-red-400">*</span>
                   </label>
                   <input
                     type="text"
@@ -120,7 +122,7 @@ const ChappContactForm = () => {
                     value={formData.name}
                     onChange={handleChange}
                     className={`form-chapp ${errors.name ? 'border-red-500 focus:ring-red-500 focus:border-red-500' : ''}`}
-                    placeholder="Il tuo nome"
+                    placeholder={t('contact.form.name')}
                   />
                   {errors.name && (
                     <p className="mt-2 text-body-sm text-red-400 flex items-center gap-1">
@@ -134,7 +136,7 @@ const ChappContactForm = () => {
                 <div>
                   <label htmlFor="email" className="flex items-center gap-2 text-body-sm font-semibold text-chapp-white mb-3">
                     <Mail size={16} className="text-chapp-accent-blue" />
-                    Email <span className="text-red-400">*</span>
+                    {t('contact.form.email')} <span className="text-red-400">*</span>
                   </label>
                   <input
                     type="email"
@@ -143,7 +145,7 @@ const ChappContactForm = () => {
                     value={formData.email}
                     onChange={handleChange}
                     className={`form-chapp ${errors.email ? 'border-red-500 focus:ring-red-500 focus:border-red-500' : ''}`}
-                    placeholder="la.tua@email.com"
+                    placeholder={t('contact.form.email')}
                   />
                   {errors.email && (
                     <p className="mt-2 text-body-sm text-red-400 flex items-center gap-1">
@@ -158,7 +160,7 @@ const ChappContactForm = () => {
               <div>
                 <label htmlFor="company" className="flex items-center gap-2 text-body-sm font-semibold text-chapp-white mb-3">
                   <Building size={16} className="text-chapp-accent-blue" />
-                  Azienda
+                  {t('contact.form.company')}
                 </label>
                 <input
                   type="text"
@@ -167,7 +169,7 @@ const ChappContactForm = () => {
                   value={formData.company}
                   onChange={handleChange}
                   className="form-chapp"
-                  placeholder="Nome dell'azienda (opzionale)"
+                  placeholder={t('contact.form.company.placeholder')}
                 />
               </div>
 
@@ -175,7 +177,7 @@ const ChappContactForm = () => {
               <div className="flex-1 flex flex-col">
                 <label htmlFor="message" className="flex items-center gap-2 text-body-sm font-semibold text-chapp-white mb-3">
                   <MessageSquare size={16} className="text-chapp-accent-blue" />
-                  Messaggio <span className="text-red-400">*</span>
+                  {t('contact.form.message')} <span className="text-red-400">*</span>
                 </label>
                 <textarea
                   id="message"
@@ -184,7 +186,7 @@ const ChappContactForm = () => {
                   value={formData.message}
                   onChange={handleChange}
                   className={`form-textarea-chapp flex-1 ${errors.message ? 'border-red-500 focus:ring-red-500 focus:border-red-500' : ''}`}
-                  placeholder="Descrivi il tuo progetto tessile o le tue esigenze..."
+                  placeholder={t('contact.form.message.placeholder')}
                 />
                 {errors.message && (
                   <p className="mt-2 text-body-sm text-red-400 flex items-center gap-1">
@@ -204,11 +206,11 @@ const ChappContactForm = () => {
                   {status === 'loading' ? (
                     <>
                       <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin mr-2" />
-                      Invio in corso...
+                      {t('contact.form.sending')}
                     </>
                   ) : (
                     <>
-                      Richiedi Consulenza
+                      {t('contact.form.send')}
                       <Send size={18} className="ml-2" />
                     </>
                   )}
@@ -216,7 +218,7 @@ const ChappContactForm = () => {
               </div>
 
               <p className="text-body-sm text-chapp-gray-400 text-center">
-                Rispettiamo la tua privacy. Le informazioni fornite verranno utilizzate esclusivamente per contattarti.
+                {t('contact.form.privacy')}
               </p>
             </form>
           </div>
@@ -231,7 +233,7 @@ const ChappContactForm = () => {
             {/* Contact Info Card */}
             <div className="card-premium-dark p-6">
               <h3 className="text-heading-lg text-chapp-title mb-6">
-                Informazioni di Contatto
+                {t('contact.info.title')}
               </h3>
 
               <div className="space-y-4">
@@ -240,7 +242,7 @@ const ChappContactForm = () => {
                     <Mail className="text-chapp-accent-blue" size={18} />
                   </div>
                   <div>
-                    <h4 className="text-body-lg font-medium text-chapp-white mb-1">Email</h4>
+                    <h4 className="text-body-lg font-medium text-chapp-white mb-1">{t('contact.info.email')}</h4>
                     <p className="text-chapp-gray-300 text-body-md">info@novaresin.it</p>
                   </div>
                 </div>
@@ -250,7 +252,7 @@ const ChappContactForm = () => {
                     <Building className="text-chapp-accent-blue" size={18} />
                   </div>
                   <div>
-                    <h4 className="text-body-lg font-medium text-chapp-white mb-1">Sede</h4>
+                    <h4 className="text-body-lg font-medium text-chapp-white mb-1">{t('contact.info.address')}</h4>
                     <address className="not-italic text-chapp-gray-300 text-body-sm">
                       Via Montegrappa, 28<br />
                       23895 Nibionno (LC)<br />

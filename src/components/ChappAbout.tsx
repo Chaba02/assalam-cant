@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Users, Award, Sparkles, Factory, Layers } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
@@ -5,27 +6,26 @@ import { useLanguage } from '../contexts/LanguageContext';
 const ChappAbout = () => {
   const { t } = useLanguage();
 
-  // Qui potremmo mantenere i valori oppure adattarli ai valori tessili dell'azienda
   const values = [
     {
       icon: Layers,
-      title: "Tecnologie Avanzate",
-      description: "Utilizziamo le più moderne tecnologie di finissaggio, accoppiatura e nobilitazione per tessuti di alta qualità."
+      titleKey: "about.value1.title",
+      descriptionKey: "about.value1.desc"
     },
     {
       icon: Factory,
-      title: "Esperienza Industriale",
-      description: "Dal 1970, esperienza consolidata nel settore tessile, con un know-how unico e riconosciuto."
+      titleKey: "about.value2.title",
+      descriptionKey: "about.value2.desc"
     },
     {
       icon: Award,
-      title: "Qualità e Affidabilità",
-      description: "Garantiamo prodotti con standard elevati, in grado di soddisfare clienti nazionali e internazionali."
+      titleKey: "about.value3.title",
+      descriptionKey: "about.value3.desc"
     },
     {
       icon: Users,
-      title: "Team Specializzato",
-      description: "Un team di professionisti dedicati alla ricerca e allo sviluppo di soluzioni innovative."
+      titleKey: "about.value4.title",
+      descriptionKey: "about.value4.desc"
     }
   ];
 
@@ -37,26 +37,26 @@ const ChappAbout = () => {
           <div className="animate-on-scroll">
             <div className="inline-flex items-center gap-2 bg-chapp-white/10 backdrop-blur-sm px-4 py-2 rounded-full text-body-md font-medium text-chapp-gray-300 mb-8 shadow-chapp border border-chapp-white/20">
               <Sparkles size={16} className="text-chapp-accent-blue" />
-              La Nostra Storia
+              {t('about.badge')}
             </div>
 
             <h2 className="text-display-lg text-chapp-title mb-8 leading-tight">
-              Novaresin: <br />
+              {t('about.title1')} <br />
               <span className="bg-gradient-blue-elegant bg-clip-text text-transparent">
-                Innovazione Tessile
+                {t('about.title2')}
               </span>{' '}
-              dal 1970
+              {t('about.title3')}
             </h2>
 
             <div className="space-y-6 mb-12 text-body-lg text-chapp-body leading-relaxed">
               <p>
-                La nostra storia inizia nel 1970 come Retex Srl, evolvendosi fino a diventare Novaresin S.p.A., leader nel finissaggio, accoppiatura e nobilitazione tessuti.
+                {t('about.description1')}
               </p>
               <p>
-                Grazie a investimenti continui e a un team specializzato, offriamo soluzioni innovative e tecnologie all’avanguardia per il settore tessile tecnico e arredamento.
+                {t('about.description2')}
               </p>
               <p>
-                Oggi siamo un punto di riferimento per aziende che cercano qualità, affidabilità e ricerca applicata nel mondo dei tessuti.
+                {t('about.description3')}
               </p>
             </div>
 
@@ -74,10 +74,10 @@ const ChappAbout = () => {
                     </div>
                     <div className="flex-1 min-w-0">
                       <h4 className="text-heading-md text-chapp-title mb-2 font-semibold">
-                        {value.title}
+                        {t(value.titleKey)}
                       </h4>
                       <p className="text-body-md text-chapp-body leading-relaxed">
-                        {value.description}
+                        {t(value.descriptionKey)}
                       </p>
                     </div>
                   </div>
@@ -101,14 +101,14 @@ const ChappAbout = () => {
                   </div>
                   <div>
                     <h3 className="text-heading-xl text-chapp-title font-semibold mb-3">
-                      Il Nostro Team
+                      {t('about.team.title')}
                     </h3>
                     <p className="text-body-lg text-chapp-body mb-6">
-                      Professionisti con esperienza consolidata nel settore tessile, dedicati alla ricerca e sviluppo di tecnologie innovative.
+                      {t('about.team.subtitle')}
                     </p>
                     <div className="inline-flex items-center gap-2 bg-chapp-white/10 px-4 py-2 rounded-full text-body-sm font-medium text-chapp-gray-300 border border-chapp-white/20">
                       <Award size={14} />
-                      Eccellenza Certificata
+                      {t('about.team.badge')}
                     </div>
                   </div>
                 </div>
@@ -122,14 +122,14 @@ const ChappAbout = () => {
               <div className="absolute -bottom-6 -left-6 card-glass-dark p-6 shadow-chapp-lg">
                 <div className="text-center">
                   <div className="text-display-md text-chapp-title font-semibold mb-1">50+</div>
-                  <div className="text-body-sm text-chapp-body">Anni di esperienza</div>
+                  <div className="text-body-sm text-chapp-body">{t('about.stat1')}</div>
                 </div>
               </div>
 
               <div className="absolute -top-6 -right-6 card-glass-dark p-6 shadow-chapp-lg">
                 <div className="text-center">
                   <div className="text-display-md text-chapp-title font-semibold mb-1">200+</div>
-                  <div className="text-body-sm text-chapp-body">Clienti soddisfatti</div>
+                  <div className="text-body-sm text-chapp-body">{t('about.stat2')}</div>
                 </div>
               </div>
             </div>

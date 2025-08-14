@@ -1,3 +1,4 @@
+
 import React from 'react';
 import {
   Factory,
@@ -11,46 +12,47 @@ import { useLanguage } from '../contexts/LanguageContext';
 
 const ChappSectors = () => {
   const { t } = useLanguage();
+  
   const sectors = [
     {
       icon: Factory,
-      title: 'Fashion',
-      description: 'Tessuti pregiati per l\'alta moda e il prêt-à-porter, con focus su qualità e innovazione.',
+      titleKey: 'sectors.fashion.title',
+      descriptionKey: 'sectors.fashion.description',
     },
     {
       icon: Heart,
-      title: 'Infanzia',
-      description: 'Materiali sicuri e certificati per l\'abbigliamento dei più piccoli, morbidi e anallergici.',
+      titleKey: 'sectors.children.title',
+      descriptionKey: 'sectors.children.description',
     },
     {
       icon: Zap,
-      title: 'Sport / Casual',
-      description: 'Tessuti performanti per sportswear e casual wear, traspiranti e resistenti.',
+      titleKey: 'sectors.sport.title',
+      descriptionKey: 'sectors.sport.description',
     },
     {
       icon: Shield,
-      title: 'Balistica',
-      description: 'Materiali ad alta resistenza per applicazioni di protezione e sicurezza professionale.',
+      titleKey: 'sectors.ballistic.title',
+      descriptionKey: 'sectors.ballistic.description',
     },
     {
       icon: Home,
-      title: 'Arredamento',
-      description: 'Tessuti decorativi per interior design, tappezzeria e complementi d\'arredo di qualità.',
+      titleKey: 'sectors.furnishing.title',
+      descriptionKey: 'sectors.furnishing.description',
     },
     {
       icon: Car,
-      title: 'Outdoor',
-      description: 'Materiali tecnici resistenti agli agenti atmosferici per abbigliamento e accessori outdoor.',
+      titleKey: 'sectors.outdoor.title',
+      descriptionKey: 'sectors.outdoor.description',
     },
     {
       icon: Zap,
-      title: 'Sport Attivo',
-      description: 'Tessuti high-tech per performance atletiche estreme, con proprietà termoregolanti.',
+      titleKey: 'sectors.activesport.title',
+      descriptionKey: 'sectors.activesport.description',
     },
     {
       icon: Factory,
-      title: 'Geotessile',
-      description: 'Soluzioni innovative per ingegneria civile, drenaggio e stabilizzazione del terreno.',
+      titleKey: 'sectors.geotextile.title',
+      descriptionKey: 'sectors.geotextile.description',
     }
   ];
 
@@ -58,10 +60,8 @@ const ChappSectors = () => {
     <section id="sectors" className="section-chapp bg-chapp-dark-bg relative">
       {/* Soft ambient light effects */}
       <div className="absolute inset-0 overflow-hidden">
-
         {/* Subtle side accents */}
         <div className="absolute top-1/2 -left-20 transform -translate-y-1/2 w-60 h-60 bg-indigo-500/15 rounded-full blur-2xl animate-pulse opacity-30" style={{ animationDelay: '3s', animationDuration: '8s' }}></div>
-
         <div className="absolute top-1/3 -right-32 w-64 h-64 bg-cyan-500/12 rounded-full blur-3xl animate-pulse opacity-35" style={{ animationDelay: '4s', animationDuration: '7s' }}></div>
       </div>
 
@@ -69,18 +69,18 @@ const ChappSectors = () => {
         {/* Header */}
         <div className="text-center mb-20 animate-on-scroll">
           <div className="inline-flex items-center gap-2 bg-chapp-accent-blue/20 text-chapp-accent-blue px-4 py-2 rounded-full text-body-sm font-semibold mb-6">
-            Settori di applicazione
+            {t('sectors.badge')}
           </div>
 
           <h2 className="text-display-lg text-chapp-title mb-8">
-            {t('sectors.title.part1') || 'Tessuti per ogni'}{' '}
+            {t('sectors.title.part1')}{' '}
             <span className="bg-gradient-blue-elegant bg-clip-text text-transparent">
-              {t('sectors.title.part2') || 'Industria'}
+              {t('sectors.title.part2')}
             </span>
           </h2>
 
           <p className="text-body-xl text-chapp-body max-w-4xl mx-auto leading-relaxed">
-            {t('sectors.subtitle') || 'Soluzioni tessili innovative per i più esigenti settori industriali, dove prestazioni e affidabilità fanno la differenza.'}
+            {t('sectors.subtitle')}
           </p>
         </div>
 
@@ -104,10 +104,10 @@ const ChappSectors = () => {
                 {/* Content */}
                 <div className="flex flex-col h-32">
                   <h3 className="text-heading-md text-chapp-title mb-3 group-hover:text-chapp-accent-blue transition-colors duration-200">
-                    {sector.title}
+                    {t(sector.titleKey)}
                   </h3>
                   <p className="text-chapp-body leading-relaxed text-body-sm flex-1 group-hover:text-chapp-gray-300 transition-colors duration-200">
-                    {sector.description}
+                    {t(sector.descriptionKey)}
                   </p>
                 </div>
               </div>
@@ -119,14 +119,14 @@ const ChappSectors = () => {
         <div className="text-center animate-on-scroll">
           <div className="card-premium-dark max-w-4xl mx-auto p-12">
             <h3 className="text-display-md text-chapp-title mb-4">
-              {t('sectors.cta.title') || 'Consulenza Specializzata'}
+              {t('sectors.cta.title')}
             </h3>
             <p className="text-body-xl text-chapp-body mb-8 max-w-2xl mx-auto">
-              {t('sectors.cta.description') || 'I nostri esperti analizzano le tue esigenze specifiche per sviluppare soluzioni tessili innovative e personalizzate.'}
+              {t('sectors.cta.description')}
             </p>
 
             <button className="btn-chapp-accent hover-glow-blue">
-              {t('sectors.cta.button') || 'Richiedi Consulenza'}
+              {t('sectors.cta.button')}
             </button>
           </div>
         </div>
