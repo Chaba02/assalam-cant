@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Menu, X, ChevronDown, Globe } from 'lucide-react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
@@ -16,12 +15,10 @@ const ChappNavbar = () => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
     };
-
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Chiudi i dropdown quando si clicca fuori
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       const target = event.target as Element;
@@ -29,57 +26,42 @@ const ChappNavbar = () => {
         setIsLanguageOpen(false);
       }
     };
-
     document.addEventListener('click', handleClickOutside);
     return () => document.removeEventListener('click', handleClickOutside);
   }, []);
 
   const handleNavClick = (href: string) => {
     setIsOpen(false);
-
     if (href.startsWith('/#')) {
       const targetId = href.substring(2);
       if (location.pathname !== '/') {
         navigate('/');
         setTimeout(() => {
           const element = document.getElementById(targetId);
-          if (element) {
-            element.scrollIntoView({ behavior: 'smooth' });
-          }
+          if (element) element.scrollIntoView({ behavior: 'smooth' });
         }, 100);
       } else {
         const element = document.getElementById(targetId);
-        if (element) {
-          element.scrollIntoView({ behavior: 'smooth' });
-        }
+        if (element) element.scrollIntoView({ behavior: 'smooth' });
       }
     }
   };
 
   const handleLogoClick = () => {
-    if (location.pathname !== '/') {
-      navigate('/');
-    } else {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
+    if (location.pathname !== '/') navigate('/');
+    else window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   const handleContactClick = () => {
     setIsOpen(false);
+    const scrollToContact = () => {
+      const element = document.getElementById('contact');
+      if (element) element.scrollIntoView({ behavior: 'smooth' });
+    };
     if (location.pathname !== '/') {
       navigate('/');
-      setTimeout(() => {
-        const element = document.getElementById('contact');
-        if (element) {
-          element.scrollIntoView({ behavior: 'smooth' });
-        }
-      }, 100);
-    } else {
-      const element = document.getElementById('contact');
-      if (element) {
-        element.scrollIntoView({ behavior: 'smooth' });
-      }
-    }
+      setTimeout(scrollToContact, 100);
+    } else scrollToContact();
   };
 
   const navLinks = [
@@ -124,7 +106,7 @@ const ChappNavbar = () => {
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-6">
-            {navLinks.map((link) => (
+            {navLinks.map((link) =>
               link.isRoute ? (
                 <Link
                   key={link.name}
@@ -144,7 +126,7 @@ const ChappNavbar = () => {
                   <span className="absolute -bottom-1 left-0 right-0 h-0.5 bg-chapp-accent-blue scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></span>
                 </button>
               )
-            ))}
+            )}
           </div>
 
           {/* Language Dropdown & CTA */}
@@ -157,7 +139,7 @@ const ChappNavbar = () => {
               >
                 <Globe size={14} className="group-hover:rotate-12 transition-transform duration-300" />
                 <span className="text-body-sm font-medium">
-                  {languages.find(lang => lang.code === language)?.flag}
+                  {languages.find((lang) => lang.code === language)?.flag}
                 </span>
                 <ChevronDown
                   size={12}
@@ -166,32 +148,35 @@ const ChappNavbar = () => {
               </button>
 
               {/* Dropdown Menu */}
-              {isLanguageOpen && (
-                <div className="absolute top-full right-0 mt-2 w-44 bg-chapp-dark-card/95 backdrop-blur-xl border border-chapp-white/20 rounded-xl shadow-glass-dark overflow-hidden z-60">
-                  {languages.map((langItem) => (
-                    <button
-                      key={langItem.code}
-                      onClick={() => handleLanguageSelect(langItem.code)}
-                      className={`w-full flex items-center space-x-3 px-3 py-2 text-left text-body-sm font-medium transition-all duration-300 hover:bg-chapp-white/10 ${language === langItem.code
-                        ? 'text-chapp-accent-blue bg-chapp-white/5'
-                        : 'text-chapp-gray-300 hover:text-chapp-white'
-                        }`}
-                    >
-                      <span className="text-sm">{langItem.flag}</span>
-                      <span>{langItem.name}</span>
-                      {language === langItem.code && (
-                        <div className="ml-auto w-1.5 h-1.5 bg-chapp-accent-blue rounded-full animate-glow"></div>
-                      )}
-                    </button>
-                  ))}
-                </div>
-              )}
+              <div
+                className={`absolute top-full right-0 mt-2 w-44 bg-chapp-dark-card/95 backdrop-blur-xl border border-chapp-white/20 rounded-xl shadow-glass-dark overflow-hidden z-60
+                transform transition-all duration-300 ease-out ${isLanguageOpen ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-2 pointer-events-none'
+                  }`}
+              >
+                {languages.map((langItem) => (
+                  <button
+                    key={langItem.code}
+                    onClick={() => handleLanguageSelect(langItem.code)}
+                    className={`w-full flex items-center space-x-3 px-3 py-2 text-left text-body-sm font-medium transition-all duration-300 hover:bg-chapp-white/10 ${language === langItem.code
+                      ? 'text-chapp-accent-blue bg-chapp-white/5'
+                      : 'text-chapp-gray-300 hover:text-chapp-white'
+                      }`}
+                  >
+                    <span className="text-sm">{langItem.flag}</span>
+                    <span>{langItem.name}</span>
+                    {language === langItem.code && (
+                      <div className="ml-auto w-1.5 h-1.5 bg-chapp-accent-blue rounded-full animate-glow"></div>
+                    )}
+                  </button>
+                ))}
+              </div>
             </div>
 
             {/* CTA Button */}
             <button
               onClick={handleContactClick}
-              className={`px-5 py-2 bg-chapp-accent-blue text-chapp-white font-medium rounded-xl text-body-md hover:bg-chapp-accent-blue-dark transition-all duration-300 hover:scale-[1.02] hover:shadow-glow-blue ${isLoading ? 'opacity-50 cursor-not-allowed' : ''}`}
+              className={`px-5 py-2 bg-chapp-accent-blue text-chapp-white font-medium rounded-xl text-body-md hover:bg-chapp-accent-blue-dark transition-all duration-300 hover:scale-[1.02] hover:shadow-glow-blue ${isLoading ? 'opacity-50 cursor-not-allowed' : ''
+                }`}
               disabled={isLoading}
             >
               {t('nav.cta')}
@@ -206,9 +191,7 @@ const ChappNavbar = () => {
                 onClick={toggleMobileLanguage}
                 className="flex items-center space-x-1 px-2 py-1.5 bg-chapp-white/10 backdrop-blur-sm border border-chapp-white/20 rounded-lg text-chapp-gray-300 hover:text-chapp-white transition-all duration-300 touch-manipulation"
               >
-                <span className="text-xs">
-                  {languages.find(lang => lang.code === language)?.flag}
-                </span>
+                <span className="text-xs">{languages.find((lang) => lang.code === language)?.flag}</span>
                 <ChevronDown
                   size={10}
                   className={`transition-transform duration-300 ${isLanguageOpen ? 'rotate-180' : ''}`}
@@ -216,23 +199,25 @@ const ChappNavbar = () => {
               </button>
 
               {/* Mobile Language Dropdown */}
-              {isLanguageOpen && (
-                <div className="absolute top-full right-0 mt-1 w-32 bg-chapp-dark-card/95 backdrop-blur-xl border border-chapp-white/20 rounded-lg shadow-glass-dark overflow-hidden z-[70]">
-                  {languages.map((langItem) => (
-                    <button
-                      key={langItem.code}
-                      onClick={() => handleLanguageSelect(langItem.code)}
-                      className={`w-full flex items-center space-x-2 px-2 py-1.5 text-left text-body-sm font-medium transition-all duration-300 hover:bg-chapp-white/10 touch-manipulation ${language === langItem.code
-                        ? 'text-chapp-accent-blue bg-chapp-white/5'
-                        : 'text-chapp-gray-300 hover:text-chapp-white'
-                        }`}
-                    >
-                      <span className="text-xs">{langItem.flag}</span>
-                      <span className="text-xs">{langItem.name}</span>
-                    </button>
-                  ))}
-                </div>
-              )}
+              <div
+                className={`absolute top-full right-0 mt-1 w-32 bg-chapp-dark-card/95 backdrop-blur-xl border border-chapp-white/20 rounded-lg shadow-glass-dark overflow-hidden z-[70]
+                transform transition-all duration-300 ease-out ${isLanguageOpen ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-2 pointer-events-none'
+                  }`}
+              >
+                {languages.map((langItem) => (
+                  <button
+                    key={langItem.code}
+                    onClick={() => handleLanguageSelect(langItem.code)}
+                    className={`w-full flex items-center space-x-2 px-2 py-1.5 text-left text-body-sm font-medium transition-all duration-300 hover:bg-chapp-white/10 touch-manipulation ${language === langItem.code
+                      ? 'text-chapp-accent-blue bg-chapp-white/5'
+                      : 'text-chapp-gray-300 hover:text-chapp-white'
+                      }`}
+                  >
+                    <span className="text-xs">{langItem.flag}</span>
+                    <span className="text-xs">{langItem.name}</span>
+                  </button>
+                ))}
+              </div>
             </div>
 
             <button
@@ -251,7 +236,7 @@ const ChappNavbar = () => {
             }`}
         >
           <div className="flex flex-col space-y-3 pt-3 border-t border-chapp-white/20">
-            {navLinks.map((link) => (
+            {navLinks.map((link) =>
               link.isRoute ? (
                 <Link
                   key={link.name}
@@ -270,12 +255,13 @@ const ChappNavbar = () => {
                   {link.name}
                 </button>
               )
-            ))}
+            )}
 
             <div className="px-3 pt-1">
               <button
                 onClick={handleContactClick}
-                className={`w-full px-4 py-2 bg-chapp-accent-blue text-chapp-white font-medium rounded-lg text-body-md hover:bg-chapp-accent-blue-dark transition-all duration-300 touch-manipulation ${isLoading ? 'opacity-50 cursor-not-allowed' : ''}`}
+                className={`w-full px-4 py-2 bg-chapp-accent-blue text-chapp-white font-medium rounded-xl text-body-md hover:bg-chapp-accent-blue-dark transition-all duration-300 hover:scale-[1.02] hover:shadow-glow-blue ${isLoading ? 'opacity-50 cursor-not-allowed' : ''
+                  }`}
                 disabled={isLoading}
               >
                 {t('nav.cta')}
