@@ -1,9 +1,19 @@
 import React from 'react';
 import { ArrowRight, Play } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
+import { useNavigate } from 'react-router-dom';
 
 const ChappHero = () => {
   const { t } = useLanguage();
+  const navigate = useNavigate();
+
+  const handleLearnMore = () => {
+    navigate('/services');
+  };
+
+  const handleWatchVideo = () => {
+    window.open('https://www.youtube.com/watch?v=QM29tfIX49w&t=30s', '_blank');
+  };
 
   const clientLogos = [
     { name: 'Burberry', src: '/burberry.png' },
@@ -192,7 +202,10 @@ const ChappHero = () => {
           className="flex flex-col sm:flex-row gap-4 animate-fade-in-up"
           style={{ animationDelay: '0.4s' }}
         >
-          <button className="inline-flex items-center justify-center px-8 py-4 bg-gradient-to-r from-blue-600 to-blue-700 text-white font-medium rounded-2xl text-body-lg hover:from-blue-700 hover:to-blue-800 active:from-blue-800 active:to-blue-900 transition-all duration-300 hover:scale-[1.02] hover:shadow-[0_0_30px_rgba(59,130,246,0.5)] focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-chapp-dark-bg shadow-lg group">
+          <button 
+            onClick={handleLearnMore}
+            className="inline-flex items-center justify-center px-8 py-4 bg-gradient-to-r from-blue-600 to-blue-700 text-white font-medium rounded-2xl text-body-lg hover:from-blue-700 hover:to-blue-800 active:from-blue-800 active:to-blue-900 transition-all duration-300 hover:scale-[1.02] hover:shadow-[0_0_30px_rgba(59,130,246,0.5)] focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-chapp-dark-bg shadow-lg group"
+          >
             {t('hero.cta.primary')}
             <ArrowRight
               size={20}
@@ -200,6 +213,7 @@ const ChappHero = () => {
             />
           </button>
           <button
+            onClick={handleWatchVideo}
             className="inline-flex items-center justify-center px-8 py-4
     bg-white/10 backdrop-blur-md border border-white/30 text-white
     font-medium rounded-2xl text-body-lg

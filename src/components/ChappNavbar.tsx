@@ -69,9 +69,23 @@ const ChappNavbar = () => {
     } else scrollToContact();
   };
 
+  const handleServicesClick = () => {
+    setIsOpen(false);
+    if (location.pathname !== '/services') {
+      navigate('/services');
+      // Force scroll to top after navigation with longer delay to ensure page loads
+      setTimeout(() => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }, 300);
+    } else {
+      // If already on services page, scroll to top immediately
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  };
+
   const navLinks = [
     { name: t('nav.about'), href: '/#about', action: () => handleNavClick('/#about') },
-    { name: t('nav.services'), href: '/services', isRoute: true },
+    { name: t('nav.services'), href: '/services', isRoute: true, action: () => handleServicesClick() },
     { name: t('nav.contact'), href: '/#contact', action: () => handleNavClick('/#contact') },
   ];
 
@@ -117,7 +131,16 @@ const ChappNavbar = () => {
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-6">
             {navLinks.map((link) =>
-              link.isRoute ? (
+              link.isRoute && link.action ? (
+                <button
+                  key={link.name}
+                  onClick={link.action}
+                  className="text-body-md font-medium text-chapp-gray-300 hover:text-chapp-white transition-all duration-300 relative group link-hover-dark"
+                >
+                  {link.name}
+                  <span className="absolute -bottom-1 left-0 right-0 h-0.5 bg-chapp-accent-blue scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></span>
+                </button>
+              ) : link.isRoute ? (
                 <Link
                   key={link.name}
                   to={link.href}
@@ -247,7 +270,15 @@ const ChappNavbar = () => {
         >
           <div className="flex flex-col space-y-3 pt-3 border-t border-chapp-white/20">
             {navLinks.map((link) =>
-              link.isRoute ? (
+              link.isRoute && link.action ? (
+                <button
+                  key={link.name}
+                  onClick={link.action}
+                  className="text-body-md font-medium text-chapp-gray-300 hover:text-chapp-white transition-colors duration-300 px-3 py-2 hover:bg-chapp-white/10 rounded-lg text-left touch-manipulation"
+                >
+                  {link.name}
+                </button>
+              ) : link.isRoute ? (
                 <Link
                   key={link.name}
                   to={link.href}

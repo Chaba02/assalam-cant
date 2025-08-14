@@ -21,6 +21,11 @@ import ChappFooter from '../components/ChappFooter';
 const Services = () => {
   const { t } = useLanguage();
 
+  // Force scroll to top when component mounts
+  React.useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   const services = [
     {
       id: 'resinatura',
@@ -227,22 +232,11 @@ const Services = () => {
           <div className="space-y-20 sm:space-y-32">
             {services.map((service, index) => (
               <div key={service.id} className="relative group">
-                {/* Elegant Enhanced Separator */}
-                {index > 0 && (
-                  <div className="absolute -top-10 sm:-top-16 left-1/2 transform -translate-x-1/2 flex flex-col items-center">
-                    <div className="w-2 h-2 bg-chapp-accent-blue rounded-full animate-pulse mb-4"></div>
-                    <div className="w-px h-8 sm:h-12 bg-gradient-to-b from-chapp-accent-blue via-chapp-accent-blue/50 to-transparent"></div>
-                    <div className="w-6 sm:w-8 h-6 sm:h-8 border border-chapp-accent-blue/30 rounded-full flex items-center justify-center mt-4 bg-chapp-dark-bg">
-                      <div className="w-1.5 h-1.5 bg-chapp-accent-blue rounded-full animate-glow"></div>
-                    </div>
-                    <div className="w-px h-8 sm:h-12 bg-gradient-to-b from-transparent via-chapp-accent-blue/50 to-chapp-accent-blue mt-4"></div>
-                    <div className="w-2 h-2 bg-chapp-accent-blue rounded-full animate-pulse mt-4"></div>
-                  </div>
-                )}
+                                 {/* Separator removed to fix overflow issues */}
                 
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 xl:gap-24 items-center">
                   {/* Content */}
-                  <div className={`${index % 2 === 1 ? 'lg:order-2' : ''} space-y-6 sm:space-y-8`}>
+                  <div className={`${index % 2 === 1 ? 'lg:order-2' : ''} space-y-6 sm:space-y-8 lg:col-span-1 col-span-1`}>
                     <div className="space-y-4 sm:space-y-6">
                       <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-3xl glass-dark border border-chapp-accent-blue/20 flex items-center justify-center group-hover:border-chapp-accent-blue/40 transition-all duration-500 mx-auto lg:mx-0">
                         <service.icon className="text-chapp-accent-blue group-hover:scale-110 transition-transform duration-300" size={28} />
@@ -293,8 +287,8 @@ const Services = () => {
                     </div>
                   </div>
 
-                  {/* Enhanced Animated Visual Element - Responsive */}
-                  <div className={`${index % 2 === 1 ? 'lg:order-1' : ''} flex items-center justify-center`}>
+                  {/* Enhanced Animated Visual Element - Hidden on Mobile */}
+                  <div className={`${index % 2 === 1 ? 'lg:order-1' : ''} hidden lg:flex items-center justify-center`}>
                     <div className="relative group/visual">
                       <div className="w-64 h-64 sm:w-80 sm:h-80 lg:w-96 lg:h-96 rounded-full border border-chapp-white/5 bg-chapp-white/[0.02] flex items-center justify-center backdrop-blur-sm group-hover/visual:border-chapp-white/15 transition-all duration-1000 animate-pulse">
                         <div className="w-48 h-48 sm:w-60 sm:h-60 lg:w-72 lg:h-72 rounded-full border border-chapp-white/10 bg-chapp-white/[0.03] flex items-center justify-center group-hover/visual:border-chapp-accent-blue/40 group-hover/visual:rotate-45 transition-all duration-1000">
