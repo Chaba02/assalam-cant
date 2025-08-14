@@ -7,7 +7,10 @@ import {
   CheckCircle,
   Zap,
   Award,
-  Target
+  Target,
+  Recycle,
+  Settings,
+  Plus
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useLanguage } from '../contexts/LanguageContext';
@@ -80,10 +83,43 @@ const Services = () => {
     }
   ];
 
-  const stats = [
-    { icon: Award, value: '25+', label: t('services.stats.experience') },
-    { icon: Target, value: '500+', label: t('services.stats.projects') },
-    { icon: Zap, value: '99.8%', label: t('services.stats.quality') }
+  const certifications = [
+    {
+      id: 'grs',
+      icon: Recycle,
+      title: 'GRS Certified',
+      subtitle: 'Global Recycled Standard',
+      certifier: 'ICEA (ICEA-TX-2978)',
+      description: 'GRS-compliant Textile Ennobling Processes',
+      note: 'Solo i processi coperti da un certificato valido sono certificati GRS',
+      gradient: 'from-emerald-400 to-green-500',
+      bgGradient: 'from-emerald-500/15 to-green-600/10',
+      iconBg: 'from-emerald-500 to-green-600'
+    },
+    {
+      id: 'iso',
+      icon: Settings,
+      title: 'ISO 9001 Certified',
+      subtitle: 'Quality Management System',
+      certifier: 'Certificazione attiva dal 2017',
+      description: 'Garantisce standard di qualità elevati nei servizi ai partner',
+      note: 'Sistema di gestione qualità riconosciuto internazionalmente',
+      gradient: 'from-blue-400 to-indigo-500',
+      bgGradient: 'from-blue-500/15 to-indigo-600/10',
+      iconBg: 'from-blue-500 to-indigo-600'
+    },
+    {
+      id: 'swiss',
+      icon: Plus,
+      title: 'Swiss Antimicrobial Expertise',
+      subtitle: 'Antimicrobial Solutions',
+      certifier: 'Swiss Quality Standard',
+      description: 'Eccellenza svizzera nelle soluzioni antimicrobiche',
+      note: 'Tecnologie avanzate per protezione e igiene',
+      gradient: 'from-red-400 to-rose-500',
+      bgGradient: 'from-red-500/15 to-rose-600/10',
+      iconBg: 'from-red-500 to-rose-600'
+    }
   ];
 
   return (
@@ -119,27 +155,63 @@ const Services = () => {
               {t('services.subtitle')}
             </p>
 
-            {/* Enhanced Professional Stats Cards */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-              {stats.map((stat, index) => (
-                <div key={index} className="group">
-                  <div className="relative bg-gradient-to-br from-chapp-dark-card/95 via-chapp-gray-900/90 to-chapp-dark-card/95 backdrop-blur-xl rounded-3xl p-10 border border-chapp-white/10 shadow-[0_20px_40px_rgba(0,0,0,0.3)] hover:shadow-[0_30px_60px_rgba(0,0,0,0.4)] transition-all duration-700 hover:-translate-y-3 hover:scale-[1.02] overflow-hidden">
-                    {/* Subtle gradient overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 via-transparent to-purple-500/5 opacity-0 group-hover:opacity-100 transition-all duration-700"></div>
+            {/* Enhanced Professional Certification Cards */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+              {certifications.map((cert, index) => (
+                <div key={cert.id} className="group">
+                  <div className="relative h-80 overflow-hidden rounded-3xl backdrop-blur-xl bg-gradient-to-br from-white/[0.08] via-white/[0.05] to-white/[0.02] border border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.3)] hover:shadow-[0_12px_48px_rgba(0,0,0,0.4)] transition-all duration-700 hover:-translate-y-2 hover:scale-[1.02]">
+                    {/* Glassmorphism background overlay */}
+                    <div className={`absolute inset-0 bg-gradient-to-br ${cert.bgGradient} opacity-40 group-hover:opacity-60 transition-all duration-700`}></div>
                     
                     {/* Animated border glow */}
-                    <div className="absolute inset-0 rounded-3xl bg-gradient-to-r from-blue-500/20 via-purple-500/20 to-blue-500/20 opacity-0 group-hover:opacity-100 blur-xl transition-all duration-700"></div>
+                    <div className={`absolute inset-0 rounded-3xl bg-gradient-to-r ${cert.gradient} opacity-0 group-hover:opacity-20 blur-xl transition-all duration-700`}></div>
                     
-                    <div className="relative z-10">
-                      <div className="w-20 h-20 mx-auto mb-8 bg-gradient-to-br from-blue-600 via-blue-700 to-blue-800 rounded-3xl flex items-center justify-center group-hover:scale-110 group-hover:rotate-3 transition-all duration-500 shadow-[0_10px_30px_rgba(59,130,246,0.3)] group-hover:shadow-[0_15px_40px_rgba(59,130,246,0.5)]">
-                        <stat.icon className="text-white" size={32} />
+                    {/* Content */}
+                    <div className="relative z-10 p-8 h-full flex flex-col">
+                      {/* Icon */}
+                      <div className={`w-16 h-16 mx-auto mb-6 bg-gradient-to-br ${cert.iconBg} rounded-2xl flex items-center justify-center group-hover:scale-110 group-hover:rotate-3 transition-all duration-500 shadow-[0_8px_24px_rgba(0,0,0,0.3)]`}>
+                        <cert.icon className="text-white" size={28} />
                       </div>
-                      <div className="text-4xl text-white font-bold mb-4 group-hover:text-blue-300 transition-colors duration-500">{stat.value}</div>
-                      <div className="text-chapp-gray-300 text-lg font-medium group-hover:text-white transition-colors duration-500 leading-relaxed">{stat.label}</div>
+                      
+                      {/* Title */}
+                      <h3 className="text-xl font-bold text-white mb-2 group-hover:text-opacity-90 transition-colors duration-500">
+                        {cert.title}
+                      </h3>
+                      
+                      {/* Subtitle */}
+                      <p className="text-sm text-chapp-gray-300 mb-4 font-medium">
+                        {cert.subtitle}
+                      </p>
+                      
+                      {/* Certifier */}
+                      <div className="mb-4">
+                        <p className="text-xs text-chapp-accent-blue font-semibold mb-1">
+                          CERTIFICATO DA
+                        </p>
+                        <p className="text-sm text-white font-medium">
+                          {cert.certifier}
+                        </p>
+                      </div>
+                      
+                      {/* Description */}
+                      <p className="text-sm text-chapp-gray-300 leading-relaxed mb-4 flex-grow">
+                        {cert.description}
+                      </p>
+                      
+                      {/* Note */}
+                      <div className="mt-auto">
+                        <div className="h-px bg-gradient-to-r from-transparent via-white/20 to-transparent mb-3"></div>
+                        <p className="text-xs text-chapp-gray-400 italic">
+                          {cert.note}
+                        </p>
+                      </div>
+                      
+                      {/* Subtle inner glow */}
+                      <div className={`absolute inset-x-4 bottom-0 h-px bg-gradient-to-r from-transparent via-current to-transparent opacity-30 group-hover:opacity-60 transition-all duration-700 ${cert.gradient.includes('emerald') ? 'text-emerald-400' : cert.gradient.includes('blue') ? 'text-blue-400' : 'text-red-400'}`}></div>
                     </div>
                     
-                    {/* Subtle inner glow */}
-                    <div className="absolute inset-x-4 bottom-0 h-px bg-gradient-to-r from-transparent via-blue-400/30 to-transparent group-hover:via-blue-400/60 transition-all duration-700"></div>
+                    {/* Glass reflection effect */}
+                    <div className="absolute top-0 left-0 right-0 h-1/2 bg-gradient-to-b from-white/[0.08] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
                   </div>
                 </div>
               ))}
