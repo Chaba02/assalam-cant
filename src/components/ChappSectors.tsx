@@ -116,20 +116,7 @@ const ChappSectors = () => {
         </div>
 
         {/* CTA Section */}
-        <div className="text-center animate-on-scroll">
-          <div className="card-premium-dark max-w-4xl mx-auto p-12">
-            <h3 className="text-display-md text-chapp-title mb-4">
-              {t('sectors.cta.title')}
-            </h3>
-            <p className="text-body-xl text-chapp-body mb-8 max-w-2xl mx-auto">
-              {t('sectors.cta.description')}
-            </p>
-
-            <button className="btn-chapp-accent hover-glow-blue">
-              {t('sectors.cta.button')}
-            </button>
-          </div>
-        </div>
+        
       </div>
     </section>
   );
