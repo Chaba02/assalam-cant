@@ -15,11 +15,13 @@ import {
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useLanguage } from '../contexts/LanguageContext';
+import SEOHead from '../components/SEOHead';
 import ChappNavbar from '../components/ChappNavbar';
 import ChappFooter from '../components/ChappFooter';
+import { serviceSchemas, breadcrumbSchema } from '../data/structuredData';
 
 const Services = () => {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
 
   // Force scroll to top when component mounts
   React.useEffect(() => {
@@ -128,12 +130,48 @@ const Services = () => {
     }
   ];
 
+  // SEO data for Services page
+  const pageTitle = language === 'IT' 
+    ? 'Servizi Novaresin - Resinatura, Accoppiatura, Membrane Tessili | Certificazioni GRS ISO 9001'
+    : 'Novaresin Services - Resination, Coupling, Textile Membranes | GRS ISO 9001 Certifications';
+
+  const pageDescription = language === 'IT'
+    ? 'Scopri i servizi specializzati di Novaresin: resinatura tessile per impermeabilizzazione, accoppiatura per materiali compositi, membrane tecniche. Certificazioni GRS e ISO 9001.'
+    : 'Discover Novaresin specialized services: textile resination for waterproofing, coupling for composite materials, technical membranes. GRS and ISO 9001 certifications.';
+
+  // Breadcrumb structured data
+  const breadcrumbs = breadcrumbSchema([
+    { name: 'Home', url: 'https://novaresin.lovable.app/' },
+    { name: language === 'IT' ? 'Servizi' : 'Services', url: 'https://novaresin.lovable.app/services' }
+  ]);
+
+  // Combined structured data with services
+  const combinedStructuredData = {
+    "@context": "https://schema.org",
+    "@graph": [
+      breadcrumbs,
+      ...serviceSchemas
+    ]
+  };
+
   return (
-    <div className="min-h-screen bg-chapp-dark-bg">
-      <ChappNavbar />
+    <>
+      <SEOHead
+        title={pageTitle}
+        description={pageDescription}
+        structuredData={combinedStructuredData}
+        type="website"
+        canonical="https://novaresin.lovable.app/services"
+      />
       
-      {/* Hero Section */}
-      <section className="section-chapp pt-32 bg-chapp-dark-bg relative overflow-hidden">
+      <div className="min-h-screen bg-chapp-dark-bg">
+        <header>
+          <ChappNavbar />
+        </header>
+        
+        <main>
+          {/* Hero Section */}
+          <section className="section-chapp pt-32 bg-chapp-dark-bg relative overflow-hidden">
         <div className="container-chapp relative z-10">
           {/* Back Button */}
           <Link 
@@ -334,10 +372,14 @@ const Services = () => {
             </div>
           </div>
         </div>
-      </section>
-
-      <ChappFooter />
-    </div>
+          </section>
+        </main>
+        
+        <footer>
+          <ChappFooter />
+        </footer>
+      </div>
+    </>
   );
 };
 

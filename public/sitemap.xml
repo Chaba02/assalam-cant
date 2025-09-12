@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" 
+        xmlns:xhtml="http://www.w3.org/1999/xhtml"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  
+  <!-- Homepage -->
+  <url>
+    <loc>https://novaresin.lovable.app/</loc>
+    <lastmod>2024-12-09</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="it" href="https://novaresin.lovable.app/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://novaresin.lovable.app/en/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://novaresin.lovable.app/"/>
+    <image:image>
+      <image:loc>https://novaresin.lovable.app/novaresin_logo.png</image:loc>
+      <image:title>Novaresin S.p.A. Logo</image:title>
+      <image:caption>Logo ufficiale di Novaresin S.p.A., leader nel finissaggio tessile</image:caption>
+    </image:image>
+  </url>
+
+  <!-- Services Page -->
+  <url>
+    <loc>https://novaresin.lovable.app/services</loc>
+    <lastmod>2024-12-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="it" href="https://novaresin.lovable.app/services"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://novaresin.lovable.app/en/services"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://novaresin.lovable.app/services"/>
+    <image:image>
+      <image:loc>https://novaresin.lovable.app/novaresin_logo.png</image:loc>
+      <image:title>Servizi Novaresin - Resinatura, Accoppiatura, Membrane</image:title>
+      <image:caption>I servizi specializzati di Novaresin per il finissaggio tessile</image:caption>
+    </image:image>
+  </url>
+
+  <!-- English Homepage -->
+  <url>
+    <loc>https://novaresin.lovable.app/en/</loc>
+    <lastmod>2024-12-09</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="it" href="https://novaresin.lovable.app/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://novaresin.lovable.app/en/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://novaresin.lovable.app/"/>
+    <image:image>
+      <image:loc>https://novaresin.lovable.app/novaresin_logo.png</image:loc>
+      <image:title>Novaresin S.p.A. - Textile Finishing Leader</image:title>
+      <image:caption>Official logo of Novaresin S.p.A., leader in textile finishing</image:caption>
+    </image:image>
+  </url>
+
+  <!-- English Services Page -->
+  <url>
+    <loc>https://novaresin.lovable.app/en/services</loc>
+    <lastmod>2024-12-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="it" href="https://novaresin.lovable.app/services"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://novaresin.lovable.app/en/services"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://novaresin.lovable.app/services"/>
+    <image:image>
+      <image:loc>https://novaresin.lovable.app/novaresin_logo.png</image:loc>
+      <image:title>Novaresin Services - Resination, Coupling, Membranes</image:title>
+      <image:caption>Specialized services by Novaresin for textile finishing</image:caption>
+    </image:image>
+  </url>
+
+  <!-- Section Anchors -->
+  <url>
+    <loc>https://novaresin.lovable.app/#about</loc>
+    <lastmod>2024-12-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://novaresin.lovable.app/#sectors</loc>
+    <lastmod>2024-12-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://novaresin.lovable.app/#contact</loc>
+    <lastmod>2024-12-09</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+</urlset>

@@ -1,0 +1,65 @@
+{
+  "name": "Novaresin S.p.A. - Finissaggio e Nobilitazione Tessuti",
+  "short_name": "Novaresin",
+  "description": "Leader nel finissaggio tessile dal 1970. Servizi di resinatura, accoppiatura e membrane per fashion, sport, outdoor e geotessile.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0D0D0D",
+  "theme_color": "#2196F3",
+  "orientation": "portrait-primary",
+  "scope": "/",
+  "lang": "it",
+  "categories": ["business", "manufacturing", "textiles"],
+  "icons": [
+    {
+      "src": "/novaresin_logo.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "/novaresin_logo.png", 
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable any"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/novaresin_logo.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "label": "Homepage"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Servizi",
+      "short_name": "Services",
+      "description": "I nostri servizi di finissaggio tessile",
+      "url": "/services",
+      "icons": [
+        {
+          "src": "/novaresin_logo.png",
+          "sizes": "96x96"
+        }
+      ]
+    },
+    {
+      "name": "Contatti",
+      "short_name": "Contact",
+      "description": "Contatta il nostro team",
+      "url": "/#contact",
+      "icons": [
+        {
+          "src": "/novaresin_logo.png",
+          "sizes": "96x96"
+        }
+      ]
+    }
+  ],
+  "related_applications": [],
+  "prefer_related_applications": false,
+  "dir": "ltr",
+  "iarc_rating_id": ""
+}

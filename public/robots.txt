@@ -1,14 +1,49 @@
+# Novaresin S.p.A. - Robots.txt
+# Leader nel finissaggio tessile dal 1970
+
+# Allow all search engines
+User-agent: *
+Allow: /
+Crawl-delay: 1
+
+# Specific rules for major search engines
 User-agent: Googlebot
 Allow: /
+Crawl-delay: 1
 
-User-agent: Bingbot
+User-agent: Bingbot  
 Allow: /
+Crawl-delay: 1
 
+User-agent: Slurp
+Allow: /
+Crawl-delay: 1
+
+# Social media crawlers
 User-agent: Twitterbot
 Allow: /
 
 User-agent: facebookexternalhit
 Allow: /
 
-User-agent: *
+User-agent: LinkedInBot
 Allow: /
+
+User-agent: WhatsApp
+Allow: /
+
+# Block unnecessary crawlers
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: MJ12bot
+Disallow: /
+
+User-agent: DotBot
+Disallow: /
+
+# Sitemap location
+Sitemap: https://novaresin.lovable.app/sitemap.xml
+
+# Host preference
+Host: novaresin.lovable.app
