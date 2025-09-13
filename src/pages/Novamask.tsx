@@ -8,6 +8,7 @@ import ChappFooter from "@/components/ChappFooter";
 import SEOHead from "@/components/SEOHead";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { breadcrumbSchema } from "@/data/structuredData";
+import InteractiveLayerStructure from "@/components/InteractiveLayer";
 
 const Novamask = () => {
   const navigate = useNavigate();
@@ -282,79 +283,7 @@ const Novamask = () => {
         </section>
 
         {/* Interactive Layer Structure - Apple Style */}
-        <section className="section-chapp bg-gradient-to-b from-background to-card/50">
-          <div className="container-chapp">
-            <motion.div 
-              className="text-center mb-16"
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-              viewport={{ once: true }}
-            >
-              <h2 className="text-display-lg font-display font-bold text-foreground mb-4">
-                {language === 'IT' ? 'Struttura a Strati Avanzata' : 'Advanced Layer Structure'}
-              </h2>
-              <p className="text-body-lg text-muted-foreground max-w-2xl mx-auto">
-                {language === 'IT' 
-                  ? 'Tecnologia multi-strato per protezione completa e comfort superiore'
-                  : 'Multi-layer technology for complete protection and superior comfort'
-                }
-              </p>
-            </motion.div>
-
-            <div className="layer-3d relative">
-              <div className="grid md:grid-cols-3 gap-8">
-                {layers.map((layer, index) => (
-                  <motion.div
-                    key={layer.id}
-                    className="stagger-item"
-                    style={{ animationDelay: `${index * 0.2}s` }}
-                  >
-                    <motion.div
-                      className={`
-                        layer-card apple-glass rounded-3xl p-8 cursor-pointer
-                        ${activeLayer === layer.id ? 'ring-2 ring-accent' : ''}
-                      `}
-                      whileHover="hover"
-                      onHoverStart={() => setActiveLayer(layer.id)}
-                      onHoverEnd={() => setActiveLayer(null)}
-                      variants={{
-                        hover: {
-                          rotateY: 15,
-                          rotateX: 5,
-                          translateZ: 20,
-                          transition: { duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }
-                        }
-                      }}
-                    >
-                      <div className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${layer.color} flex items-center justify-center mb-6 mx-auto`}>
-                        <layer.icon className="w-8 h-8 text-white" />
-                      </div>
-                      
-                      <h3 className="text-heading-lg font-semibold text-foreground mb-3 text-center">
-                        {layer.name}
-                      </h3>
-                      
-                      <AnimatePresence>
-                        {activeLayer === layer.id && (
-                          <motion.p
-                            className="text-body-md text-muted-foreground text-center leading-relaxed"
-                            initial={{ opacity: 0, height: 0 }}
-                            animate={{ opacity: 1, height: "auto" }}
-                            exit={{ opacity: 0, height: 0 }}
-                            transition={{ duration: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
-                          >
-                            {layer.description}
-                          </motion.p>
-                        )}
-                      </AnimatePresence>
-                    </motion.div>
-                  </motion.div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </section>
+        <InteractiveLayerStructure language="IT"/>
 
         {/* Usage Sectors - Bento Grid Layout */}
         <section className="section-chapp">
