@@ -171,6 +171,34 @@ export default {
 				'glow': {
 					'0%, 100%': { opacity: '1' },
 					'50%': { opacity: '0.8' }
+				},
+				'magnetic-attract': {
+					'0%': { transform: 'scale(1) translateY(0)' },
+					'100%': { transform: 'scale(1.05) translateY(-8px)' }
+				},
+				'apple-slide-up': {
+					'0%': {
+						opacity: '0',
+						transform: 'translateY(40px) scale(0.95)'
+					},
+					'100%': {
+						opacity: '1',
+						transform: 'translateY(0) scale(1)'
+					}
+				},
+				'rotate-y': {
+					'0%': { transform: 'rotateY(0deg)' },
+					'100%': { transform: 'rotateY(360deg)' }
+				},
+				'pulse-glow': {
+					'0%, 100%': { 
+						boxShadow: '0 0 20px rgba(59, 130, 246, 0.4)',
+						transform: 'scale(1)'
+					},
+					'50%': { 
+						boxShadow: '0 0 40px rgba(59, 130, 246, 0.8)',
+						transform: 'scale(1.02)'
+					}
 				}
 			},
 			animation: {
@@ -178,7 +206,11 @@ export default {
 				'fade-in': 'fade-in 0.4s ease-out',
 				'scale-in': 'scale-in 0.3s ease-out',
 				'float': 'float 6s ease-in-out infinite',
-				'glow': 'glow 2s ease-in-out infinite'
+				'glow': 'glow 2s ease-in-out infinite',
+				'magnetic-attract': 'magnetic-attract 0.3s cubic-bezier(0.25, 0.1, 0.25, 1)',
+				'apple-slide-up': 'apple-slide-up 0.8s cubic-bezier(0.16, 1, 0.3, 1)',
+				'rotate-y': 'rotate-y 20s linear infinite',
+				'pulse-glow': 'pulse-glow 3s ease-in-out infinite'
 			},
 			zIndex: {
 				'60': '60'

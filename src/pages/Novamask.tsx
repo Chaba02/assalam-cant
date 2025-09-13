@@ -1,565 +1,630 @@
-import React, { useState } from "react";
-import {
-  Shield,
-  ArrowLeft,
-  Building,
-  Shirt,
-  Home,
-  Eye,
-  Droplets,
-  Wind,
-  AlertTriangle,
-  Thermometer,
-  WashingMachine,
-  Flame,
-  Layers,
-} from "lucide-react";
-import { Link } from "react-router-dom";
-import { useLanguage } from "../contexts/LanguageContext";
-import SEOHead from "../components/SEOHead";
-import ChappNavbar from "../components/ChappNavbar";
-import ChappFooter from "../components/ChappFooter";
-import { breadcrumbSchema } from "../data/structuredData";
+import { useState, useEffect, useCallback } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { ArrowLeft, Play, Pause, ChevronRight, Check, X, Droplets, Wind, Shield, Sparkles } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { useNavigate } from "react-router-dom";
+import ChappNavbar from "@/components/ChappNavbar";
+import ChappFooter from "@/components/ChappFooter";
+import SEOHead from "@/components/SEOHead";
+import { useLanguage } from "@/contexts/LanguageContext";
+import { breadcrumbSchema } from "@/data/structuredData";
 
 const Novamask = () => {
-  const { t, language } = useLanguage();
-  const [activeLayer, setActiveLayer] = useState<string | null>(null);
-  const [isInspiration, setIsInspiration] = useState(true);
-  const [imageLoading, setImageLoading] = useState({});
+  const navigate = useNavigate();
+  const { language } = useLanguage();
+  const [activeLayer, setActiveLayer] = useState<number | null>(null);
+  const [isBreathingActive, setIsBreathingActive] = useState(false);
+  const [breathingPhase, setBreathingPhase] = useState<'inspiration' | 'expiration'>('inspiration');
+  const [imageLoaded, setImageLoaded] = useState(false);
 
-  // Force scroll to top when component mounts
-  React.useEffect(() => {
+  useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
+  // Apple-style breathing animation cycle
+  useEffect(() => {
+    if (!isBreathingActive) return;
+    
+    const interval = setInterval(() => {
+      setBreathingPhase(prev => prev === 'inspiration' ? 'expiration' : 'inspiration');
+    }, 3000);
+    
+    return () => clearInterval(interval);
+  }, [isBreathingActive]);
+
   const layers = [
     {
-      id: "bacteriostatic",
-      name:
-        language === "IT"
-          ? "Batteriostatico traspirante"
-          : "Breathable bacteriostatic",
-      description:
-        language === "IT"
-          ? "Tessuto indemagliabile certificato Oeko-tex e trattato con batteriostatico e idrorepellente Sanitized ® AG Swiss"
-          : "Run-resistant fabric certified Oeko-tex and treated with bacteriostatic and water-repellent Sanitized ® AG Swiss",
-      color: "from-cyan-400 to-blue-500",
-      borderColor: "border-cyan-400/30",
-      hoverColor: "hover:border-cyan-400/60",
+      id: 1,
+      name: language === 'IT' ? 'Strato Batteriostatico' : 'Bacteriostatic Layer',
+      description: language === 'IT' 
+        ? 'Trattamento antibatterico certificato Sanitized AG per massima igiene'
+        : 'Certified Sanitized AG antibacterial treatment for maximum hygiene',
+      color: 'from-blue-500/20 via-cyan-400/30 to-blue-600/20',
+      icon: Shield,
+      depth: 'translateZ(30px)'
     },
     {
-      id: "filter",
-      name: language === "IT" ? "Imbottitura filtrante" : "Filtering padding",
-      description:
-        language === "IT"
-          ? "Imbottitura filtrante microforata."
-          : "Micro-perforated filtering padding.",
-      color: "from-emerald-400 to-green-500",
-      borderColor: "border-emerald-400/30",
-      hoverColor: "hover:border-emerald-400/60",
+      id: 2,
+      name: language === 'IT' ? 'Strato Filtrante' : 'Filtering Layer',
+      description: language === 'IT' 
+        ? 'Filtrazione avanzata delle particelle e massima protezione respiratoria'
+        : 'Advanced particle filtration and maximum respiratory protection',
+      color: 'from-purple-500/20 via-pink-400/30 to-purple-600/20',
+      icon: Wind,
+      depth: 'translateZ(20px)'
     },
     {
-      id: "breathable",
-      name: language === "IT" ? "Tessuto traspirante" : "Breathable fabric",
-      description:
-        language === "IT"
-          ? "Lo strato a contatto con la pelle è composto da un tessuto indemagliabile certificato Oeko-tex."
-          : "The layer in contact with the skin is made of run-resistant fabric certified Oeko-tex.",
-      color: "from-purple-400 to-indigo-500",
-      borderColor: "border-purple-400/30",
-      hoverColor: "hover:border-purple-400/60",
-    },
+      id: 3,
+      name: language === 'IT' ? 'Strato Traspirante' : 'Breathable Layer',
+      description: language === 'IT' 
+        ? 'Comfort respiratorio e gestione ottimale della temperatura e umidità'
+        : 'Respiratory comfort and optimal temperature and humidity management',
+      color: 'from-green-500/20 via-emerald-400/30 to-green-600/20',
+      icon: Droplets,
+      depth: 'translateZ(10px)'
+    }
   ];
 
   const sectors = [
     {
-      id: "industrial",
-      title: "Industrial",
-      description:
-        language === "IT"
-          ? "Protezione in ambienti industriali e manifatturieri"
-          : "Protection in industrial and manufacturing environments",
-      icon: Building,
-      gradient: "from-slate-400 to-gray-500",
-      glowColor: "shadow-slate-400/20",
+      id: 'industrial',
+      title: language === 'IT' ? 'Industriale' : 'Industrial',
+      description: language === 'IT' 
+        ? 'Protezione avanzata in ambienti di lavoro con alte concentrazioni di particelle'
+        : 'Advanced protection in work environments with high particle concentrations',
+      icon: '🏭',
+      gradient: 'from-amber-500/20 to-orange-600/20',
+      features: ['ISO 9001', 'Alta filtrazione', 'Resistenza'],
     },
     {
-      id: "fashion",
-      title: "Fashion",
-      description:
-        language === "IT"
-          ? "Design elegante per uso quotidiano e professionale"
-          : "Elegant design for daily and professional use",
-      icon: Shirt,
-      gradient: "from-pink-400 to-rose-500",
-      glowColor: "shadow-pink-400/20",
+      id: 'fashion',
+      title: 'Fashion',
+      description: language === 'IT' 
+        ? 'Design elegante per eventi, sfilate e occasioni speciali di alta gamma'
+        : 'Elegant design for events, fashion shows and high-end special occasions',
+      icon: '✨',
+      gradient: 'from-pink-500/20 to-rose-600/20',
+      features: ['Design premium', 'Comfort superiore', 'Stile italiano'],
     },
     {
-      id: "daily",
-      title: "Daily",
-      description:
-        language === "IT"
-          ? "Comfort e praticità per l'uso di tutti i giorni"
-          : "Comfort and practicality for everyday use",
-      icon: Home,
-      gradient: "from-blue-400 to-indigo-500",
-      glowColor: "shadow-blue-400/20",
-    },
+      id: 'daily',
+      title: language === 'IT' ? 'Quotidiano' : 'Daily',
+      description: language === 'IT' 
+        ? 'Uso quotidiano con massimo comfort, lavabile e riutilizzabile'
+        : 'Daily use with maximum comfort, washable and reusable',
+      icon: '🌟',
+      gradient: 'from-blue-500/20 to-cyan-600/20',
+      features: ['Lavabile', 'Riutilizzabile', 'Eco-friendly'],
+    }
   ];
 
   const warnings = [
     {
-      icon: Thermometer,
-      text:
-        language === "IT"
-          ? "Lavaggio a macchina delicato alla temperatura indicata"
-          : "Delicate machine wash at indicated temperature",
-      color: "from-cyan-400 to-blue-500",
-      iconColor: "text-cyan-400",
+      icon: '🌡️',
+      text: language === 'IT' 
+        ? 'Lavaggio a macchina delicato alla temperatura indicata' 
+        : 'Machine wash gentle at indicated temperature',
+      allowed: true
     },
     {
-      icon: AlertTriangle,
-      text: language === "IT" ? "Asciugatura in tamburo" : "Tumble drying",
-      color: "from-amber-400 to-orange-500",
-      iconColor: "text-amber-400",
+      icon: '🚫',
+      text: language === 'IT' ? 'Non stirare' : 'Do not iron',
+      allowed: false
     },
     {
-      icon: Droplets,
-      text: language === "IT" ? "No lavaggio a secco" : "No dry cleaning",
-      color: "from-red-400 to-pink-500",
-      iconColor: "text-red-400",
+      icon: '💨',
+      text: language === 'IT' ? 'Asciugatura in tamburo' : 'Tumble dry',
+      allowed: true
     },
     {
-      icon: Flame,
-      text: language === "IT" ? "Non stirare" : "Do not iron",
-      color: "from-yellow-400 to-amber-500",
-      iconColor: "text-yellow-400",
-    },
+      icon: '🧼',
+      text: language === 'IT' ? 'No lavaggio a secco' : 'No dry cleaning',
+      allowed: false
+    }
   ];
 
-  // SEO data for Novamask page
-  const pageTitle =
-    language === "IT"
-      ? "Novamask - Mascherine Protettive Lavabili | Certificazione Sanitized AG ISO 9001"
-      : "Novamask - Washable Protective Face Masks | Sanitized AG ISO 9001 Certification";
+  const pageTitle = language === 'IT' 
+    ? 'Novamask - Mascherina Lavabile Premium | Protezione e Stile'
+    : 'Novamask - Premium Washable Face Mask | Protection and Style';
+  
+  const pageDescription = language === 'IT' 
+    ? 'Novamask è la mascherina lavabile premium certificata ISO9001 e Sanitized AG. Protezione batteriostatica e idrorepellente per uso industriale, fashion e quotidiano.'
+    : 'Novamask is the premium washable face mask certified ISO9001 and Sanitized AG. Bacteriostatic and water-repellent protection for industrial, fashion and daily use.';
 
-  const pageDescription =
-    language === "IT"
-      ? "Novamask: mascherine protettive lavabili e riutilizzabili con certificazione Sanitized AG. Riduce la diffusione di particelle contenenti batteri e virus. Comfort e protezione quotidiana."
-      : "Novamask: washable and reusable protective face masks with Sanitized AG certification. Reduces the spread of particles containing bacteria and viruses. Daily comfort and protection.";
-
-  // Breadcrumb structured data
   const breadcrumbs = breadcrumbSchema([
-    { name: "Home", url: "https://novaresin.lovable.app/" },
-    { name: "Novamask", url: "https://novaresin.lovable.app/novamask" },
+    { name: 'Home', url: '/' },
+    { name: 'Novamask', url: '/novamask' }
   ]);
 
-  const handleImageLoad = (imageName) => {
-    setImageLoading(prev => ({ ...prev, [imageName]: false }));
-  };
-
-  const handleImageError = (imageName) => {
-    setImageLoading(prev => ({ ...prev, [imageName]: false }));
-  };
+  const toggleBreathing = useCallback(() => {
+    setIsBreathingActive(prev => !prev);
+  }, []);
 
   return (
     <>
-      <SEOHead
+      <SEOHead 
         title={pageTitle}
         description={pageDescription}
         structuredData={breadcrumbs}
-        type="website"
-        canonical="https://novaresin.lovable.app/novamask"
       />
+      
+      <div className="min-h-screen bg-background">
+        <ChappNavbar />
 
-      <div className="min-h-screen bg-chapp-dark-bg">
-        <header>
-          <ChappNavbar />
-        </header>
+        {/* Apple-style Hero Section */}
+        <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-br from-background via-background/95 to-chapp-night-blue/20" />
+          
+          {/* Animated background particles */}
+          <div className="absolute inset-0 overflow-hidden">
+            {[...Array(20)].map((_, i) => (
+              <motion.div
+                key={i}
+                className="absolute w-1 h-20 bg-gradient-to-b from-accent/30 to-transparent rounded-full"
+                style={{
+                  left: `${Math.random() * 100}%`,
+                  top: `${Math.random() * 100}%`,
+                }}
+                animate={{
+                  y: [-20, -40, -20],
+                  opacity: [0.3, 0.8, 0.3],
+                  scale: [1, 1.2, 1],
+                }}
+                transition={{
+                  duration: 4 + Math.random() * 2,
+                  repeat: Infinity,
+                  delay: Math.random() * 2,
+                }}
+              />
+            ))}
+          </div>
 
-        <main>
-          {/* Hero Section */}
-          <section className="section-chapp pt-32 bg-chapp-dark-bg relative overflow-hidden">
-            <div className="container-chapp relative z-10">
-              {/* Back Button */}
-              <Link
-                to="/"
-                className="inline-flex items-center gap-2 text-chapp-gray-300 hover:text-chapp-white transition-colors duration-300 mb-12 group"
+          <div className="container-chapp relative z-10">
+            <div className="grid lg:grid-cols-2 gap-16 items-center">
+              {/* Left Content */}
+              <motion.div 
+                className="space-y-8"
+                initial={{ opacity: 0, y: 40 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
               >
-                <ArrowLeft
-                  size={20}
-                  className="group-hover:-translate-x-1 transition-transform duration-300"
-                />
-                {language === "IT" ? "Torna alla Homepage" : "Back to Homepage"}
-              </Link>
+                <Button
+                  variant="ghost"
+                  onClick={() => navigate(-1)}
+                  className="group p-3 hover:bg-white/5 rounded-2xl transition-all duration-300 mb-6"
+                >
+                  <ArrowLeft className="w-5 h-5 group-hover:-translate-x-1 transition-transform duration-300" />
+                  <span className="ml-2">{language === 'IT' ? 'Indietro' : 'Back'}</span>
+                </Button>
 
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-                {/* Content */}
-                <div className="space-y-8">
-                  <div className="inline-flex items-center gap-2 bg-cyan-400/10 text-cyan-400 px-4 py-2 rounded-full text-body-sm font-semibold border border-cyan-400/20">
-                    <Shield size={16} />
-                    Novamask
-                  </div>
-
-                  <h1 className="text-display-xl text-chapp-title leading-tight font-light">
-                    {language === "IT" ? "Protezione " : "Advanced "}
-                    <span className="bg-gradient-to-r from-cyan-400 via-blue-500 to-indigo-600 bg-clip-text text-transparent font-medium">
-                      {language === "IT" ? "Avanzata" : "Protection"}
-                    </span>
-                    <br />
-                    {language === "IT" ? "Riutilizzabile" : "Reusable Masks"}
-                  </h1>
-
-                  <p className="text-body-xl text-chapp-body leading-relaxed">
-                    {language === "IT"
-                      ? "Copri viso lavabile e adattabile a diverse morfologie facciali. Realizzato secondo normativa ISO9001, certificato Sanitized AG con proprietà batteriostatiche e idrorepellenti."
-                      : "Washable face cover adaptable to different facial morphologies. Made according to ISO9001 standards, Sanitized AG certified with bacteriostatic and water-repellent properties."}
-                  </p>
-
-                  <div className="bg-cyan-400/5 border border-cyan-400/20 rounded-2xl p-6 backdrop-blur-sm">
-                    <div className="flex items-start gap-3">
-                      <Shield
-                        className="text-cyan-400 flex-shrink-0 mt-1"
-                        size={20}
-                      />
-                      <div>
-                        <h3 className="text-heading-sm text-chapp-white font-semibold mb-2">
-                          {language === "IT"
-                            ? "Messaggio Chiave"
-                            : "Key Message"}
-                        </h3>
-                        <p className="text-body-md text-chapp-gray-300">
-                          {language === "IT"
-                            ? "Novamask riduce la diffusione di particelle di saliva contenenti batteri e virus, garantendo protezione e comfort per uso quotidiano."
-                            : "Novamask reduces the spread of saliva particles containing bacteria and viruses, ensuring protection and comfort for daily use."}
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Product Logo - Interactive */}
-                <div className="flex justify-center lg:justify-end">
-                  <div className="relative group cursor-pointer">
-                    <div className="absolute inset-0 bg-gradient-to-r from-cyan-400/20 via-blue-500/20 to-indigo-600/20 rounded-3xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                    <div className="relative bg-chapp-dark-bg/80 backdrop-blur-sm border border-gray-700/50 rounded-3xl p-8 group-hover:border-cyan-400/30 transition-all duration-500 group-hover:scale-105">
-                      <img
-                        src="/novamask_logo.png"
-                        alt="Novamask Logo"
-                        className="w-96 h-auto object-contain filter drop-shadow-2xl group-hover:drop-shadow-[0_0_30px_rgba(34,211,238,0.3)] transition-all duration-500"
-                        style={{ 
-                          filter: 'drop-shadow(0 0 20px rgba(0,0,0,0.5)) brightness(1.1) contrast(1.1)',
-                          mixBlendMode: 'screen'
-                        }}
-                        onLoad={() => handleImageLoad('logo')}
-                        onError={() => handleImageError('logo')}
-                      />
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </section>
-
-          {/* Interactive Layers Section */}
-          <section className="section-chapp bg-chapp-dark-bg">
-            <div className="container-chapp">
-              <div className="text-center mb-16">
-                <h2 className="text-display-md text-chapp-title font-light mb-6">
-                  {language === "IT" ? "Struttura a Strati" : "Layer Structure"}
-                </h2>
-                <p className="text-body-lg text-chapp-body max-w-2xl mx-auto">
-                  {language === "IT"
-                    ? "Scopri la tecnologia avanzata dei nostri strati protettivi"
-                    : "Discover the advanced technology of our protective layers"}
-                </p>
-              </div>
-
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-                {/* Interactive Layers Visualization */}
-                <div className="flex justify-center">
-                  <div className="relative w-80 h-80">
-                    {layers.map((layer, index) => (
-                      <div
-                        key={layer.id}
-                        className={`absolute inset-0 rounded-3xl border-2 cursor-pointer transition-all duration-500 backdrop-blur-sm ${
-                          activeLayer === layer.id
-                            ? `bg-gradient-to-br ${layer.color} ${layer.borderColor} scale-105 z-30 shadow-2xl`
-                            : `border-gray-700/30 bg-gray-900/20 hover:border-gray-600/50 hover:scale-102 ${layer.hoverColor}`
-                        }`}
-                        style={{
-                          transform: `translateZ(${index * 20}px) scale(${
-                            1 - index * 0.08
-                          })`,
-                          zIndex: activeLayer === layer.id ? 30 : 10 - index,
-                        }}
-                        onClick={() =>
-                          setActiveLayer(
-                            activeLayer === layer.id ? null : layer.id
-                          )
-                        }
-                        onMouseEnter={() => setActiveLayer(layer.id)}
-                        onMouseLeave={() => setActiveLayer(null)}
-                      >
-                        <div className="flex items-center justify-center h-full relative overflow-hidden">
-                          <div className={`absolute inset-0 ${activeLayer === layer.id ? 'bg-black/10' : 'bg-black/30'} transition-all duration-300`}></div>
-                          <img
-                            src="/novamask.webp"
-                            alt="Novamask"
-                            className={`w-32 h-32 object-contain transition-all duration-300 relative z-10 ${
-                              activeLayer === layer.id
-                                ? "scale-110 drop-shadow-[0_0_20px_rgba(255,255,255,0.3)]"
-                                : "scale-100 opacity-80"
-                            }`}
-                            style={{ 
-                              filter: 'drop-shadow(0 0 10px rgba(0,0,0,0.5)) brightness(1.2) contrast(1.1)',
-                              mixBlendMode: 'screen'
-                            }}
-                            onLoad={() => handleImageLoad(`layer-${index}`)}
-                            onError={() => handleImageError(`layer-${index}`)}
-                          />
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Layer Descriptions */}
                 <div className="space-y-6">
-                  {layers.map((layer, index) => (
-                    <div
-                      key={layer.id}
-                      className={`p-6 rounded-2xl border transition-all duration-500 cursor-pointer backdrop-blur-sm ${
-                        activeLayer === layer.id
-                          ? `bg-gradient-to-r ${layer.color} border-white/20 scale-105 shadow-xl`
-                          : `bg-gray-900/30 ${layer.borderColor} hover:${layer.hoverColor} hover:bg-gray-800/40`
-                      }`}
-                      onClick={() =>
-                        setActiveLayer(
-                          activeLayer === layer.id ? null : layer.id
-                        )
-                      }
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.2, duration: 0.6 }}
+                  >
+                    <span className="inline-block px-4 py-2 rounded-full bg-accent/10 text-accent text-sm font-medium mb-4 border border-accent/20">
+                      {language === 'IT' ? '🏆 Certificato ISO 9001' : '🏆 ISO 9001 Certified'}
+                    </span>
+                  </motion.div>
+
+                  <motion.h1 
+                    className="text-hero-sm lg:text-hero font-display font-bold text-foreground leading-none"
+                    initial={{ opacity: 0, y: 30 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.3, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+                  >
+                    Nova<span className="text-glow-cyan-magenta">mask</span>
+                  </motion.h1>
+
+                  <motion.p 
+                    className="text-body-xl text-muted-foreground leading-relaxed max-w-lg"
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.5, duration: 0.6 }}
+                  >
+                    {language === 'IT' 
+                      ? 'La mascherina lavabile premium che combina protezione avanzata, comfort superiore e design elegante. Certificata per ridurre la diffusione di particelle contenenti batteri e virus.'
+                      : 'The premium washable face mask that combines advanced protection, superior comfort and elegant design. Certified to reduce the spread of particles containing bacteria and viruses.'
+                    }
+                  </motion.p>
+
+                  <motion.div 
+                    className="flex flex-wrap gap-4"
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.7, duration: 0.6 }}
+                  >
+                    <Button className="btn-chapp-primary group">
+                      {language === 'IT' ? 'Scopri di più' : 'Learn More'}
+                      <ChevronRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+                    </Button>
+                    <Button variant="outline" className="btn-chapp-secondary">
+                      {language === 'IT' ? 'Specifiche tecniche' : 'Technical specs'}
+                    </Button>
+                  </motion.div>
+                </div>
+              </motion.div>
+
+              {/* Right Content - Product Image */}
+              <motion.div 
+                className="relative"
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 0.4, duration: 1, ease: [0.16, 1, 0.3, 1] }}
+              >
+                <div className="relative aspect-square max-w-md mx-auto">
+                  <motion.div
+                    className="absolute inset-0 rounded-full bg-gradient-to-br from-accent/20 via-primary/10 to-accent/20 blur-3xl"
+                    animate={{ 
+                      scale: [1, 1.1, 1],
+                      rotate: [0, 180, 360],
+                    }}
+                    transition={{ 
+                      duration: 20, 
+                      repeat: Infinity, 
+                      ease: "linear" 
+                    }}
+                  />
+                  
+                  <motion.img
+                    src="/novamask.webp"
+                    alt="Novamask Premium Face Mask"
+                    className="relative z-10 w-full h-full object-contain animate-float"
+                    onLoad={() => setImageLoaded(true)}
+                    whileHover={{ scale: 1.05, rotateY: 15 }}
+                    transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                  />
+                </div>
+              </motion.div>
+            </div>
+          </div>
+        </section>
+
+        {/* Interactive Layer Structure - Apple Style */}
+        <section className="section-chapp bg-gradient-to-b from-background to-card/50">
+          <div className="container-chapp">
+            <motion.div 
+              className="text-center mb-16"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+              viewport={{ once: true }}
+            >
+              <h2 className="text-display-lg font-display font-bold text-foreground mb-4">
+                {language === 'IT' ? 'Struttura a Strati Avanzata' : 'Advanced Layer Structure'}
+              </h2>
+              <p className="text-body-lg text-muted-foreground max-w-2xl mx-auto">
+                {language === 'IT' 
+                  ? 'Tecnologia multi-strato per protezione completa e comfort superiore'
+                  : 'Multi-layer technology for complete protection and superior comfort'
+                }
+              </p>
+            </motion.div>
+
+            <div className="layer-3d relative">
+              <div className="grid md:grid-cols-3 gap-8">
+                {layers.map((layer, index) => (
+                  <motion.div
+                    key={layer.id}
+                    className="stagger-item"
+                    style={{ animationDelay: `${index * 0.2}s` }}
+                  >
+                    <motion.div
+                      className={`
+                        layer-card apple-glass rounded-3xl p-8 cursor-pointer
+                        ${activeLayer === layer.id ? 'ring-2 ring-accent' : ''}
+                      `}
+                      whileHover="hover"
+                      onHoverStart={() => setActiveLayer(layer.id)}
+                      onHoverEnd={() => setActiveLayer(null)}
+                      variants={{
+                        hover: {
+                          rotateY: 15,
+                          rotateX: 5,
+                          translateZ: 20,
+                          transition: { duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }
+                        }
+                      }}
                     >
-                      <div className="flex items-start gap-4">
-                        <div className={`w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0 ${
-                          activeLayer === layer.id
-                            ? 'bg-white/20'
-                            : 'bg-gray-800/50'
-                        }`}>
-                          <Layers size={20} className={`${
-                            activeLayer === layer.id ? 'text-white' : 'text-cyan-400'
-                          }`} />
-                        </div>
-                        <div>
-                          <h3
-                            className={`text-heading-md font-semibold mb-3 ${
-                              activeLayer === layer.id
-                                ? "text-white"
-                                : "text-chapp-white"
-                            }`}
-                          >
-                            {layer.name}
-                          </h3>
-                          <p
-                            className={`text-body-md ${
-                              activeLayer === layer.id
-                                ? "text-white/90"
-                                : "text-chapp-gray-300"
-                            }`}
+                      <div className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${layer.color} flex items-center justify-center mb-6 mx-auto`}>
+                        <layer.icon className="w-8 h-8 text-white" />
+                      </div>
+                      
+                      <h3 className="text-heading-lg font-semibold text-foreground mb-3 text-center">
+                        {layer.name}
+                      </h3>
+                      
+                      <AnimatePresence>
+                        {activeLayer === layer.id && (
+                          <motion.p
+                            className="text-body-md text-muted-foreground text-center leading-relaxed"
+                            initial={{ opacity: 0, height: 0 }}
+                            animate={{ opacity: 1, height: "auto" }}
+                            exit={{ opacity: 0, height: 0 }}
+                            transition={{ duration: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
                           >
                             {layer.description}
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </section>
-
-          {/* Sectors Section */}
-          <section className="section-chapp bg-chapp-dark-bg">
-            <div className="container-chapp">
-              <div className="text-center mb-16">
-                <h2 className="text-display-md text-chapp-title font-light mb-6">
-                  {language === "IT" ? "Settori di Utilizzo" : "Usage Sectors"}
-                </h2>
-                <p className="text-body-lg text-chapp-body max-w-2xl mx-auto">
-                  {language === "IT"
-                    ? "Versatilità e protezione per ogni ambiente"
-                    : "Versatility and protection for every environment"}
-                </p>
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                {sectors.map((sector) => (
-                  <div key={sector.id} className="group">
-                    <div className="relative overflow-hidden rounded-3xl bg-gray-900/40 border border-gray-700/50 p-8 text-center hover:border-gray-600/60 transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl backdrop-blur-sm group-hover:bg-gray-800/50">
-                      {/* Background gradient overlay */}
-                      <div
-                        className={`absolute inset-0 bg-gradient-to-br ${sector.gradient} opacity-0 group-hover:opacity-10 transition-opacity duration-500`}
-                      ></div>
-
-                      <div className="relative z-10">
-                        <div
-                          className={`w-20 h-20 mx-auto mb-6 bg-gradient-to-br ${sector.gradient} rounded-2xl flex items-center justify-center group-hover:scale-110 group-hover:rotate-3 transition-all duration-500 ${sector.glowColor} group-hover:shadow-2xl`}
-                        >
-                          <sector.icon className="text-white" size={32} />
-                        </div>
-
-                        <h3 className="text-heading-lg text-chapp-white font-semibold mb-4 group-hover:text-opacity-90">
-                          {sector.title}
-                        </h3>
-
-                        <p className="text-body-md text-chapp-gray-300 leading-relaxed group-hover:text-chapp-white transition-colors duration-300">
-                          {sector.description}
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </section>
-
-          {/* Breathing Function Section */}
-          <section className="section-chapp bg-chapp-dark-bg">
-            <div className="container-chapp">
-              <div className="text-center mb-16">
-                <h2 className="text-display-md text-chapp-title font-light mb-6">
-                  {language === "IT"
-                    ? "Funzionamento Respiratorio"
-                    : "Breathing Function"}
-                </h2>
-                <p className="text-body-lg text-chapp-body max-w-2xl mx-auto">
-                  {language === "IT"
-                    ? "Flusso d'aria ottimizzato per comfort e protezione"
-                    : "Optimized airflow for comfort and protection"}
-                </p>
-              </div>
-
-              <div className="max-w-4xl mx-auto">
-                <div className="flex justify-center mb-8">
-                  <div className="bg-gray-900/60 backdrop-blur-sm border border-gray-700/50 rounded-full p-2">
-                    <button
-                      onClick={() => setIsInspiration(true)}
-                      className={`px-6 py-3 rounded-full transition-all duration-300 ${
-                        isInspiration
-                          ? "bg-gradient-to-r from-cyan-400 to-blue-500 text-white shadow-lg"
-                          : "text-chapp-gray-300 hover:text-chapp-white hover:bg-gray-800/50"
-                      }`}
-                    >
-                      {language === "IT" ? "Inspirazione" : "Inspiration"}
-                    </button>
-                    <button
-                      onClick={() => setIsInspiration(false)}
-                      className={`px-6 py-3 rounded-full transition-all duration-300 ${
-                        !isInspiration
-                          ? "bg-gradient-to-r from-emerald-400 to-green-500 text-white shadow-lg"
-                          : "text-chapp-gray-300 hover:text-chapp-white hover:bg-gray-800/50"
-                      }`}
-                    >
-                      {language === "IT" ? "Espirazione" : "Expiration"}
-                    </button>
-                  </div>
-                </div>
-
-                {/* Content Box */}
-                <div className="relative bg-gray-900/40 border border-gray-700/50 rounded-3xl p-12 overflow-hidden backdrop-blur-sm">
-                  <div className="flex flex-col items-center justify-center text-center space-y-6">
-                    {/* Interactive Image Switch */}
-                    <div className="relative group cursor-pointer">
-                      <div className={`absolute inset-0 ${isInspiration ? 'bg-cyan-400/10' : 'bg-emerald-400/10'} rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500`}></div>
-                      <div className={`relative bg-gray-800/50 backdrop-blur-sm border ${isInspiration ? 'border-cyan-400/20' : 'border-emerald-400/20'} rounded-2xl p-6 transition-all duration-500 group-hover:scale-105`}>
-                        {isInspiration ? (
-                          <img
-                            src="/inspira.png"
-                            alt="Inspirazione"
-                            className="w-48 h-48 object-contain mx-auto transition-all duration-500 hover:scale-110"
-                            style={{ 
-                              filter: 'drop-shadow(0 0 15px rgba(34,211,238,0.3)) brightness(1.2) contrast(1.1)',
-                              mixBlendMode: 'screen'
-                            }}
-                            onLoad={() => handleImageLoad('inspira')}
-                            onError={() => handleImageError('inspira')}
-                          />
-                        ) : (
-                          <img
-                            src="/espira.png"
-                            alt="Espirazione"
-                            className="w-48 h-48 object-contain mx-auto transition-all duration-500 hover:scale-110"
-                            style={{ 
-                              filter: 'drop-shadow(0 0 15px rgba(16,185,129,0.3)) brightness(1.2) contrast(1.1)',
-                              mixBlendMode: 'screen'
-                            }}
-                            onLoad={() => handleImageLoad('espira')}
-                            onError={() => handleImageError('espira')}
-                          />
+                          </motion.p>
                         )}
-                      </div>
-                    </div>
-
-                    {/* Text Switch */}
-                    <div className={`p-6 rounded-2xl border ${isInspiration ? 'border-cyan-400/20 bg-cyan-400/5' : 'border-emerald-400/20 bg-emerald-400/5'} backdrop-blur-sm transition-all duration-500`}>
-                      <p className="text-body-lg text-chapp-white font-semibold max-w-2xl mx-auto">
-                        {isInspiration
-                          ? language === "IT"
-                            ? "Tramite il composto 3-layer della maschera, l'aria viene filtrata dallo strato esterno impermeabile e batteriostatico."
-                            : "Through the 3-layer composition of the mask, the air is filtered by the outer waterproof and bacteriostatic layer."
-                          : language === "IT"
-                          ? "Riduce la nebulizzazione e la diffusione delle particelle di saliva verso l'esterno"
-                          : "Reduces nebulization and the spread of saliva particles outward."}
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </section>
-
-          {/* Care Instructions Section */}
-          <section className="section-chapp bg-chapp-dark-bg">
-            <div className="container-chapp">
-              <div className="text-center mb-16">
-                <h2 className="text-display-md text-chapp-title font-light mb-6">
-                  {language === "IT"
-                    ? "Istruzioni per la Cura"
-                    : "Care Instructions"}
-                </h2>
-                <p className="text-body-lg text-chapp-body max-w-2xl mx-auto">
-                  {language === "IT"
-                    ? "Mantieni la tua Novamask in perfette condizioni"
-                    : "Keep your Novamask in perfect condition"}
-                </p>
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-                {warnings.map((warning, index) => (
-                  <div key={index} className="group">
-                    <div className="flex items-center gap-6 p-6 bg-gray-900/40 border border-gray-700/50 rounded-2xl hover:border-gray-600/60 transition-all duration-500 hover:-translate-y-1 backdrop-blur-sm group-hover:bg-gray-800/50">
-                      <div
-                        className={`w-16 h-16 bg-gradient-to-br ${warning.color} rounded-2xl flex items-center justify-center flex-shrink-0 group-hover:scale-110 group-hover:rotate-3 transition-all duration-500 shadow-lg`}
-                      >
-                        <warning.icon className="text-white" size={24} />
-                      </div>
-
-                      <div className="flex-1">
-                        <div className="flex items-center gap-2 mb-1">
-                          <warning.icon className={`${warning.iconColor}`} size={16} />
-                          <div className={`w-2 h-2 rounded-full bg-gradient-to-r ${warning.color}`}></div>
-                        </div>
-                        <p className="text-body-md text-chapp-gray-300 group-hover:text-chapp-white transition-colors duration-300 leading-relaxed">
-                          {warning.text}
-                        </p>
-                      </div>
-                    </div>
-                  </div>
+                      </AnimatePresence>
+                    </motion.div>
+                  </motion.div>
                 ))}
               </div>
             </div>
-          </section>
-        </main>
+          </div>
+        </section>
+
+        {/* Usage Sectors - Bento Grid Layout */}
+        <section className="section-chapp">
+          <div className="container-chapp">
+            <motion.div 
+              className="text-center mb-16"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+              viewport={{ once: true }}
+            >
+              <h2 className="text-display-lg font-display font-bold text-foreground mb-4">
+                {language === 'IT' ? 'Settori di Utilizzo' : 'Usage Sectors'}
+              </h2>
+              <p className="text-body-lg text-muted-foreground max-w-2xl mx-auto">
+                {language === 'IT' 
+                  ? 'Versatilità e prestazioni per ogni esigenza'
+                  : 'Versatility and performance for every need'
+                }
+              </p>
+            </motion.div>
+
+            <div className="hover-orchestration grid md:grid-cols-3 gap-8">
+              {sectors.map((sector, index) => (
+                <motion.div
+                  key={sector.id}
+                  className={`
+                    hover-child-${index + 1} apple-glass rounded-3xl p-8 
+                    magnetic-hover group cursor-pointer
+                    ${sector.gradient} bg-gradient-to-br
+                  `}
+                  initial={{ opacity: 0, y: 40 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ delay: index * 0.15, duration: 0.8 }}
+                  viewport={{ once: true }}
+                  whileHover={{ scale: 1.03, y: -8 }}
+                >
+                  <div className="text-6xl mb-6 group-hover:scale-110 transition-transform duration-300">
+                    {sector.icon}
+                  </div>
+                  
+                  <h3 className="text-heading-xl font-semibold text-foreground mb-4">
+                    {sector.title}
+                  </h3>
+                  
+                  <p className="text-body-md text-muted-foreground mb-6 leading-relaxed">
+                    {sector.description}
+                  </p>
+
+                  <div className="flex flex-wrap gap-2">
+                    {sector.features.map((feature, featureIndex) => (
+                      <span 
+                        key={featureIndex}
+                        className="px-3 py-1 bg-white/10 rounded-full text-xs font-medium text-white backdrop-blur-sm"
+                      >
+                        {feature}
+                      </span>
+                    ))}
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Breathing Function Demo */}
+        <section className="section-chapp bg-gradient-to-b from-card/20 to-background">
+          <div className="container-chapp">
+            <motion.div 
+              className="text-center mb-16"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+              viewport={{ once: true }}
+            >
+              <h2 className="text-display-lg font-display font-bold text-foreground mb-4">
+                {language === 'IT' ? 'Funzione Respiratoria' : 'Breathing Function'}
+              </h2>
+              <p className="text-body-lg text-muted-foreground max-w-2xl mx-auto">
+                {language === 'IT' 
+                  ? 'Visualizza il flusso d\'aria ottimizzato per comfort e protezione'
+                  : 'Visualize the optimized airflow for comfort and protection'
+                }
+              </p>
+            </motion.div>
+
+            <div className="max-w-4xl mx-auto">
+              <div className="apple-glass rounded-3xl p-8 md:p-12">
+                <div className="text-center mb-8">
+                  <Button
+                    onClick={toggleBreathing}
+                    className={`
+                      group px-8 py-4 rounded-2xl font-medium transition-all duration-300
+                      ${isBreathingActive 
+                        ? 'bg-accent text-accent-foreground hover:bg-accent/90' 
+                        : 'bg-white/10 text-white hover:bg-white/20'
+                      }
+                    `}
+                  >
+                    {isBreathingActive ? (
+                      <>
+                        <Pause className="w-5 h-5 mr-2" />
+                        {language === 'IT' ? 'Ferma Demo' : 'Stop Demo'}
+                      </>
+                    ) : (
+                      <>
+                        <Play className="w-5 h-5 mr-2" />
+                        {language === 'IT' ? 'Avvia Demo' : 'Start Demo'}
+                      </>
+                    )}
+                  </Button>
+                </div>
+
+                <div className="relative aspect-video bg-gradient-to-br from-background to-card/50 rounded-2xl overflow-hidden">
+                  <AnimatePresence mode="wait">
+                    {isBreathingActive && (
+                      <motion.div
+                        key={breathingPhase}
+                        className="absolute inset-0 flex items-center justify-center"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        transition={{ duration: 0.5 }}
+                      >
+                        <div className="text-center space-y-6">
+                          <motion.div
+                            className={`
+                              w-32 h-32 rounded-full mx-auto flex items-center justify-center
+                              ${breathingPhase === 'inspiration' 
+                                ? 'bg-blue-500/30 animate-breathe' 
+                                : 'bg-green-500/30 animate-breathe'
+                              }
+                            `}
+                            animate={{
+                              scale: breathingPhase === 'inspiration' ? [1, 1.2, 1] : [1, 0.8, 1],
+                            }}
+                            transition={{ duration: 3, ease: "easeInOut" }}
+                          >
+                            <Wind className="w-12 h-12 text-white" />
+                          </motion.div>
+
+                          <motion.h3 
+                            className="text-heading-lg font-semibold text-foreground"
+                            key={`${breathingPhase}-title`}
+                            initial={{ y: 20, opacity: 0 }}
+                            animate={{ y: 0, opacity: 1 }}
+                            transition={{ duration: 0.4 }}
+                          >
+                            {breathingPhase === 'inspiration' 
+                              ? (language === 'IT' ? 'Inspirazione' : 'Inspiration')
+                              : (language === 'IT' ? 'Espirazione' : 'Expiration')
+                            }
+                          </motion.h3>
+
+                          <motion.p 
+                            className="text-body-md text-muted-foreground max-w-md"
+                            key={`${breathingPhase}-desc`}
+                            initial={{ y: 20, opacity: 0 }}
+                            animate={{ y: 0, opacity: 1 }}
+                            transition={{ duration: 0.4, delay: 0.1 }}
+                          >
+                            {breathingPhase === 'inspiration' 
+                              ? (language === 'IT' ? 'Filtrazione avanzata dell\'aria in entrata' : 'Advanced filtering of incoming air')
+                              : (language === 'IT' ? 'Controllo delle particelle in uscita' : 'Control of outgoing particles')
+                            }
+                          </motion.p>
+
+                          {/* Particle Animation */}
+                          <div className="absolute inset-0 overflow-hidden pointer-events-none">
+                            {[...Array(8)].map((_, i) => (
+                              <motion.div
+                                key={i}
+                                className="absolute w-2 h-2 bg-accent rounded-full animate-particle-flow"
+                                style={{
+                                  left: `${20 + i * 10}%`,
+                                  top: `${40 + Math.sin(i) * 20}%`,
+                                }}
+                                animate={{
+                                  x: breathingPhase === 'inspiration' ? ['-100px', '100px'] : ['100px', '-100px'],
+                                }}
+                                transition={{
+                                  duration: 3,
+                                  repeat: Infinity,
+                                  delay: i * 0.2,
+                                  ease: [0.25, 0.1, 0.25, 1]
+                                }}
+                              />
+                            ))}
+                          </div>
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+
+                  {!isBreathingActive && (
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <div className="text-center space-y-4">
+                        <Sparkles className="w-16 h-16 text-accent mx-auto opacity-50" />
+                        <p className="text-muted-foreground">
+                          {language === 'IT' ? 'Clicca per avviare la demo' : 'Click to start the demo'}
+                        </p>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Care Instructions - Modern Icons */}
+        <section className="section-chapp">
+          <div className="container-chapp">
+            <motion.div 
+              className="text-center mb-16"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+              viewport={{ once: true }}
+            >
+              <h2 className="text-display-lg font-display font-bold text-foreground mb-4">
+                {language === 'IT' ? 'Istruzioni per la Cura' : 'Care Instructions'}
+              </h2>
+              <p className="text-body-lg text-muted-foreground max-w-2xl mx-auto">
+                {language === 'IT' 
+                  ? 'Mantieni la tua Novamask in perfette condizioni'
+                  : 'Keep your Novamask in perfect condition'
+                }
+              </p>
+            </motion.div>
+
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+              {warnings.map((warning, index) => (
+                <motion.div
+                  key={index}
+                  className={`
+                    apple-glass rounded-2xl p-6 text-center group
+                    ${warning.allowed 
+                      ? 'hover:bg-green-500/10 hover:border-green-500/30' 
+                      : 'hover:bg-red-500/10 hover:border-red-500/30'
+                    }
+                  `}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ delay: index * 0.1, duration: 0.6 }}
+                  viewport={{ once: true }}
+                  whileHover={{ scale: 1.05, y: -5 }}
+                >
+                  <div className="text-4xl mb-4 group-hover:scale-110 transition-transform duration-300">
+                    {warning.icon}
+                  </div>
+                  
+                  <div className={`
+                    inline-flex items-center justify-center w-8 h-8 rounded-full mb-4
+                    ${warning.allowed 
+                      ? 'bg-green-500/20 text-green-400' 
+                      : 'bg-red-500/20 text-red-400'
+                    }
+                  `}>
+                    {warning.allowed ? <Check className="w-4 h-4" /> : <X className="w-4 h-4" />}
+                  </div>
+                  
+                  <p className="text-body-sm text-muted-foreground leading-relaxed">
+                    {warning.text}
+                  </p>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </section>
 
         <ChappFooter />
       </div>
