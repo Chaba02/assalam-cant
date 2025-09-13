@@ -83,9 +83,24 @@ const ChappNavbar = () => {
     }
   };
 
+  const handleNovamaskClick = () => {
+    setIsOpen(false);
+    if (location.pathname !== '/novamask') {
+      navigate('/novamask');
+      // Force scroll to top after navigation with longer delay to ensure page loads
+      setTimeout(() => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }, 300);
+    } else {
+      // If already on novamask page, scroll to top immediately
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  };
+
   const navLinks = [
     { name: t('nav.about'), href: '/#about', action: () => handleNavClick('/#about') },
     { name: t('nav.services'), href: '/services', isRoute: true, action: () => handleServicesClick() },
+    { name: 'Novamask', href: '/novamask', isRoute: true, action: () => handleNovamaskClick() },
     { name: t('nav.contact'), href: '/#contact', action: () => handleNavClick('/#contact') },
   ];
 

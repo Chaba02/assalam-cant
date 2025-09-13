@@ -35,6 +35,22 @@
     </image:image>
   </url>
 
+  <!-- Novamask Page -->
+  <url>
+    <loc>https://novaresin.lovable.app/novamask</loc>
+    <lastmod>2024-12-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="it" href="https://novaresin.lovable.app/novamask"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://novaresin.lovable.app/en/novamask"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://novaresin.lovable.app/novamask"/>
+    <image:image>
+      <image:loc>https://novaresin.lovable.app/novaresin_logo.png</image:loc>
+      <image:title>Novamask - Mascherine Protettive Lavabili</image:title>
+      <image:caption>Mascherine protettive certificate Sanitized AG per uso quotidiano</image:caption>
+    </image:image>
+  </url>
+
   <!-- English Homepage -->
   <url>
     <loc>https://novaresin.lovable.app/en/</loc>
@@ -64,6 +80,22 @@
       <image:loc>https://novaresin.lovable.app/novaresin_logo.png</image:loc>
       <image:title>Novaresin Services - Resination, Coupling, Membranes</image:title>
       <image:caption>Specialized services by Novaresin for textile finishing</image:caption>
+    </image:image>
+  </url>
+
+  <!-- English Novamask Page -->
+  <url>
+    <loc>https://novaresin.lovable.app/en/novamask</loc>
+    <lastmod>2024-12-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="it" href="https://novaresin.lovable.app/novamask"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://novaresin.lovable.app/en/novamask"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://novaresin.lovable.app/novamask"/>
+    <image:image>
+      <image:loc>https://novaresin.lovable.app/novaresin_logo.png</image:loc>
+      <image:title>Novamask - Washable Protective Masks</image:title>
+      <image:caption>Sanitized AG certified protective masks for daily use</image:caption>
     </image:image>
   </url>
 
