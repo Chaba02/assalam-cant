@@ -217,8 +217,27 @@ const ChappContactForm = () => {
                 </button>
               </div>
 
+              {/* Privacy Consent */}
+              <div className="flex items-start gap-3 p-4 bg-chapp-white/5 border border-chapp-white/10 rounded-xl">
+                <input
+                  type="checkbox"
+                  id="privacy-consent"
+                  required
+                  className="mt-1 w-4 h-4 text-chapp-accent-blue bg-transparent border-2 border-chapp-gray-400 rounded focus:ring-chapp-accent-blue focus:ring-2 focus:border-chapp-accent-blue"
+                />
+                <label htmlFor="privacy-consent" className="text-body-sm text-chapp-gray-300 leading-relaxed">
+                  Accetto il trattamento dei miei dati personali secondo la{' '}
+                  <a href="/privacy" className="text-chapp-accent-blue hover:underline" target="_blank" rel="noopener noreferrer">
+                    Privacy Policy
+                  </a>
+                  {' '}e acconsento a essere contattato per rispondere alla mia richiesta. <span className="text-red-400">*</span>
+                </label>
+              </div>
+
               <p className="text-body-sm text-chapp-gray-400 text-center">
-                {t('contact.form.privacy')}
+                I campi contrassegnati con * sono obbligatori. 
+                <br />
+                Consulta la nostra <a href="/privacy" className="text-chapp-accent-blue hover:underline">Privacy Policy</a> per maggiori informazioni.
               </p>
             </form>
           </div>

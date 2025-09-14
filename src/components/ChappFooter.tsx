@@ -11,21 +11,21 @@ const ChappFooter = () => {
           </p>
           <div className="flex justify-center items-center gap-6 mt-4">
             <a
-              href="#"
+              href="/privacy"
               className="text-body-sm text-chapp-gray-500 hover:text-chapp-gray-300 transition-colors duration-300"
             >
               Privacy Policy
             </a>
             <span className="w-1 h-1 bg-chapp-gray-600 rounded-full"></span>
             <a
-              href="#"
+              href="/terms"
               className="text-body-sm text-chapp-gray-500 hover:text-chapp-gray-300 transition-colors duration-300"
             >
               Termini di Servizio
             </a>
             <span className="w-1 h-1 bg-chapp-gray-600 rounded-full"></span>
             <a
-              href="#"
+              href="/cookies"
               className="text-body-sm text-chapp-gray-500 hover:text-chapp-gray-300 transition-colors duration-300"
             >
               Cookie Policy
